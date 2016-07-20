@@ -1,0 +1,21 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_MOD_BY	Bostjan Mihoric	/ccompletion@gmail.com/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	/unofficial modification/
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	/unofficial modification/
+breadcrumbs	admin.php	5;"	variable
+breadcrumbs	create.php	5;"	variable
+breadcrumbs	index.php	5;"	variable
+breadcrumbs	update.php	5;"	variable
+breadcrumbs	view.php	5;"	variable
+documentation	_form.php	14;"	class
+form	_form.php	9;"	variable
+form	_search.php	9;"	variable
+list_data	_form.php	36;"	variable
+menu	admin.php	10;"	variable
+menu	create.php	10;"	variable
+menu	index.php	9;"	variable
+menu	update.php	11;"	variable
+menu	view.php	10;"	variable

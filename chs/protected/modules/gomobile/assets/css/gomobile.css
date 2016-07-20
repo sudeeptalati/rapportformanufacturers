@@ -1,0 +1,9 @@
+#gmcontainer
+{ 
+	margin: 30px;
+} 
+
+#gmcontainer table td 
+{ 
+	vertical-align: top;
+}

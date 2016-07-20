@@ -1,0 +1,77 @@
+DESCRIPTION
+===========
+YiiFramework extension that helps you send SMS messages using Clickatell API with only one line of code.
+
+INSTALLATION
+============
+1. Copy the ClickatellSms folder to your *extensions* folder (usually in protected/extensions/)
+2. In configuration, add the following component:
+
+'components' => array(
+	...
+	'sms' => array(
+		'class'=>'ext.ClickatellSms.ClickatellSms',
+		'clickatell_username'=>'your clickatell user',
+		'clickatell_password'=>'your clickatell password',
+		'clickatell_apikey'=>'your clickatell api id',
+	),
+	...
+);
+There are a few more settings available.
+
+3. Send messages as follows:
+Yii::app()->sms->send([per-sms configurations]);
+
+USAGE EXAMPLE
+=============
+Yii::app()->sms->send(array('to'=>'xxxxxx','message'=>'hello world'));
+
+CONFIGURATIONS
+==============
+
+All configurations can be set at sending time, but I recommend to set as much as you can in the component configuration. Also, setting too many options at sending time may slow down the process.
+
+List of available configurations:
+
+to			Mobile phone no to send the SMS to. It can be an array with more numbers.
+message			The message.
+smsId			An optional SMS ID to be used with the callback or message status requests. Check the Clickatell docs for cliMsgId for more.
+clickatell_username	Clickatell username.
+clickatell_password	Clickatell password.
+clickatell_apikey	Clickatell API ID.
+https			Default is TRUE. Whether to use a secure connection (https) or http.
+debug			Default is FALSE. Whether to print debug information on screen. Useful when testing from console.
+callbackLevel		Default is 2 which means you will receive some callback requests. Set 0 (zero) for no callback requests. Check Clickatell docs for more.
+
+Note: Chaning the clickatell_username, clickatell_password and clickatell_apikey may have no effect at sending time if there is already a cached session id.
+
+REQUIREMENTS
+============
+
+ * cURL
+ * Cache component (Yii::app()->cache)
+ * Tested only with YiiFramework v1.1.8
+
+LINKS
+=====
+
+http://yiiframework.com
+http://clickatell.com
+
+AUTHOR
+======
+This extension was developed by Vlad Velici.
+http://twitter.com/vla_ve
+http://github.com/vladvelici
+
+LICENCE
+=======
+
+This extension is free software released under the terms of the following BSD Licence:
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+Neither the name of Yii Software LLC nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

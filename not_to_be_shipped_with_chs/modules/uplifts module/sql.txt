@@ -1,0 +1,9 @@
+CREATE TABLE uplifts_number_series (id INTEGER PRIMARY KEY NOT NULL, prefix TEXT, start_from INTEGER, available_code TEXT);
+CREATE TABLE uplifts (id INTEGER PRIMARY KEY NOT NULL, uplift_number TEXT, prefix_id INTEGER,  servicecall_id INTEGER, service_reference_number INTEGER, customer_id INTEGER, product_id INTEGER, product_type_id INTEGER, retailer_id INTEGER, retailer_contact TEXT, retailer_phone TEXT, distributor_id INTEGER, visited_engineer_id INTEGER, visited_engineer_name TEXT, date_of_call DATETIME, reason_for_uplift TEXT, request_type_id INTEGER, model_number TEXT, serial_number TEXT, index_number TEXT, purchase_date DATETIME, exchange_date DATETIME, authorised_by INTEGER, price TEXT, customer_claim_description TEXT, notes TEXT, created DATETIME, modified DATETIME, created_by INTEGER, modified_by INTEGER);
+CREATE TABLE uplifts_request_type(id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, info TEXT, created DATETIME);
+INSERT INTO uplifts_number_series (id,prefix,start_from,available_code) VALUES (1,'PS',NULL,NULL);
+INSERT INTO uplifts_number_series (id,prefix,start_from,available_code) VALUES (2,'ST',NULL,NULL);
+INSERT INTO uplifts_number_series (id,prefix,start_from,available_code) VALUES (3,'CS',NULL,NULL);
+CREATE TABLE uplifts_report (id INTEGER PRIMARY KEY NOT NULL, report_type INTEGER, field_type TEXT, field_relation TEXT, field_label TEXT, sort_order INTEGER,active INTEGER );
+INSERT INTO uplifts_request_type (id,name,info,created) VALUES ('1000000','Unknown',NULL,time(''));
+INSERT INTO addons (id,type,name,addon_label,information,active,created_on,created_by,inactivated_on,inactivated_by) VALUES (NULL,'component','uplifts','Uplifts',NULL,'1',NULL,NULL,NULL,NULL);

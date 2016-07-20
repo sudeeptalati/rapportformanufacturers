@@ -1,0 +1,2 @@
+CREATE TABLE oow(id INTEGER PRIMARY KEY NOT NULL, serial_number TEXT, model_number TEXT, model_range TEXT, notes TEXT, created DATETIME ,modified DATETIME, createdby INTEGER, modifiedy INTEGER );
+INSERT INTO addons (id,type,name,addon_label,information,active,created_on,created_by,inactivated_on,inactivated_by) VALUES (NULL,'component','oow','Out of Warranty',NULL,'1',NULL,NULL,NULL,NULL);

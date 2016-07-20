@@ -1,0 +1,32 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_MOD_BY	Bostjan Mihoric	/ccompletion@gmail.com/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	/unofficial modification/
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	/unofficial modification/
+a	_form.php	326;"	variable
+addSelectObject	_form.php	293;"	function
+append_relation_form_field	_form.php	284;"	function
+breadcrumbs	index.php	5;"	variable
+createDropDown	_form.php	182;"	function
+documentation	_form.php	15;"	class
+documentation	update.php	22;"	class
+fields_list	_form.php	78;"	variable
+form	_form.php	9;"	variable
+form	_search.php	9;"	variable
+form	update.php	16;"	variable
+length	_form.php	327;"	variable
+maximumrelationlimit	_form.php	313;"	function
+menu	admin.php	5;"	variable
+menu	create.php	5;"	variable
+menu	index.php	9;"	variable
+menu	update.php	2;"	variable
+menu	view.php	5;"	variable
+relation_changed	_form.php	135;"	function
+relation_changed_dynamic	_form.php	219;"	function
+success	_form.php	163;"	jsfunction
+success	_form.php	241;"	jsfunction
+uplifts_relation_json	_form.php	72;"	variable
+uplifts_relations	_form.php	73;"	variable
+validateForm	_form.php	302;"	function

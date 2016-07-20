@@ -1,0 +1,1 @@
+CREATE TABLE "invoice" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "servicecall_id" INTEGER, "labour_cost" DOUBLE, "shipping_handling_cost" DOUBLE, "sub_total" DOUBLE, "vat" DOUBLE, "grand_total_ex_vat" DOUBLE, "grand_total_in_vat" DOUBLE, "created" DATETIME, "created_by" INTEGER, "modified" DATETIME, "modified_by" INTEGER);

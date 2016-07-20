@@ -1,0 +1,244 @@
+<table border="1">
+        <tr>
+			<th>QTY</th>
+			<th>ACCEPTED</th>
+			<th>COMMENT AMICA</th>
+			<th>NOTES</th>
+			<th>COMPANY NAME </th>
+			<th>PAYABLE TO</th>
+			<th>JOB NUMBER</th>
+			<th>LABOUR COST</th>
+		
+			<th>X = VAT REGISTERED (UK USE ONLY)</th>
+			<th>INDEX CODE</th>
+			<th>SERIAL NUMBER</th>
+			<th>ALTERNATIVE SN.</th>
+			<th>CUSTOMER NAME</th>
+			<th>ADDRESS</th>
+			<th>RETAILER NAME</th>
+			<th>MODEL NUMBER</th>
+			<th>GROUP </th>
+			<th>GROUP 1 </th>
+			<th>SUPPLIER </th>
+			<th>Date OF PURCHASE</th>
+			
+			<th>CUSTOMER CALL DATE</th>
+			<th>REPAIR START DATE</th>
+			<th>DATE JOB COMPLETED</th>
+			<th>DATE JOB RETURENED WITH PAPAER</th>
+			
+			
+						
+			<th>WARRANTY DAY</th>
+			<th>JOB SPEED (in Days)</th>
+			<th>ENGINEER JOB SPEED (in Days)</th>
+			<th>ENGINEER ADMIN SPEED (in Days)</th>
+			
+			
+			<th>CLAIM DESCRIPTION- CUSTOMER </th>
+			<th>FAULT CODE</th>
+			<th>CLAIM DESCRIPTION-ENGINEER</th>
+			<th>UPLIFT NO</th>
+			<th>REASON FOR UPLIFT</th>
+			<th>WORK SUMMARY</th>
+			<th>Job Status</th>
+			<th>Spares Notes</th>
+			<th>PARTS USED</th>
+			<th>Spare Part Postage</th>
+			<th>Spare Part Total</th>
+			
+			<th>Spares Part Number</th>
+			<th>Quantity</th>
+			<th>Price</th>
+		
+		</tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>-Not Assigned</td><td></td><td>135269</td><td></td><td>N/A</td><td>1170290</td><td>AEIOU11702900139464</td><td>AEIOU</td><td> homegoods ltd</td><td>12
+deans
+court
+bicester
+OX26 6RD</td><td>homegoods</td><td>FK196.4</td><td></td><td></td><td></td><td>13-May-2016</td><td>13-May-2016</td><td></td><td>24-May-2016</td><td></td><td>0</td><td>11</td><td></td><td></td><td>door damaged on delivery at retailers</td><td></td><td>Spares only to retailer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>10.0</td><td>38</td><td>1016734</td><td>1</td><td>38.0</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>-Not Assigned</td><td></td><td>135410</td><td></td><td>N/A</td><td>55025</td><td>AEIOU</td><td>AEIOU</td><td> Abbey Appliances</td><td>86 High Street
+
+
+Evesham
+WR11 4EU</td><td>Abbey Appliances Ltd</td><td>1052.3MSW</td><td></td><td></td><td></td><td></td><td>31-May-2016</td><td></td><td>31-May-2016</td><td></td><td></td><td>0</td><td></td><td></td><td>chip in glass at base of door</td><td></td><td>Spares only to retailer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>10.0</td><td>44</td><td>9058957</td><td>1</td><td>30.0</td><td>9052827</td><td>1</td><td>14.0</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Simon Freear</td><td></td><td>135113</td><td></td><td></td><td>1170303</td><td>AEIOU11703030065515</td><td>AEIOU</td><td> owens electrical</td><td>9/11 Abergele Road
+
+
+Colwyn Bay
+LL29 7RS</td><td>owens electrical </td><td>FC206.3</td><td></td><td></td><td></td><td></td><td>03-May-2016</td><td></td><td>24-May-2016</td><td></td><td></td><td>21</td><td></td><td></td><td>fridge door dented on delivery </td><td></td><td>Spares only to retailer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>10.0</td><td>39</td><td>1032384</td><td>1</td><td>39.0</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Simon Freear</td><td></td><td>135387</td><td></td><td></td><td>1170452</td><td>AEIOU11704520029175</td><td>AEIOU</td><td> hargandon</td><td>12 Willow Way
+
+
+Liskeard
+PL14 4SU</td><td>sparkworld </td><td>BC276.3</td><td></td><td></td><td></td><td>24-May-2016</td><td>25-May-2016</td><td></td><td>25-May-2016</td><td></td><td>1</td><td>0</td><td></td><td></td><td>bottom door shelf - milk tray - cracked on delivery </td><td></td><td>Spares only to customer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>7.0</td><td>2.7</td><td>1033020</td><td>1</td><td>2.7</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Simon Freear</td><td></td><td>135463</td><td></td><td></td><td>1170359</td><td>AEIOU11703590015066</td><td>AEIOU</td><td> jyotsna electrical ltd</td><td>724 Field End Road
+
+
+Ruislip
+HA4 0QP</td><td>jyotsna electrical </td><td>FD225.3</td><td></td><td></td><td></td><td></td><td>03-Jun-2016</td><td></td><td>14-Jun-2016</td><td></td><td></td><td>11</td><td></td><td></td><td>freezer door dented on delivery</td><td></td><td>Spares only to retailer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>10.0</td><td>21</td><td>1030359</td><td>1</td><td>21.0</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Simon Freear</td><td></td><td>135479</td><td></td><td></td><td>54387</td><td>AEIOU00195438708915</td><td>AEIOU</td><td> thoms</td><td>flat 1 kings quey house
+
+
+Dartmouth
+TQ6 9PN</td><td>Sparkworld Ltd</td><td>608CE2TA(W)</td><td></td><td></td><td></td><td>09-Mar-2016</td><td>06-Jun-2016</td><td></td><td>06-Jun-2016</td><td></td><td>88</td><td>0</td><td></td><td></td><td>drawer front broken. authorised by simon </td><td></td><td>Spares only to retailer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>7.0</td><td>8.2</td><td>9033484</td><td>1</td><td>5.5</td><td>8032359</td><td>1</td><td>2.7</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>134633</td><td></td><td></td><td>54386</td><td>AEIOU00465438623915</td><td>AEIOU</td><td> wallace</td><td>17
+Saint Domingo Vale
+
+Liverpool
+L5 6RN</td><td>liverpool city council</td><td>508GG5(W)</td><td></td><td></td><td></td><td>09-Nov-2015</td><td>16-Mar-2016</td><td></td><td>27-May-2016</td><td></td><td>128</td><td>71</td><td></td><td></td><td>took glass out for cleaning cant put it back to gether, advised not covered but would sent top vent as it got broken as a guesture of good will</td><td></td><td>Spares only to customer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>7.0</td><td>1.8</td><td>8051130</td><td>1</td><td>1.8</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135239</td><td></td><td></td><td>1170295</td><td>AEIOU11702950082175</td><td>AEIOU</td><td> FIRST CHOICE</td><td>217
+WELLINGTON RD
+
+RHYL
+LL18 1LR</td><td>first choice</td><td>FK213.3</td><td></td><td></td><td></td><td>11-May-2016</td><td>11-May-2016</td><td></td><td>24-May-2016</td><td></td><td>0</td><td>13</td><td></td><td></td><td>freezer door dented just at handle when unboxed, wantes to replace door rather than appliance</td><td></td><td>Spares only to retailer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>10.0</td><td>29</td><td>1032420</td><td>1</td><td>29.0</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135290</td><td></td><td></td><td>1160627</td><td>AEIOU11606270093163</td><td>AEIOU</td><td> Dicknell</td><td>6 Dorset Avenue
+
+
+Exeter
+EX4 1LY</td><td>sparkworld</td><td>OKC6726I</td><td></td><td></td><td></td><td>30-Mar-2016</td><td>16-May-2016</td><td></td><td>03-Jun-2016</td><td></td><td>47</td><td>18</td><td></td><td></td><td>filter missing, spares only to csutomer </td><td></td><td>Spares only to customer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>7.0</td><td>5</td><td>1060042</td><td>1</td><td>5.0</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135317</td><td></td><td></td><td>52559</td><td>AEIOU15465255918507</td><td>AEIOU</td><td> Garrett</td><td>10 Chaucer Close
+
+
+Fareham
+PO16 7PD</td><td></td><td> SET113.3TAYKDX</td><td></td><td></td><td></td><td></td><td>18-May-2016</td><td></td><td>03-Jun-2016</td><td></td><td></td><td>16</td><td></td><td></td><td>window hangings</td><td></td><td>Spares only to customer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>7.0</td><td>7.2</td><td>8028450</td><td>1</td><td>1.8</td><td>8028449</td><td>1</td><td>1.8</td><td>8028448</td><td>1</td><td>1.8</td><td>8028446</td><td>1</td><td>1.8</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135346</td><td></td><td></td><td>1060275</td><td>AEIOU10602750540134</td><td>AEIOU</td><td> r shakepeare-miller</td><td>66 Dacres Road
+
+
+London
+SE23 2NR</td><td>budget appliances </td><td>OSC6468W</td><td></td><td></td><td></td><td>01-Sep-2015</td><td>23-May-2016</td><td></td><td>23-May-2016</td><td></td><td>265</td><td>0</td><td></td><td></td><td>visor that covers the bulb has fallen off </td><td></td><td>Spares only to customer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>7.0</td><td>0.9</td><td>1006924</td><td>1</td><td>0.9</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135353</td><td></td><td></td><td>1170290</td><td>AEIOU11702900141136</td><td>AEIOU</td><td> mills</td><td>8 Stonefield Close
+
+
+Bradford
+BD2 2JP</td><td>sonic</td><td>FK196.4</td><td></td><td></td><td></td><td>20-May-2016</td><td>23-May-2016</td><td></td><td>07-Jun-2016</td><td></td><td>3</td><td>15</td><td></td><td></td><td>fridge shelf missing on delivery. spares only to retailer.</td><td></td><td>Spares only to customer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>10.0</td><td>8.1</td><td>1018415</td><td>1</td><td>6.3</td><td>1013785</td><td>2</td><td>0.9</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135361</td><td></td><td></td><td>55425</td><td>AEIOU</td><td>AEIOU</td><td>jayne hughes electrical</td><td>algar retail park
+blackpole
+road
+worcester
+WR3 8HP</td><td>hughes</td><td>508TEE1(W)</td><td></td><td></td><td></td><td>23-May-2016</td><td>23-May-2016</td><td></td><td>23-May-2016</td><td></td><td>0</td><td>0</td><td></td><td></td><td>missing grill handle </td><td></td><td>Spares only to retailer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>7.0</td><td>2.7</td><td>9055147</td><td>1</td><td>2.7</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135372</td><td></td><td></td><td>55775</td><td>AEIOU00825577511716</td><td>AEIOU</td><td> homegoods ltd</td><td>12
+deans
+court
+bicester
+OX26 6RD</td><td>homegoods </td><td>10132.3X</td><td></td><td></td><td></td><td></td><td>24-May-2016</td><td></td><td>24-May-2016</td><td></td><td></td><td>0</td><td></td><td></td><td>chrome shelf missing on delivery </td><td></td><td>Spares only to retailer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>7.0</td><td>2.7</td><td>8052541</td><td>1</td><td>2.7</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135383</td><td></td><td></td><td>1140091</td><td>AEIOU11400910469274</td><td>AEIOU</td><td> georgina</td><td>22 Fairway Drive
+
+
+Greenford
+UB6 8PW</td><td>furnish</td><td>AWB510L</td><td></td><td></td><td></td><td></td><td>24-May-2016</td><td></td><td>25-May-2016</td><td></td><td></td><td>1</td><td></td><td></td><td>button on facia pushed in, will take new panel rather than uplifting</td><td></td><td>Spares only to retailer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>10.0</td><td>17</td><td>1030326</td><td>1</td><td>17.0</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135388</td><td></td><td></td><td>54385</td><td>AEIOU00435438508216</td><td>AEIOU</td><td> W Prothero</td><td>120 Swinton Hall Road
+Swinton
+
+Manchester
+M27 4AT</td><td>Appliance world</td><td>508CE2MS(W)</td><td></td><td></td><td></td><td>15-May-2016</td><td>25-May-2016</td><td></td><td>25-May-2016</td><td></td><td>10</td><td>0</td><td></td><td></td><td>wire shelf missing on delivery</td><td></td><td>Spares only to customer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>7.0</td><td>2.7</td><td>8052541</td><td>1</td><td>2.7</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135399</td><td></td><td></td><td></td><td>AEIOU11702930039434</td><td>AEIOU</td><td> Eric Livermore</td><td>2 Ellis Street
+
+
+Kilmarnock
+KA1 2DB</td><td>appliancesdirect</td><td>FZ210.3</td><td></td><td></td><td></td><td>26-May-2016</td><td>26-May-2016</td><td></td><td>27-May-2016</td><td></td><td>0</td><td>1</td><td></td><td></td><td>Flap down in the freezer is broken off</td><td></td><td>Spares only to customer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td>No postage customer came in to collect</td><td>Yes</td><td></td><td>3.6</td><td>1023516</td><td>1</td><td>3.6</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135414</td><td></td><td></td><td>1170290</td><td>AEIOU</td><td>AEIOU</td><td>JOE GRAHAM AND SON Not Known</td><td>1
+COSGROVE WAY
+
+LUTON
+LU1 1XL</td><td>Joe Graham and Son Ltd</td><td>FK196.4</td><td></td><td></td><td></td><td>28-May-2016</td><td>31-May-2016</td><td></td><td>31-May-2016</td><td></td><td>3</td><td>0</td><td></td><td></td><td>needs a replacement top door for appliance as it arrived dented</td><td></td><td>Spares only to retailer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>10.0</td><td>38</td><td>1016734</td><td>1</td><td>38.0</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135417</td><td></td><td></td><td>54389</td><td>AEIOU00065438914215</td><td>AEIOU</td><td> Automatica</td><td>6 Station Road
+Crayford
+
+Dartford
+DA1 3QA</td><td>Automatica UK Ltd</td><td>608EE2TA(W)</td><td></td><td></td><td></td><td>31-May-2016</td><td>31-May-2016</td><td></td><td>31-May-2016</td><td></td><td>0</td><td>0</td><td></td><td></td><td>needs both inner and outer glass only </td><td></td><td>Spares only to retailer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>20.0</td><td>31.9</td><td>9050204</td><td>1</td><td>22.0</td><td>8051824</td><td>1</td><td>7.2</td><td>8051768</td><td>1</td><td>2.7</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135418</td><td></td><td></td><td>1170514</td><td>AEIOU</td><td>AEIOU</td><td> enterprise 2000</td><td>3
+castell close
+enterprise park
+SWANSEA
+SA7 9FH</td><td></td><td>FK308.6</td><td></td><td></td><td></td><td></td><td>31-May-2016</td><td></td><td>14-Jun-2016</td><td></td><td></td><td>14</td><td></td><td></td><td>the bottom door rack, milk shelf has a crack in it</td><td></td><td>Spares only to retailer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>10.0</td><td>3.6</td><td>1031063</td><td>1</td><td>3.6</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135428</td><td></td><td></td><td>1170299</td><td>AEIOU11702990199474</td><td>AEIOU</td><td> lloyd</td><td>5 Mount Street
+
+
+Battle
+TN33 0EG</td><td>adams and jarrett </td><td>FK106.4</td><td></td><td></td><td></td><td>26-Nov-2015</td><td>31-May-2016</td><td></td><td>01-Jun-2016</td><td></td><td>186</td><td>1</td><td></td><td></td><td>light cover has shattered </td><td></td><td>Spares only to customer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td>No lamp cover part, had to take it off 1019248 thermostat</td><td>Yes</td><td>7.0</td><td>0</td><td></td><td>1</td><td>0.0</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135438</td><td></td><td></td><td>1170290</td><td>AEIOU11702900176136</td><td>AEIOU</td><td> welsh</td><td>2/5 Bughtlin Gardens
+
+
+Edinburgh
+EH12 8XB</td><td>bhs direct</td><td>FK196.4</td><td></td><td></td><td></td><td>27-May-2016</td><td>01-Jun-2016</td><td></td><td>01-Jun-2016</td><td></td><td>5</td><td>0</td><td></td><td></td><td>middle drawer on the door arrived damaged</td><td></td><td>Sparse only to retailer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>7.0</td><td>2.7</td><td>1023196</td><td>1</td><td>2.7</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135472</td><td></td><td></td><td>55025</td><td>AEIOU00145502504415</td><td>AEIOU</td><td> skelthorpe</td><td>loxley, Terrace Lane
+Pleasley
+
+Mansfield
+NG19 7PU</td><td>Domestic Supplies Ltd </td><td>1052.3MSW</td><td></td><td></td><td></td><td>12-Mar-2015</td><td>06-Jun-2016</td><td></td><td>06-Jun-2016</td><td></td><td>451</td><td>0</td><td></td><td></td><td>needs a door seal sent direct to customer he thinks he can fix it himself</td><td></td><td>Spares only to customer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>7.0</td><td>2.7</td><td>8048074</td><td>1</td><td>2.7</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135524</td><td></td><td></td><td>54383</td><td>AEIOU14425438328913</td><td>AEIOU</td><td> stuart</td><td>flat 2/2, 5 Bridge Street
+Rothesay
+
+Isle of Bute
+PA20 0HS</td><td></td><td>508EE1(W)</td><td></td><td></td><td></td><td>16-Jan-2014</td><td>09-Jun-2016</td><td></td><td>09-Jun-2016</td><td></td><td>874</td><td>0</td><td></td><td></td><td>oven and grill stopped working, 
+</td><td></td><td>Spares only to customer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>7.0</td><td>10.8</td><td>8049290</td><td>1</td><td>7.2</td><td>8001690</td><td>1</td><td>3.6</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135534</td><td></td><td></td><td>54388</td><td>AEIOU00375438832215</td><td>AEIOU</td><td> craik</td><td>the copse  Castle Street
+
+
+Llandovery
+SA20 0AN</td><td>tryden arthur </td><td>608CE2TA(XX)</td><td></td><td></td><td></td><td>07-Jun-2016</td><td>10-Jun-2016</td><td></td><td>13-Jun-2016</td><td></td><td>3</td><td>3</td><td></td><td></td><td>drawer front not sitting flush </td><td></td><td>Spares only to customer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>7.0</td><td>14.6</td><td>8032361</td><td>1</td><td>3.6</td><td>9033374</td><td>1</td><td>11.0</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135547</td><td></td><td></td><td>54389</td><td>AEIOU00035438923113</td><td>AEIOU</td><td> dannielle</td><td>Flat 5
+Beckford House
+Mayville Estate
+London
+N16 8LR</td><td>real domestic appliances</td><td>608EE2TA(W)</td><td></td><td></td><td></td><td>01-Apr-2014</td><td>13-Jun-2016</td><td></td><td>13-Jun-2016</td><td></td><td>803</td><td>0</td><td></td><td></td><td>out of warranty new cam switch sent as good will gesture</td><td></td><td>Spares only to customer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>7.0</td><td>3.6</td><td>8061791</td><td>1</td><td>3.6</td></tr>
+ 
+ 
+ <tr><td></td><td></td><td></td><td></td><td>Spares Only</td><td></td><td>135550</td><td></td><td></td><td></td><td>AEIOU</td><td>AEIOU</td><td> First choice domestics - Louise</td><td>217 Wellington Road
+
+
+Rhyl
+LL18 1LL</td><td></td><td>FK213.3</td><td></td><td></td><td></td><td></td><td>13-Jun-2016</td><td></td><td>13-Jun-2016</td><td></td><td></td><td>0</td><td></td><td></td><td>un packed and handle was damaged</td><td></td><td>Spares only to retailer</td><td></td><td></td><td>SPARES ONLY</td><td>Invoiced - Spares Only</td><td></td><td>Yes</td><td>7.0</td><td>5.5</td><td>1030955</td><td>1</td><td>5.5</td></tr></table>
