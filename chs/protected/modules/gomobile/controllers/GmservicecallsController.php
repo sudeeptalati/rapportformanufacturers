@@ -51,11 +51,19 @@ class GmservicecallsController extends RController
      */
     public function actionView($id)
     {
+        /*
         $system_message = '';
         $this->render('view', array(
             'model' => $this->loadModel($id), 'system_message' => $system_message
-        ));
+        ));*/
+       // $this->render('view');
+
+        $model=Gmservicecalls::model()->findByPk($id);
+
+        $this->redirect(array('/servicecall/view', 'id' => $model->servicecall_id));
+
     }
+
 
     /**
      * Returns the data model based on the primary key given in the GET variable.

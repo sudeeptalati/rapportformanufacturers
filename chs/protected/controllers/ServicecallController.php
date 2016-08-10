@@ -373,6 +373,126 @@ $mpdf->Output($filename,'I');
 		
 	}//end of update().
 
+
+	/**
+	 *
+	 * Updating the dialog
+	 * public function actionUpdateservicecalldialog()
+	 */
+
+	public function actionUpdateservicecalldialog()
+	{
+		$error_msg='';
+		if (isset($_POST['Servicecall'])) {
+
+			$servicecall_id=$_GET['servicecall_id'];
+			$service_model=Servicecall::model()->findByPk($servicecall_id);
+
+			$service_model->attributes = $_POST['Servicecall'];
+
+			/*
+			var_dump($_POST['Product']);
+			var_dump($product_model);
+			*/
+			$invoiceModel = Invoice::model()->findByAttributes(array('servicecall_id'=>$service_model->id));
+			if($invoiceModel)
+			{
+				echo "<br>existing invoice id = ".$invoiceModel->id;
+			}
+			else
+			{
+				echo "New Invoice<br>";
+				$invoiceModel = new Invoice();
+			}
+
+			if(isset($_POST['Invoice']))
+			{
+				$invoiceModel->attributes=$_POST['Invoice'];
+				$invoiceModel->servicecall_id = $servicecall_id;
+
+				if($invoiceModel->save())
+				{
+					echo "<br>Invoice saved";
+					var_dump($invoiceModel->attributes);
+					$service_model->net_cost = $service_model->net_cost+$invoiceModel->shipping_handling_cost+$invoiceModel->labour_cost;
+					echo "<br>Serivce calls net cost = ".$service_model->net_cost;
+				}
+				else
+				{
+					echo "<br>Error in saving Invoice";
+					echo "getErrors";
+					$errors=$invoiceModel->getErrors();
+					$error_msg.='<h5>Invoice cost Details Not Updated</h5>';
+					foreach ($errors as $key=>$value)
+						$error_msg.="<br>".$value[0];
+
+
+
+
+				}
+
+
+			}//end of isset(invoice).
+
+
+
+
+
+			if ($service_model->save()) {
+				echo "Svaed";
+				$this->redirect(array('servicecall/view&id='.$servicecall_id.'#service-details'));
+			}
+			else{
+				echo "getErrors";
+				$errors=$service_model->getErrors();
+				$error_msg='<h5>Servicecall Details Not Updated</h5>';
+				foreach ($errors as $key=>$value)
+					$error_msg.="<br>".$value[0];
+
+
+				//$this->redirect(array('servicecall/view', 'id' => $servicecall_id, 'error_msg='=>$error_msg));
+				$this->redirect(array('servicecall/view&id='.$servicecall_id.'&error_msg='.$error_msg.''));
+			}
+
+
+
+
+		}
+
+
+	}///end of 	public function actionUpdateservicecalldialog()
+
+
+	public function  actionAddcommnetsinservicecall()
+	{
+		if (isset($_POST['Servicecall'])) {
+
+			$servicecall_id=$_GET['servicecall_id'];
+			$service_model=Servicecall::model()->findByPk($servicecall_id);
+
+			$service_model->attributes = $_POST['Servicecall'];
+			if ($service_model->save()) {
+				echo "Servicecall Comments Saved";
+				$this->redirect(array('servicecall/view', 'id' => $servicecall_id));
+			}
+			else{
+				echo "Servicecall Comments  getErrors";
+				$errors=$service_model->getErrors();
+				$error_msg='<h5>Servicecall Comments Not Updated</h5>';
+				foreach ($errors as $key=>$value)
+					$error_msg.="<br>".$value[0];
+
+
+				//$this->redirect(array('servicecall/view', 'id' => $servicecall_id, 'error_msg='=>$error_msg));
+				$this->redirect(array('servicecall/view&id='.$servicecall_id.'&error_msg='.$error_msg.'#productbox'));
+			}
+		}
+
+	}////end of public function addcommnetsinservicecall()
+
+
+
+
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -731,9 +851,21 @@ WHERE     customer.postcode LIKE 'gl50 4bd'
 			$redirect_url=$_POST['Servicecall']['successfulredirectto'];
 			$r=Servicecall::model()->updateengineerbyservicecallid($id,$updated_engineer_id);
 			////Update engineer by PK
-			if ($r==2)
-			//redirect
-				$this->redirect(array($redirect_url));
+			if ($r==2){
+				//Whenever the engg is changed, the remote chat is transferred to comments and cleared
+				$clearchat=$this->clearchathistory($id);
+				//redirect
+
+				//$this->redirect(array($redirect_url));
+				if ($clearchat==true)
+				{
+					$this->redirect(array('servicecall/view&id='.$id));
+
+				}else
+				{
+					$this->redirect(array('servicecall/view&id='.$id.'&error_msg='.$clearchat));
+				}
+			}
 			else
 				echo 'cannot update engineer in either product or servicecall';
 
@@ -1010,6 +1142,91 @@ WHERE     customer.postcode LIKE 'gl50 4bd'
 	}//end of actionDisplayMap
 
 
-	
-	
+
+	public function actionChangejobstatusonly()
+	{
+
+		if (isset($_POST['Servicecall'])) {
+
+			$updated_job_status_id = $_POST['Servicecall']['job_status_id'];
+			$id = $_POST['Servicecall']['id'];
+			$redirect_url = $_POST['Servicecall']['successfulredirectto'];
+			$r = Servicecall::model()->updatejobstatusbyservicecallid($id, $updated_job_status_id);
+			////Update engineer by PK
+			if ($r == 1) {
+				 //redirect
+				$this->redirect(array($redirect_url));
+			} else
+				echo 'cannot update Job Status in servicecall. Please contact support';
+
+		}
+		$this->renderPartial('changeEngineerOnly');
+	}//end of ChangeEngineerOnly.
+
+
+	public function clearchathistory($servicecall_id)
+	{
+		$systemmsg= "Clear Chat history is called servicecall_id".$servicecall_id;
+		$error_msg='';
+		$setupmodel=Setup::model();
+		////Find the chat in mobile
+		$gm_servicecallmodel=Gmservicecalls::model()->findByAttributes(array('servicecall_id'=>$servicecall_id));
+
+		if ($gm_servicecallmodel)
+		{
+			$systemmsg.="<br> There is a gm data";
+			$systemmsg.="<br> ".$gm_servicecallmodel->communications;
+			$chats=$gm_servicecallmodel->communications;
+
+
+			///Trannsfer and update chat in comments
+			$servicecallmodel=Servicecall::model()->findByPk($servicecall_id);
+
+			$systemmsg.="<br>fault_date ".$servicecallmodel->fault_date;
+			$chats="<h5>Engineer Changed from ".$servicecallmodel->engineer->company."</h5><b>Previous Chats:</b><br>".$chats;
+			$comments= $setupmodel->updatenotesorcomments($chats, $servicecallmodel, 'comments');
+
+
+
+
+
+
+			$servicecall_update = Servicecall::model()->updateByPk($servicecall_id,
+				array(
+					'comments' => $comments,
+
+				));
+
+			if ($servicecall_update)
+			{
+				/// update the activity log as engineer is changed
+				Servicecall::model()->updatejobstatusbyservicecallid($servicecall_id, '1'); //The job will be reset to logged
+
+
+				///Clear chat history
+				$gm_servicecallmodel->communications='{"chats":[]}';
+				$gm_servicemodelsave=$setupmodel->savemodel($gm_servicecallmodel);
+
+				if ($gm_servicemodelsave)
+				{
+					return true;
+				}else
+				{
+					$error_msg.=$gm_servicemodelsave;
+				}
+
+			}else
+			{
+				$error_msg.='<br>Cannot update servicecall';
+			}
+
+
+		}///end of 	if ($gm_servicecallmodel)
+
+
+		return $error_msg;
+
+	}///end of 	public function clearchathistory($servicecall_id)
+
+
 }//end of class.

@@ -662,7 +662,7 @@ class Setup extends CActiveRecord
 
     }///end of formataddress
 
-    public function formatdate($d)
+    public function formatdate($d=null)
     {
         if ($d != '' || $d != NULL)
             return date('d-M-Y', $d);
@@ -670,12 +670,23 @@ class Setup extends CActiveRecord
             return '';
     }
 
-    public function formatdatewithtime($d)
+    public function formatdatewithtime($d=null)
     {
         if ($d != '' || $d != NULL)
             return date('d-M-Y h:i A', $d);
         else
             return '';
+    }
+
+
+    public function getdate()
+    {
+        return date('d-M-Y');
+    }
+
+    public function getdatetime()
+    {
+        return date('d-M-Y h:i A');
     }
 
 
@@ -758,11 +769,13 @@ class Setup extends CActiveRecord
         $returnhtml = '';
         ///var_dump($json_notes);
 
-
         if ($json_notes!=NULL) {
             $allnotesarray = $json_notes['timestampednotes'];
             if (count($allnotesarray) > 0) {
                 $returnhtml = '<table class="notes_comments_table" ><tr><th>Date/Time</th><th>User</th><th>Notes</th></tr>';
+
+                $allnotesarray = array_reverse($allnotesarray, true);
+
                 foreach ($allnotesarray as $jn) {
                     $returnhtml .= '<tr>';
                     $returnhtml .= '<td>' . $jn['date'] . '</td>';
@@ -805,6 +818,26 @@ class Setup extends CActiveRecord
 		$user = User::model()->findByPk(Yii::app()->user->id);
 		return $user->email;
 	}
+
+
+    public function savemodel($model)
+    {
+        if ($model->save()) {
+
+            return true;
+        }
+        else{
+
+            $error_msg='<h4>Error in Saving</h4>';
+            $errors=$model->getErrors();
+            foreach ($errors as $key=>$value)
+                $error_msg.="<br>".$value[0];
+
+            //$this->redirect(array('servicecall/view', 'id' => $servicecall_id, 'error_msg='=>$error_msg));
+            return $error_msg.'<hr>';
+        }
+
+    }///end of public function savemodel($model)
 
 
 }//end of class.

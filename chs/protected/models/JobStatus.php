@@ -163,7 +163,7 @@ class JobStatus extends CActiveRecord
 	public static function published_item($type,$code)
 	{
 		if(!isset(self::$_published_items[$type]))
-			self::published_loadItems($type);
+			self::published_loadItemshtml($type);
 		return isset(self::$_published_items[$type][$code]) ? self::$_published_items[$type][$code] : false;
 	}
 
@@ -181,6 +181,9 @@ class JobStatus extends CActiveRecord
 		foreach($models as $model)
 			self::$_published_items[$type][$model->id]=$model->name;
 	}
+
+
+
 	
 	//************ END OF FUNCTION TO CREATE DROPDOWN FILTER IN ADMIN VIEW ****************
 	

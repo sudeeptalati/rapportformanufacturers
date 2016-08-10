@@ -20,10 +20,6 @@
  * @property integer $created_by_user_id
  * @property string $created
  * @property string $modified
- * @property string $management_contact_details
- * @property string $spares_contact_details
- * @property string $accounts_contact_details
- * @property string $technical_contact_details
  * @property integer $short_name
  * @property integer $labour_warranty_months_duration
  * @property integer $parts_warranty_months_duration

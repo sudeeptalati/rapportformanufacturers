@@ -87,12 +87,16 @@ $(document).ready(function() {
  
  <div style="width:129%;">
  
- 
+
+
  
 <?php $gridVar = $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'servicecall-grid',
 	'dataProvider'=>$model->search(),
- 	'filter'=>$model,
+	'selectableRows'=>1,
+	'selectionChanged'=>'function(id){ location.href = "'.$this->createUrl('view').'/id/"+$.fn.yiiGridView.getSelection(id);}',
+
+	'filter'=>$model,
 	'columns'=>array(
 		//'id',
 		//'service_reference_number',
@@ -126,18 +130,33 @@ $(document).ready(function() {
 
 		//'created_by_user_id',
 
-		
+		/*
 		array(
 			'name'=>'job_status_id',
 			'value'=>'JobStatus::published_item("JobStatus",$data->job_status_id)',
 			'filter'=>JobStatus::published_items('JobStatus'),
+			'type'=>'raw',
 		),
+		*/
+
+		array(
+			'name'=>'job_status_id',
+			'value'=>'$data->jobStatus->html_name',
+			'filter'=>JobStatus::model()->getAllPublishedListdata(),
+			'type'=>'raw',
+		),
+
 		//'fault_description',
 
 		array('header' => 'RaisedBy',
             	'name'=>'user_name','value'=>'$data->createdByUser->username','filter'=>false),
 
 		array('header' => 'ReportedDate','name'=>'fault_date', 'value'=>'date("d-M-Y",$data->fault_date)', 'filter'=>false),
+
+		//'fault_date',
+
+
+
 		/*
 		'insurer_reference_number',
 		'job_status_id',

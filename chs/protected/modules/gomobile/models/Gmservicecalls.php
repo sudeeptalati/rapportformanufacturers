@@ -19,7 +19,7 @@
  */
 class Gmservicecalls extends CActiveRecord
 {
-
+	public $servicecall_status;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -37,7 +37,7 @@ class Gmservicecalls extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('servicecall_id, service_reference_number, server_status_id, created, modified', 'numerical', 'integerOnly'=>true),
-			array('data_sent, 	data_recieved, communications, event_log, comments', 'safe'),
+			array('servicecall_status, data_sent, 	data_recieved, communications, event_log, comments', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array(' id, servicecall_id, service_reference_number, server_status_id, created, modified, comments', 'safe', 'on'=>'search'),
@@ -240,21 +240,16 @@ class Gmservicecalls extends CActiveRecord
 
 			foreach ($data  as $recieved_sc_data )
 			{
-//				$system_message.= $recieved_sc_data->service_reference_number;
-//				$system_message.= $recieved_sc_data->engineer_email;
-//				$system_message.= $recieved_sc_data->sent_data->data_sent;
-//				$system_message.= $recieved_sc_data->sent_data->communications;
                 if ($recieved_sc_data->type=='servicecall_data')
                 {
-                    $claim_status=35; //as 50 is status of claim recieved
+					$servicecall_status=35;
 
                 }else
                 {
-                    $claim_status=37; //as 50 is status of claim recieved
-
+					$servicecall_status=0;
                 }
 
-				$this->saverecieveddatatoservicecalls($claim_status,$recieved_sc_data->service_reference_number, $recieved_sc_data->sent_data->data_sent, $recieved_sc_data->sent_data->communications);
+				$this->saverecieveddatatoservicecalls($servicecall_status,$recieved_sc_data->service_reference_number, $recieved_sc_data->sent_data->data_sent, $recieved_sc_data->sent_data->communications);
 
 			}
 		}
@@ -269,7 +264,7 @@ class Gmservicecalls extends CActiveRecord
 	}///end of 	public function recieveservicecallfromserver()
 
 
-	public function saverecieveddatatoservicecalls($received_server_status,$ser_ref_no, $data, $communications )
+	public function saverecieveddatatoservicecalls($service_status,$ser_ref_no, $data, $communications )
 	{
 //		echo $ser_ref_no.$data.$communications;
 		/*
@@ -278,13 +273,15 @@ class Gmservicecalls extends CActiveRecord
 		*/
 		$id=$this->getgomobileidbyservicereferenceno($ser_ref_no);
         $model=Gmservicecalls::model()->findByPk($id);
-        $model->server_status_id=$received_server_status;
+        $model->server_status_id=37;///as msg unread
         $model->data_recieved=$data;
         $model->communications=$communications;
         //$model->event_log=$model->event_log.'DATA Recieved';
         $model->save();
 
-        $this->updatestatusbygomobileid($id,$received_server_status);
+		////Only update servicecall status if it is service data
+		if ($service_status!=0)
+	        $this->updatestatusbygomobileid($id,$service_status);
 
 	}////end of public function saverecieveddatatoservicecalls()
 
@@ -300,17 +297,34 @@ class Gmservicecalls extends CActiveRecord
 
 	}//end of getserviceidbyservicerefrencenumber
 
+
+
 	public function getgomobileidbyservicereferenceno($service_reference_number)
 	{
 		$model = Gmservicecalls::model()->findByAttributes(array('service_reference_number' => $service_reference_number));
 		if ($model)
-           return $model->id;
-        else
-            return null;
+			return $model->id;
+		else
+			return null;
 	}///end of 	public function getgomobileidbyservicereferenceno($service_reference_number)
 
 
-    public function getportalurl()
+	public function getgomobileidbyservicecallid($servicecall_id)
+	{
+		$model = Gmservicecalls::model()->findByAttributes(array('servicecall_id' => $servicecall_id));
+		if ($model)
+			return $model->id;
+		else
+			return null;
+	}///end of 	public function getgomobileidbyservicereferenceno($service_reference_number)
+
+
+
+
+
+
+
+	public function getportalurl()
     {
         return 'http://portal.amicaservice.co.uk/aep/';
     }
@@ -427,6 +441,9 @@ class Gmservicecalls extends CActiveRecord
                     'job_status_id'=>$status_id
                 )
             );
+
+			Servicecall::model()->updateactivitylog($model->servicecall_id);
+
             return true;
         }
 

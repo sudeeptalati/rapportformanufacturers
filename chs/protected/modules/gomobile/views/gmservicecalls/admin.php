@@ -4,8 +4,8 @@
 
  //include('gomobile_menu.php'); 
 
- 
-//$this->layout='column1';
+
+$this->layout='column1';
 
 	$selected_statuses=array(
 							'31'=>'Job Sent to Engineer', 
@@ -56,23 +56,39 @@ ul#menu li {
 <?php $this->widget('zii.widgets.grid.CGridView', array(
     'id'=>'gmservicecalls-grid',
     'dataProvider'=>$model->search(),
+
+	'selectableRows'=>1,
+	'selectionChanged'=>'function(id){ location.href = "'.$this->createUrl('view').'/id/"+$.fn.yiiGridView.getSelection(id);}',
+
     'filter'=>$model,
     'columns'=>array(
     
 		array(	'name'=>'service_reference_number',
 				//'value'=>'$data->servicecall_id',
-			     'value' => 'CHtml::link($data->service_reference_number, array("/gomobile/gmservicecalls/view&id=".$data->id))',
+			     'value' => 'CHtml::link($data->service_reference_number, array("/servicecall/view&id=".$data->servicecall_id))',
 				'type'=>'raw',
 				//'filter'=>true,
 				'header' => 'Service Ref No#'
 		),
-		
+
+		array(	'name'=>'server_status_id',
+				'value'=>'$data->servicecall->jobStatus->name',
+				'type'=>'raw',
+				'filter'=>false,
+				//'filter'=>JobStatus::model()->getAllPublishedListdata(),
+		),
+
+		/*
 		array('name'=>'server_status_id',
 			'value'=>'$data->jobstatus->html_name',
 			'type'=>'raw',
 			
 			'filter'=>$selected_statuses,
 			),
+
+		*/
+
+
 		array(	'header' => 'CustomerFullName',
             	//'name'=>'customer_name',
 				'value'=>'$data->servicecall->customer->fullname',
@@ -98,14 +114,22 @@ ul#menu li {
 				 'value'=>'$data->servicecall->job_payment_date==null ? "":date("d-M-Y",$data->servicecall->job_payment_date)', 
 			),
 		//array('name'=>'created', 'value'=>'$data->created==null ? "":date("d-M-Y",$data->created)', 'filter'=>false),
-		array('header' => 'LastChanged', 'name'=>'modified', 'value'=>'$data->modified==null ? "":date("d-M-Y",$data->modified)', 'filter'=>false),
 
 		 
 		array(	'header' => 'ReportedDate',
             	//'name'=>'fault_reported_date',
 				 'value'=>'$data->servicecall->fault_date==null ? "":date("d-M-Y",$data->servicecall->fault_date)', 
 			),
-		
+		array('header' => 'LastChanged', 'name'=>'modified', 'value'=>'$data->modified==null ? "":date("d-M-Y H:i:s l",$data->modified)', 'filter'=>false),
+
+		array('name'=>'server_status_id',
+
+			'header'=>'Last Server Activity',
+			'value'=>'$data->jobstatus->html_name',
+			'type'=>'raw',
+			'filter'=>$selected_statuses,
+		),
+
     	/*
         'id',
         'servicecall_id',
@@ -119,10 +143,10 @@ ul#menu li {
         'data_recieved',
         'communications',
         'event_log',
-        */
+
  		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view}',
-		),
+		),  */
     ),
 )); ?>

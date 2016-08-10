@@ -70,7 +70,7 @@ class ProductController extends RController
 //			$model->customer_id=0;
 
 		// Uncomment the following line if AJAX validation is needed
-		$this->performAjaxValidation($model);
+		//$this->performAjaxValidation($model);
 
 		if(isset($_POST['Product']))
 		{
@@ -246,6 +246,49 @@ class ProductController extends RController
 		}//end of if(isset)
 		$this->render('updateProduct',array('model'=>$model));
 	}//end of updateProduct().
-	
-	
+
+
+
+	public function actionUpdateproductfromservicecall()
+	{
+
+		if (isset($_POST['Product'])) {
+
+			$servicecall_id=$_GET['servicecall_id'];
+			$service_model=Servicecall::model()->findByPk($servicecall_id);
+			$product_model=Product::model()->findByPk($service_model->product_id);
+
+			$product_model->attributes = $_POST['Product'];
+
+			/*
+			var_dump($_POST['Product']);
+			var_dump($product_model);
+			*/
+
+
+
+
+			if ($product_model->save()) {
+				echo "Svaed";
+				$this->redirect(array('servicecall/view&id='.$servicecall_id.'#productbox'));
+			}
+			else{
+				echo "getErrors";
+				$errors=$product_model->getErrors();
+				$error_msg='<h5>Product Not Updated</h5>';
+				foreach ($errors as $key=>$value)
+					$error_msg.="<br>".$value[0];
+
+
+				 //$this->redirect(array('servicecall/view', 'id' => $servicecall_id, 'error_msg='=>$error_msg));
+				$this->redirect(array('servicecall/view&id='.$servicecall_id.'&error_msg='.$error_msg.''));
+			}
+
+
+
+
+		}
+	}///end of 	public function actionUpdateproductfromservicecall()
+
+
 }//end of class.

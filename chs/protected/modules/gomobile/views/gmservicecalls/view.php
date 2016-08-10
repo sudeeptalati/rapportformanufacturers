@@ -2,7 +2,17 @@
 /* @var $this GmServicecallsController */
 /* @var $model GmServicecalls */
 
-include('gomobile_menu.php');
+//include('gomobile_menu.php');
+
+
+$servicecall_id=$_GET['id'];
+$gomobile_id=Gmservicecalls::model()->getgomobileidbyservicecallid($servicecall_id);
+
+$model=Gmservicecalls::model()->findByPk($gomobile_id);
+$system_message = '';
+
+
+
 ?>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -21,6 +31,8 @@ include('gomobile_menu.php');
 <?php endif; ///end of if ($system_message!=''):?>
 
 <table>
+
+    <!--
     <tr>
         <td style="text-align:center">
             <h2>Review Service Call #
@@ -33,174 +45,11 @@ include('gomobile_menu.php');
         </td>
     </tr>
 
-    <!-- Customer & Product Details Start -->
-    <tr>
-        <td>
-            <div class="customerheadingbox">
-                <h4>Customer & Product</h4>
-            </div>
-            <div class="customerdatabox">
-
-                <table style="margin: 5px;">
-                    <tr>
-                        <th style="width:50%;">
-                        </th>
-                        <th style="width:50%; ">
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <?php echo $model->servicecall->customer->title . ' ' . $model->servicecall->customer->fullname; ?>
-                            <br>
-                            <div class="address_contact">
-                                <?php
-                                echo Setup::model()->formataddressinhtml($model->servicecall->customer->address_line_1, $model->servicecall->customer->address_line_2, $model->servicecall->customer->address_line_3, $model->servicecall->customer->town, $model->servicecall->customer->postcode_s . " " . $model->servicecall->customer->postcode_e);
-                                ?>
-                            </div>
-                            <div><span
-                                    class="datacontenttitle">Mobile:</span><?php echo '' . $model->servicecall->customer->mobile; ?>
-                            </div>
-                            <div><span
-                                    class="datacontenttitle">Telephone:</span><?php echo '' . $model->servicecall->customer->telephone; ?>
-                            </div>
-
-
-                            <div><span
-                                    class="datacontenttitle">Email:</span><?php echo '' . $model->servicecall->customer->email; ?>
-                            </div>
-                            <br>
-                            <div><span
-                                    class="datacontenttitle">Customer Notes:</span>
-                                <br>
-                                <span class="notes"><?php echo '' . $model->servicecall->customer->notes; ?></span>
-                            </div>
-
-                        </td>
-                        <td>
-
-                            <div><span
-                                    class="datacontenttitle">Brand:</span><?php echo '' . $model->servicecall->product->brand->name; ?>
-                            </div>
-
-                            <div><span
-                                    class="datacontenttitle">Product Type:</span><?php echo '' . $model->servicecall->product->productType->name; ?>
-                            </div>
-
-                            <div><span
-                                    class="datacontenttitle"><?php echo $model->servicecall->product->getAttributeLabel('product.model_number'); ?></span>
-                                    <?php echo '  ' . $model->servicecall->product->model_number; ?>
-                            </div>
-
-                            <br>
-
-
-
-                            <div>
-                                <span
-                                    class="datacontenttitle"><?php echo $model->servicecall->product->getAttributeLabel('purchased_from'); ?></span>
-                                <?php echo '' . $model->servicecall->product->purchased_from; ?>
-                            </div>
-
-                            <div>
-                                <span
-                                    class="datacontenttitle"><?php echo $model->servicecall->product->getAttributeLabel('purchase_date'); ?></span>
-                                <?php echo Setup::model()->formatdate($model->servicecall->product->purchase_date); ?>
-                            </div>
-
-                            <div>
-                                <span
-                                    class="datacontenttitle"><?php echo $model->servicecall->product->getAttributeLabel('warranty_date'); ?></span>
-                                <?php echo Setup::model()->formatdate($model->servicecall->product->warranty_date); ?>
-                            </div>
-
-                            <div>
-                                <span
-                                    class="datacontenttitle"><?php echo $model->servicecall->product->getAttributeLabel('warranty_until'); ?></span>
-                                <?php
-                                if (!empty($model->servicecall->product->warranty_date) && !empty($model->servicecall->product->warranty_for_months))
-                                    echo Setup::model()->addmonthstodate($model->servicecall->product->warranty_date, $model->servicecall->product->warranty_for_months);
-                                ?>
-                            </div>
-                            <br>
-                            
-                            
-                            <div><span
-                                    class="datacontenttitle">Product Notes:</span>
-                                <br>
-                                <span class="notes"><?php echo '' . $model->servicecall->product->notes; ?></span>
-                            </div>
-
-
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </td>
-    </tr>
-    <!-- Customer & Product Details End -->
-
-    <!-- Service Details Start -->
-    <tr>
-        <td>
-            <div class="customerheadingbox">
-                <h4>Service Details</h4>
-            </div>
-
-            <div class="customerdatabox">
-                <br>
-                <div>
-                    <span class="datacontenttitle">Contract</span>
-                    <?php echo $model->servicecall->contract->name; ?>
-                </div>
-
-
-                <div>
-                <span class="datacontenttitle">
-                    <?php echo $model->servicecall->getAttributeLabel('insurer_reference_number'); ?>
-                </span>
-                    <?php echo $model->servicecall->insurer_reference_number; ?>
-                </div>
-
-                <br>
-                <div>
-                <span
-                    class="datacontenttitle">
-                    <?php echo $model->servicecall->getAttributeLabel('fault_date'); ?>
-                </span>
-                    <?php echo Setup::model()->formatdate($model->servicecall->fault_date); ?>
-                </div>
-
-                <div>
-                <span
-                    class="datacontenttitle">
-                    <?php echo $model->servicecall->getAttributeLabel('fault_code'); ?>
-                </span>
-                    <?php echo $model->servicecall->fault_code; ?>
-                </div>
-
-                <br>
-                <div>
-                <span
-                    class="datacontenttitle">
-                    <?php echo $model->servicecall->getAttributeLabel('fault_description'); ?>
-                </span>
-                    <br>
-                    <?php echo $model->servicecall->fault_description; ?>
-                </div>
-                <br>
-            </div>
-
-        </td>
-    </tr>
-    <!-- Service Details End-->
-
+    -->
     <!-- Work Carried Out Start -->
 
     <tr>
         <td>
-            <div id="workcarriedout" class="customerheadingbox">
-                <h4>Work Carried Out</h4>
-            </div>
 
             <div class="customerdatabox">
 
@@ -229,7 +78,7 @@ include('gomobile_menu.php');
                             </div>
 
                             <br>
-                            <div class="datacontenttitle">Work Done</div>
+                            <div class="datacontenttitle">Work Carried Out</div>
                             <div class="recieveddata">
                                 <?php echo '' . $recieveddata['work_done']; ?>
                             </div>
@@ -301,8 +150,7 @@ include('gomobile_menu.php');
 
 
                             <!--
-                            <img style='width:25%;' id="img_preview"
-                                 src="<?php echo $model->getportalurl() . $recieveddata['product_plating_image_url']; ?>">
+                            <img style='width:25%;' id="img_preview" src="<?php echo $model->getportalurl() . $recieveddata['product_plating_image_url']; ?>">
                             -->
 
                         </td>
@@ -581,7 +429,6 @@ Yii::app()->clientScript->registerScript( 'chat_time', "
 </div><!--<div class="chat-form" style="display:none">-->
 
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">//<![CDATA[
 
 

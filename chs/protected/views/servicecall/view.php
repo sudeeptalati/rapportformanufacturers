@@ -8,6 +8,7 @@ echo CHtml::scriptFile("https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jque
 
 $service_id = $_GET['id'];
 
+$customerModel = Customer::model()->findByPk($model->customer_id);
 $productModel = Product::model()->findByPk($model->product_id);
 
 $brandModel = Brand::model()->findByPk($productModel->brand_id);
@@ -37,7 +38,44 @@ if (!empty ($php_warranty_date)) {
     $warranty_end_date = date('d-M-Y', $warranty_until);
 }
 ?>
+<script>
+    $(function () {
+        $("#draggable").draggable();
+    });
+</script>
 
+<div class="customerheadingbox" id="draggable"
+     style="position: fixed;right: 14%; bottom: 55%;   width: 150px;height:160px;   padding-left: 35px; border-radius: 10px; cursor:move;">
+
+
+    <h4>
+        <i class="fa fa-users" aria-hidden="true"></i>
+        <a style="color:white;" href="#customerbox">Customer</a>
+    </h4>
+
+    <h4>
+        <i class="fa fa-archive" aria-hidden="true"></i>
+        <a style="color:white;" href="#productbox">Product</a>
+    </h4>
+
+    <h4>
+        <i class="fa fa-wrench" aria-hidden="true"></i>
+        <a style="color:white;" href="#service-details">Service</a>
+    </h4>
+
+    <h4>
+        <i class="fa fa-gears" aria-hidden="true"></i>
+        <a style="color:white;" href="#sparesbox">Spares</a>
+    </h4>
+
+
+    <h4>
+        <i class="fa fa-briefcase" aria-hidden="true"></i>
+        <a style="color:white;" href="#enggreporting">Work Done</a>
+    </h4>
+
+
+</div>
 
 <table>
     <tr>
@@ -84,34 +122,185 @@ if (!empty ($php_warranty_date)) {
         </td>
     </tr>
     <tr>
-        <th style="width:50%; padding:20px;"><b>Job Status : </b>
-            <h6 style="color:maroon"><?php echo $model->jobStatus->html_name; ?></h6></th>
-        <th>Service Ref. No.# <h1 style="color:green"><?php echo $model->service_reference_number; ?></h1></th>
+        <th style="width:50%;">
 
+            <?php $editicon = '<h4><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;' . $model->jobStatus->name . '</h4>'; ?>
+
+
+            <div class="contentbox"
+                 style="background-color:<?php echo $model->jobStatus->backgroundcolor; ?> ">
+
+                <?php
+                echo CHtml::link($editicon,
+                    '#', array(
+                        'onclick' => '$("#change-jobstatus-dialog").dialog("open"); return false;',
+                    ));
+                ?>
+
+
+                <?php
+                $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+                    'id' => 'change-jobstatus-dialog',
+                    // additional javascript options for the dialog plugin
+                    'options' => array(
+                        'title' => 'Change Status',
+                        'autoOpen' => false,
+                        'resizable' => false,
+                        'modal' => 'true',
+                    ),
+                ));
+                $this->renderPartial('changejobstatusonly');
+                $this->endWidget('zii.widgets.jui.CJuiDialog');
+                // the link that may open the dialog
+                ?>
+
+
+            </div>
+
+        </th>
+        <th style="text-align:right;"><h1 title="Job Reference No."
+                                          style="color:green"><?php echo $model->service_reference_number; ?></h1></th>
     </tr>
 
+    <tr>
+        <th style="width:50%;">
+            <div class="enginnerheadingbox contentbox">
+                <h4 style="color:white">
+
+                    <?php $enggtitle = '<h4 style="color: white;"><i class="fa fa-wrench" aria-hidden="true"></i> &nbsp;&nbsp; ' . $model->engineer->company . '</h4>'; ?>
+                    <?php echo CHtml::link($enggtitle,
+                        '#', array(
+                            'onclick' => '$("#change-engineer-dialog").dialog("open"); return false;',
+                        ));
+
+
+                    $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+                        'id' => 'change-engineer-dialog',
+                        // additional javascript options for the dialog plugin
+                        'options' => array(
+                            'title' => 'Change Engineer',
+                            'autoOpen' => false,
+                            'resizable' => false,
+                            'modal' => 'true',
+                        ),
+                    ));
+
+                    $this->renderPartial('changeEngineerOnly');
+
+                    $this->endWidget('zii.widgets.jui.CJuiDialog');
+
+                    ?>
+
+
+                </h4>
+            </div>
+        </th>
+        <th style="text-align:right;">
+            <h3 title="Reported Date" style="color:green">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <?php echo Setup::model()->formatdate($model->fault_date); ?>
+
+            </h3>
+        </th>
+    </tr>
 
     <tr>
         <td colspan="2">
-            <div class="customerheadingbox">
-                <h4><?php echo $model->getAttributeLabel('comments'); ?></h4>
 
-            </div>
-            <div class="customerdatabox">
-                <div>
+            <?php if (isset($_GET['error_msg'])): ?>
                     <?php
+                    $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+                        'id' => 'error-dialog',
+                        // additional javascript options for the dialog plugin
+                        'options' => array(
+                            'title' => 'Error',
+                            'autoOpen' => true,
+                            'resizable' => false,
+                            'modal' => true,
+                            'overflow' => 'hidden',
 
-                    Yii::app()->clientScript->registerScript('comments-div', "
+                        ),
+                    ));
+
+
+                    echo '<div class="error">'.$_GET['error_msg'].'</div>';
+
+                    $this->endWidget('zii.widgets.jui.CJuiDialog');
+                    // the link that may open the dialog
+                    ?>
+
+                    </div>
+            <?php endif; ?>
+
+
+
+
+
+
+            <div class="customerheadingbox contentbox">
+                <?php
+                Yii::app()->clientScript->registerScript('comments-div', "
                                         $('#comments-button').click(function(){
 	                                    $('#comments-div').toggle();
 	                                    return false;
                                         });
                                 ");
-                    ?>
-                    <?php echo CHtml::link('', '#', array('id' => 'comments-button', 'class' => 'fa fa-eye fa-1x')); ?>
+                ?>
+
+                <table>
+                    <tr>
+                        <td>
+                            <div class="left">
+                                <?php $updatecomments = "<h4 style='color: white;' ><i class='fa fa-plus-square-o' ></i> Comments</h4>"; ?>
+
+                                <?php
+                                echo CHtml::link($updatecomments,
+                                    '#', array(
+                                        'onclick' => '$("#update-comments-dialog").dialog("open"); return false;',
+                                    ));
+                                ?>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="right">
+                                <?php $commentstext = "<h4 style='color: white;' id='activilitylogdivbutton'> <i class='fa fa-eye fa-1x'></i></h4>"; ?>
+                                <?php echo CHtml::link($commentstext, '#', array('id' => 'comments-button')); ?>
+
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="customerdatabox">
+                <div>
+
                     <div id="comments-div" style="display:block">
                         <?php echo Setup::model()->printjsonnotesorcommentsinhtml($model->comments); ?>
                     </div><!-- comments-form -->
+
+
+                    <?php
+                    $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+                        'id' => 'update-comments-dialog',
+                        // additional javascript options for the dialog plugin
+
+                        'options' => array(
+                            'title' => 'Add Comments',
+                            'autoOpen' => false,
+                            'resizable' => false,
+                            'modal' => true,
+                            //'width'=>'600px',
+
+                        ),
+                    ));
+
+                    $this->renderPartial('addcomments', array('model' => $model));
+                    $this->endWidget('zii.widgets.jui.CJuiDialog');
+                    // the link that may open the dialog
+                    ?>
+
+
                 </div>
             </div>
         </td>
@@ -121,12 +310,33 @@ if (!empty ($php_warranty_date)) {
     <!-- Customer Details Start -->
     <tr>
         <td colspan="2">
-            <div class="customerheadingbox">
-                <h4>Customer
-                    Details <?php echo CHtml::link(CHtml::image('images/icons/edit.png', 'Edit Customer', array('width' => '20px')), array('Customer/openDialog', 'customer_id' => $model->customer->id, 'product_id' => $productModel->id)); ?></h4>
+            <div class="customerheadingbox contentbox" id="customerbox">
+                <?php
+                $updatecustomertext = "<h4 style='color: white;'><i class='fa fa-pencil-square-o'></i> Customer</h4>";
+                echo CHtml::link($updatecustomertext,
+                    '#', array(
+                        'onclick' => '$("#update-customer-dialog").dialog("open"); return false;',
+                    ));
+                ?>
             </div>
+            <?php
+            $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+                'id' => 'update-customer-dialog',
+                // additional javascript options for the dialog plugin
+                'options' => array(
+                    'title' => 'Update Customer',
+                    'autoOpen' => false,
+                    'resizable' => false,
+                    'modal' => 'true',
+                    'width' => '60%',
+                ),
+            ));
+            $this->renderPartial('/customer/updatecustomerfromservicecall', array('model' => $customerModel));
+            $this->endWidget('zii.widgets.jui.CJuiDialog');
+            // the link that may open the dialog
+            ?>
 
-            <div class="customerdatabox">
+            <div class="customerbox contentbox">
                 <table style="margin: 5px;">
                     <tr>
                         <th style="width:50%;"></th>
@@ -143,22 +353,30 @@ if (!empty ($php_warranty_date)) {
                             </div>
                             <br>
                             <table>
-                            	<tr>
-                            		<td><span class="datacontenttitle"><?php echo $model->getAttributeLabel('customer.mobile'); ?></span></td>
-                            		<td><?php echo '' . $model->customer->mobile; ?></td>
-                            	</tr>
-                            	<tr>
-                            		<td><span class="datacontenttitle"><?php echo $model->getAttributeLabel('customer.telephone'); ?></span></td>
-                            		<td><?php echo '' . $model->customer->telephone; ?></td>
-                            	</tr>
-                            	<tr>
-                            		<td><span class="datacontenttitle"><?php echo $model->getAttributeLabel('customer.fax'); ?></span></td>
-                            		<td><?php echo '' . $model->customer->fax; ?></td>
-                            	</tr>
-                            	<tr>
-                            		<td><span class="datacontenttitle"><?php echo $model->getAttributeLabel('customer.email'); ?></span></td>
-                            		<td><?php echo '' . $model->customer->email; ?></td>
-                            	</tr>
+                                <tr>
+                                    <td><span
+                                            class="datacontenttitle"><?php echo $model->getAttributeLabel('customer.mobile'); ?></span>
+                                    </td>
+                                    <td><?php echo '' . $model->customer->mobile; ?></td>
+                                </tr>
+                                <tr>
+                                    <td><span
+                                            class="datacontenttitle"><?php echo $model->getAttributeLabel('customer.telephone'); ?></span>
+                                    </td>
+                                    <td><?php echo '' . $model->customer->telephone; ?></td>
+                                </tr>
+                                <tr>
+                                    <td><span
+                                            class="datacontenttitle"><?php echo $model->getAttributeLabel('customer.fax'); ?></span>
+                                    </td>
+                                    <td><?php echo '' . $model->customer->fax; ?></td>
+                                </tr>
+                                <tr>
+                                    <td><span
+                                            class="datacontenttitle"><?php echo $model->getAttributeLabel('customer.email'); ?></span>
+                                    </td>
+                                    <td><?php echo '' . $model->customer->email; ?></td>
+                                </tr>
                             </table>
                         </td>
                         <td class="address_contact" style="text-align: right;">
@@ -205,11 +423,35 @@ if (!empty ($php_warranty_date)) {
     <!-- Product Details Start-->
     <tr>
         <td colspan="2">
-            <div class="customerheadingbox">
-                <h4>Product
-                    Details <?php echo CHtml::link(CHtml::image('images/icons/edit.png', 'Edit Product', array('width' => '20px')), array('Product/updateProduct', 'id' => $productModel->id)); ?></h4>
+
+            <div class="productheadingbox contentbox" id="productbox">
+
+                <?php
+                $updateproducttext = "<h4 style='color: white;'><i class='fa fa-pencil-square-o'></i> Product</h4>";
+                echo CHtml::link($updateproducttext,
+                    '#', array(
+                        'onclick' => '$("#update-product-dialog").dialog("open"); return false;',
+                    ));
+                ?>
             </div>
-            <div class="customerdatabox">
+            <?php
+            $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+                'id' => 'update-product-dialog',
+                // additional javascript options for the dialog plugin
+                'options' => array(
+                    'title' => 'Update Product',
+                    'autoOpen' => false,
+                    'resizable' => false,
+                    'modal' => 'true',
+                    'width' => '60%',
+                ),
+            ));
+            $this->renderPartial('/product/updateproductfromservicecall', array('productModel' => $productModel));
+            $this->endWidget('zii.widgets.jui.CJuiDialog');
+            // the link that may open the dialog
+            ?>
+
+            <div class="productbox contentbox" id="productbox">
                 <table style="margin: 5px;">
                     <tr>
                         <th style="width:50%;"></th>
@@ -261,6 +503,11 @@ if (!empty ($php_warranty_date)) {
 
                             <table style="width: 80%">
 
+                                <tr>
+                                    <td><span
+                                            class="datacontenttitle"><?php echo $productModel->getAttributeLabel('product.contact'); ?></span>
+                                    <td><?php echo '' . $productModel->contract->name; ?></td>
+                                </tr>
                                 <tr>
                                     <td><span
                                             class="datacontenttitle"><?php echo $productModel->getAttributeLabel('purchased_from'); ?></span>
@@ -318,28 +565,164 @@ if (!empty ($php_warranty_date)) {
         </td>
     </tr>
     <!-- Product Details End-->
+    <!-- Previous Servicecalls Start-->
+    <tr>
+        <td colspan="2">
+            <div class="customerheadingbox contentbox">
+                <table style="width: 100%">
+                    <tr>
+                        <th style="width: 50%"></th>
+                        <th style="width: 50%"></th>
+                    </tr>
+                    <tr>
+                        <td><h4><i class="fa fa-history"></i> Previous Services</h4></td>
+                        <td class="right">
+                            <?php
+
+                            Yii::app()->clientScript->registerScript('prevserivicecalls', "
+                                        $('#previous-servicecalls-button').click(function(){
+	                                    $('#previous-servicecalls-div').toggle();
+	                                    return false;
+                                        });
+                                ");
+
+                            ?>
+                            <?php $prevserviceallastitle = "<h4 style='color: white;'> <i class='fa fa-eye fa-1x'></i> <h4>"; ?>
+                            <?php echo CHtml::link($prevserviceallastitle, '#', array('id' => 'previous-servicecalls-button')); ?>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="customerdatabox">
+                <div id="previous-servicecalls-div" style="display:block">
+
+
+                    <table>
+                        <tr>
+                            <th><span class="datacontenttitle">Service Ref#</span></th>
+                            <th><span class="datacontenttitle">Product</span></th>
+                            <th><span class="datacontenttitle">Reported Date</span></th>
+                            <th><span class="datacontenttitle">Fault Description</span></th>
+                            <th><span class="datacontenttitle">Engineer Visited</span></th>
+                            <th><span class="datacontenttitle">Job Status</span></th>
+                        </tr>
+                        <?php $previousCalls = $model->previousCalls($model->customer_id);
+                        foreach ($previousCalls as $data) {
+                            if ($data->service_reference_number != $model->service_reference_number)//////since we want to skip the current service call
+                            {
+                                ?>
+                                <tr>
+                                    <td><?php echo CHtml::link($data->service_reference_number, array('view', 'id' => $data->id)); ?></td>
+                                    <td><?php echo "<b>" . $data->product->productType->name . "<b>"; ?></td>
+                                    <td><?php
+                                        if (!empty($data->fault_date))
+                                            echo date('d-M-Y', $data->fault_date);
+                                        ?>
+                                    </td>
+                                    <td><?php echo $data->fault_description; ?></td>
+                                    <td><?php echo $data->engineer->company . ', ' . $data->engineer->fullname; ?></td>
+                                    <td style="color:maroon"><?php echo $data->jobStatus->name; ?></td>
+                                </tr>
+                                <?php
+                            }///end of if
+                        }//end of foreach().?>
+                    </table>
+                </div><!-- previous-servicecalls -div -->
+
+            </div>
+        </td>
+    </tr>
+    <!-- Previous Servicecalls End-->
+
+
+    <!--  Previous Uplifts START-->
+    <tr>
+        <td colspan="2">
+            <div class="customerheadingbox contentbox">
+                <h4><i class="fa fa-history" aria-hidden="true"></i>
+                    Previous Uplifts</h4>
+            </div>
+            <div class="customerdatabox">
+                <?php
+                $uplifts = Uplifts::model()->findAllByAttributes(array('customer_id' => $model->customer->id));
+                ?>
+                <table>
+                    <tr>
+                        <th class="datacontenttitle" style="width:15%;">Uplift No.#</th>
+                        <th class="datacontenttitle" style="width:15%;">Product</th>
+                        <th class="datacontenttitle" style="width:20%;">Serial Number</th>
+                        <th class="datacontenttitle" style="width:45%;">Reason</th>
+                    </tr>
+                    <?php foreach ($uplifts as $uplift) { ?>
+                        <tr>
+                            <td><?php echo CHtml::link($uplift->uplift_number, array('uplifts/manage/view', 'id' => $uplift->id)); ?></td>
+                            <td><?php echo $uplift->product->productType->name; ?></td>
+                            <td><?php echo $uplift->serial_number;
+
+                                if ($uplift->product_id == $model->product_id)
+                                    echo "</br><small style='color: #f89406;'><b> This Servicecall Product</b></small>";
+
+                                ?>
+
+                            </td>
+                            <td><?php echo $uplift->reason_for_uplift; ?></td>
+                        </tr>
+                    <?php }
+                    ?>
+                </table>
+
+            </div>
+        </td>
+    </tr>
+    <!--  Previous Uplifts End-->
 
 
     <!-- Service Details Start-->
     <tr>
         <td colspan="2">
-            <div class="customerheadingbox" id="service-details">
+            <div class="serviceheadingbox contentbox" id="service-details">
 
                 <table>
                     <tr>
                         <td>
-                            <h4>Service
-                                Details <?php echo CHtml::link(CHtml::image('images/icons/edit.png', 'Edit Servicecall', array('width' => '20px')), array('Servicecall/update', 'id' => $model->id)); ?></h4>
+
+
+                            <?php
+                            $updateproducttext = "<h4 style='color: white;'><i class='fa fa-pencil-square-o'></i> Service Details</h4>";
+                            echo CHtml::link($updateproducttext,
+                                '#', array(
+                                    'onclick' => '$("#update-servicelcall-dialog").dialog("open"); return false;',
+                                ));
+                            ?>
+                            <?php
+                            $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+                                'id' => 'update-servicelcall-dialog',
+                                // additional javascript options for the dialog plugin
+                                'options' => array(
+                                    'title' => 'Update Servicecall',
+                                    'autoOpen' => false,
+                                    'resizable' => false,
+                                    'modal' => 'true',
+                                    'width' => '60%',
+                                ),
+                            ));
+                            $this->renderPartial('/servicecall/updateservicecalldialog');
+                            $this->endWidget('zii.widgets.jui.CJuiDialog');
+                            // the link that may open the dialog
+                            ?>
+
                         </td>
-                        <td><h4><?php echo $model->getAttributeLabel('fault_date'); ?></h4>
-                            <?php echo Setup::model()->formatdate($model->fault_date); ?>
+                        <td><h4 style='color: white;'>
+                                <?php echo $model->getAttributeLabel('fault_date'); ?>
+                                : <?php echo Setup::model()->formatdate($model->fault_date); ?>
+                            </h4>
                         </td>
                     </tr>
                 </table>
             </div>
 
 
-            <div class="customerdatabox">
+            <div class="servicebox contentbox">
 
                 <!--
 
@@ -367,145 +750,165 @@ if (!empty ($php_warranty_date)) {
                 <br>
                 -->
                 <div>
-                                <span
-                                    class="datacontenttitle"><?php echo $model->getAttributeLabel('fault_description'); ?></span>
+                    <span class="datacontenttitle">
+                        <?php echo $model->getAttributeLabel('fault_description'); ?>
+                    </span>
                     <br>
                     <?php echo $model->fault_description; ?>
                 </div>
+
+                <table>
+                    <tr>
+                        <th style="width: 50%"></th>
+                        <th style="width: 50%"></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table>
+
+                                <!--
+                                <tr>
+                                    <td>
+                                        <span class="datacontenttitle">
+                                            <?php echo $model->getAttributeLabel('Servicecall.contract'); ?>
+                                        </span>
+                                    </td>
+                                    <td> <?php echo $model->contract->name; ?></td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="datacontenttitle">
+                                            <?php echo $model->getAttributeLabel('insurer_reference_number'); ?>
+                                        </span>
+                                    </td>
+                                    <td><?php echo $model->insurer_reference_number; ?></td>
+                                </tr>
+                                -->
+                                <tr>
+                                    <td colspan="2">
+                                        <span class="datacontenttitle">
+                                            <?php echo $model->getAttributeLabel('work_carried_out'); ?>
+                                        </span><br>
+                                        <?php echo $model->work_carried_out; ?></td>
+                                </tr>
+
+                            </table>
+                        </td>
+                        <td>
+                            <table style="width: 90%">
+                                <tr>
+                                    <td><span class="datacontenttitle">
+                                            <?php echo $model->getAttributeLabel('fault_date'); ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <?php echo Setup::model()->formatdate($model->fault_date); ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="datacontenttitle">
+                                            <?php echo $model->getAttributeLabel('engg_first_visit_date'); ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <?php //echo $model->engg_first_visit_date; ?>
+                                        <?php echo Setup::model()->formatdate($model->engg_first_visit_date); ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="datacontenttitle">
+                                            <?php echo $model->getAttributeLabel('job_finished_date'); ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <?php //echo $model->job_finished_date; ?>
+                                        <?php echo Setup::model()->formatdate($model->job_finished_date); ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="datacontenttitle">
+                                            <?php echo $model->getAttributeLabel('engg_claim_returned_date'); ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <?php //echo $model->engg_claim_returned_date; ?>
+                                        <?php echo Setup::model()->formatdate($model->engg_claim_returned_date); ?>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><span class="datacontenttitle">
+                                            <?php echo $model->getAttributeLabel('job_payment_date'); ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <?php //echo $model->job_payment_date; ?>
+                                        <?php echo Setup::model()->formatdate($model->job_payment_date); ?>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                        </td>
+                    </tr>
+                </table>
+
+
+                <div>
+                    <span class="datacontenttitle"><?php echo $model->getAttributeLabel('work_summary'); ?></span>
+                    <?php echo $model->work_summary; ?>
+                </div>
+
+
                 <br>
                 <div>
-                    <span class="datacontenttitle">Engineer</span>
-                    <?php echo $model->engineer->company; ?>
-
-                    <?php //echo CHtml::link(CHtml::image('images/icons/edit.png', 'Change', array('width' => '20px')), array('servicecall/changeEngineerOnly/', 'service_id' => $model->id));
-                         echo CHtml::link(CHtml::image('images/icons/edit.png', 'Change', array('width' => '20px')),
-                                        '#', array(
-                                                'onclick'=>'$("#change-engineer-dialog").dialog("open"); return false;',
-                             ));
-                    ?>
-
+                    <span class="datacontenttitle"><?php echo $model->getAttributeLabel('notes'); ?></span>
+                    <br>
+                    <?php echo $model->notes; ?>
                 </div>
-                <?php
-                $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
-                    'id'=>'change-engineer-dialog',
-                    // additional javascript options for the dialog plugin
-                    'options'=>array(
-                        'title'=>'Change Engineer',
-                        'autoOpen' => false,
-                        'resizable' => false,
-                        'modal' => 'true',
-                    ),
-                ));
-
-                $this->renderPartial('changeEngineerOnly');
-
-                $this->endWidget('zii.widgets.jui.CJuiDialog');
-
-                // the link that may open the dialog
-
-                ?>
-
 
         </td>
     </tr>
     <!-- Service Details End-->
 
 
-    <!-- Previous Servicecalls Start-->
-    <tr>
-        <td colspan="2">
-            <div class="customerheadingbox">
-                <h4>Previous Service Details </h4>
-            </div>
-            <div class="customerdatabox">
-                <table>
-                    <tr>
-                        <th><span class="datacontenttitle">Service Ref#</span></th>
-                        <th><span class="datacontenttitle">Product</span></th>
-                        <th><span class="datacontenttitle">Reported Date</span></th>
-                        <th><span class="datacontenttitle">Fault Description</span></th>
-                        <th><span class="datacontenttitle">Engineer Visited</span></th>
-                        <th><span class="datacontenttitle">Job Status</span></th>
-                    </tr>
-                    <?php $previousCall = $model->previousCall($model->customer_id);
-                    foreach ($previousCall as $data) {
-                        if ($data->service_reference_number != $model->service_reference_number)//////since we want to skip the current service call
-                        {
-                            ?>
-                            <tr>
-                                <td><?php echo CHtml::link($data->service_reference_number, array('view', 'id' => $data->id)); ?></td>
-                                <td><?php echo "<b>" . $data->product->productType->name . "<b>"; ?></td>
-                                <td><?php
-                                    if (!empty($data->fault_date))
-                                        echo date('d-M-Y', $data->fault_date);
-                                    ?>
-                                </td>
-                                <td><?php echo $data->fault_description; ?></td>
-                                <td><?php echo $data->engineer->company . ', ' . $data->engineer->fullname; ?></td>
-                                <td style="color:maroon"><?php echo $data->jobStatus->name; ?></td>
-                            </tr>
-                            <?php
-                        }///end of if
-                    }//end of foreach().?>
-                </table>
-            </div>
-        </td>
-    </tr>
-    <!-- Previous Servicecalls End-->
-
-
-    <!--  Previous Uplifts START-->
-    <tr>
-        <td colspan="2">
-            <div class="customerheadingbox">
-                <h4>Previous Uplifts</h4>
-            </div>
-            <div class="customerdatabox">
-                <?php
-                $uplifts = Uplifts::model()->findAllByAttributes(array('customer_id' => $model->customer->id));
-               	?>
-               	<table>
-               		<tr>
-               			<th class="datacontenttitle" style="width:15%;">Uplift No.#</th>
-               			<th  class="datacontenttitle"style="width:15%;">Product</th>
-               			<th class="datacontenttitle" style="width:20%;">Serial Number</th>
-          				<th  class="datacontenttitle"style="width:45%;">Reason</th>
-               		</tr>
-	               	<?php foreach ($uplifts as $uplift){ ?>
-				   		<tr>	
-						<td><?php echo CHtml::link($uplift->uplift_number, array('uplifts/manage/view', 'id' => $uplift->id)); ?></td>
-						<td><?php echo $uplift->product->productType->name; ?></td>
-						<td><?php echo $uplift->serial_number;
-								
-									if ($uplift->product_id==$model->product_id)
-										echo "</br><small style='color: #f89406;'><b> This Servicecall Product</b></small>"; 
-
-								?>
-								
-								</td>
-						<td><?php echo $uplift->reason_for_uplift;?></td>
-						</tr>
-					<?php }
-                ?>
- 				</table>
- 
-            </div>
-        </td>
-    </tr>
-    <!--  Previous Uplifts End-->
-
-
     <!-- Spares Used -->
     <tr>
         <td colspan="2">
-            <div class="customerheadingbox">
-                <h4>Spares </h4>
+            <div class="sparesheadingbox contentbox" id="sparesbox">
+
+
+                <?php
+                $updateproducttext = "<h4 style='color: white;'><i class='fa fa-cogs'></i> Spares</h4>";
+                echo CHtml::link($updateproducttext,
+                    '#', array(
+                        'onclick' => '$("#add-spares-dialog").dialog("open"); return false;',
+                    ));
+                ?>
+                <?php
+                $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+                    'id' => 'add-spares-dialog',
+                    // additional javascript options for the dialog plugin
+                    'options' => array(
+                        'title' => 'Add Spares',
+                        'autoOpen' => false,
+                        'resizable' => false,
+                        'modal' => 'true',
+                        'width' => '30%',
+                    ),
+                ));
+
+                $this->renderPartial('/sparesUsed/addSpares', array('service_id' => $model->id));
+                $this->endWidget('zii.widgets.jui.CJuiDialog');
+                // the link that may open the dialog
+                ?>
+
 
             </div>
-            <div class="customerdatabox">
-            
-            
-            
+            <div class="sparesrbox contentbox">
+
+
                 <table style="width:100%;">
                     <?php
                     if ($model->spares_used_status_id == 1) {
@@ -519,55 +922,66 @@ if (!empty ($php_warranty_date)) {
                             <th><span class="datacontenttitle">Item</span></th>
                             <th><span class="datacontenttitle">Part Number</span></th>
                             <th><span class="datacontenttitle">Date Ordered</span></th>
-                            <th><span class="datacontenttitle" >Date Ordered Poland</span></th>
-                            <th><span class="datacontenttitle" >Date Posted</span></th>
+                            <th><span class="datacontenttitle">Date Ordered Poland</span></th>
+                            <th><span class="datacontenttitle">Date Posted</span></th>
                             <th><span class="datacontenttitle">Quantity</span></th>
                             <th><span class="datacontenttitle">Unit Price</span></th>
                             <th><span class="datacontenttitle">Total Price</span></th>
+                            <th><span class="datacontenttitle"></span></th>
+                            <th><span class="datacontenttitle"></span></th>
+
                         </tr>
-						<!--
-						<tr>
-							<td colspan='8'>
-								<hr>
-							</td>
-						</tr>
-						-->
+                        <!--
+                        <tr>
+                            <td colspan='8'>
+                                <hr>
+                            </td>
+                        </tr>
+                        -->
                         <?php foreach ($sparesModel as $data) { ?>
                             <tr>
                                 <td><?php echo $data->item_name; ?></td>
                                 <td><?php echo $data->part_number; ?></td>
-                                <td  style="width: 100px;">
-										<?php
-										if(!empty($data->date_ordered))
-										{
-											echo date('d-M-Y', $data->date_ordered);
-										}
-										?>
-								</td>
-								<td style="width: 100px;">
-										<?php
-										if(!empty($data->date_ordered_from_manufacturer))
-										{
-											echo date('d-M-Y', $data->date_ordered_from_manufacturer);
-										}
-										?>
-								</td>
-								<td style="width: 100px;">
-										<?php
-										if(!empty($data->date_posted))
-										{
-											echo date('d-M-Y', $data->date_posted);
-										}
-										?>
-								</td>
-								<td><?php echo $data->quantity; ?></td>
+                                <td style="width: 100px;">
+                                    <?php
+                                    if (!empty($data->date_ordered)) {
+                                        echo date('d-M-Y', $data->date_ordered);
+                                    }
+                                    ?>
+                                </td>
+                                <td style="width: 100px;">
+                                    <?php
+                                    if (!empty($data->date_ordered_from_manufacturer)) {
+                                        echo date('d-M-Y', $data->date_ordered_from_manufacturer);
+                                    }
+                                    ?>
+                                </td>
+                                <td style="width: 100px;">
+                                    <?php
+                                    if (!empty($data->date_posted)) {
+                                        echo date('d-M-Y', $data->date_posted);
+                                    }
+                                    ?>
+                                </td>
+                                <td><?php echo $data->quantity; ?></td>
                                 <td><?php echo $data->unit_price; ?></td>
- 								<td><?php echo $data->total_price; ?></td>
- 								
+                                <td><?php echo $data->total_price; ?></td>
+                                <td>
+
+                                    <?php echo CHtml::link('<i title="Delete" class="fa fa-trash" aria-hidden="true"></i>', array('sparesUsed/delete', 'id' => $data->id, 'servicecall_id' => $model->id)); ?>
+
+                                </td>
+
+                                <td>
+
+                                    <?php echo CHtml::link('<i title="Edit" class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('sparesUsed/updateSpares', 'spares_id' => $data->id, 'servicecall_id' => $model->id)); ?>
+
+                                </td>
+
                             </tr>
                         <?php }//end of foreach of spares()?>
 
-  
+
                         <tr>
                             <td colspan="5"></td>
                             <td><span
@@ -577,12 +991,12 @@ if (!empty ($php_warranty_date)) {
                         </tr>
 
                     <?php }//end of if($spares_used == 1).?>
- 
+
                 </table>
-                
-               
-				<div>
-                	<span class="datacontenttitle"><?php echo $model->getAttributeLabel('spares_notes'); ?></span>
+
+
+                <div>
+                    <span class="datacontenttitle"><?php echo $model->getAttributeLabel('spares_notes'); ?></span>
                     <br>
                     <?php echo $model->spares_notes; ?>
                 </div>
@@ -592,209 +1006,152 @@ if (!empty ($php_warranty_date)) {
     <!-- Spares Used End-->
 
 
-    <!-- WORK CARRIED OUT Details Start-->
-    <tr>
-        <td colspan="2">
-            <div class="customerheadingbox">
-                <h4>Work Carried Out
-                    <?php echo CHtml::link(CHtml::image('images/icons/edit.png', 'Edit Servicecall', array('width' => '20px')), array('Servicecall/update', 'id' => $model->id)); ?>
-                </h4>
-
-            </div>
-
-            <div class="customerdatabox">
-                <table style="margin: 5px;">
-                    <tr>
-
-                        <th>Engineer Reported</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <table style="width: 50%">   
-                                <tr>
-                                    <td><span
-                                            class="datacontenttitle"><?php echo $model->getAttributeLabel('fault_date'); ?></span>
-                                    </td>
-                                    <td><?php echo Setup::model()->formatdate($model->fault_date); ?></td>
-                                </tr>
-                            
-                                <tr>
-                                    <td><span
-                                            class="datacontenttitle"><?php echo $model->getAttributeLabel('engg_first_visit_date'); ?></span>
-                                    </td>
-                                    <td><?php echo Setup::model()->formatdate($model->engg_first_visit_date); ?></td>
-                                </tr>
-                            
-                            
-                            
-                                <tr>
-                                    <td><span
-                                            class="datacontenttitle"><?php echo $model->getAttributeLabel('job_finished_date'); ?></span>
-                                    </td>
-                                    <td>          <?php echo Setup::model()->formatdate($model->job_finished_date); ?></td>
-                                </tr>
-                                <tr>
-                                    <td><span
-                                            class="datacontenttitle"><?php echo $model->getAttributeLabel('engg_claim_returned_date'); ?></span>
-                                    </td>
-                                    <td><?php echo Setup::model()->formatdate($model->engg_claim_returned_date); ?></td>
-                                </tr>
-                                <tr>
-                                    <td><span
-                                            class="datacontenttitle"><?php echo $model->getAttributeLabel('job_payment_date'); ?></span>
-                                    </td>
-                                    <td> <?php echo Setup::model()->formatdate($model->job_payment_date); ?></td>
-                                </tr>
-                            </table>
-
-
-                            <br><br<br>
-
-                            <div>
-                                <span
-                                    class="datacontenttitle"><?php echo $model->getAttributeLabel('work_summary'); ?></span>
-                                <?php echo $model->work_summary; ?>
-                            </div>
-                            <br>
-                            <div>
-                                <span
-                                    class="datacontenttitle"><?php echo $model->getAttributeLabel('work_carried_out'); ?></span>
-                                <br>
-                                <?php echo $model->work_carried_out; ?>
-                            </div>
-                            <br>
-
-
-                            <br>
-                            <div>
-                                <span class="datacontenttitle"><?php echo $model->getAttributeLabel('notes'); ?></span>
-                                <br>
-                                <?php echo $model->notes; ?>
-                            </div>
-
-
-                        </td>
-                    </tr>
-                </table><!-- END OF Table in customer databox-->
-
-            </div><!-- end of customerdatabox-->
-        </td>
-    </tr>
-    <!-- WORK CARRIED OUT DEetails End-->
-
-
-
-
     <!-- Invoice Start-->
     <tr>
         <td colspan="2">
-            <div class="customerheadingbox">
-                <h4>Costs </h4>
+            <div class="costinvoiceheadingbox contentbox" id="costs">
+
+
+                <?php
+
+
+                $coststext = "<h4 style='color: white;'><i class='fa fa-money'></i> Costs</h4>";
+                echo CHtml::link($coststext,
+                    '#', array(
+                        'onclick' => '$("#update-servicelcall-dialog").dialog("open"); return false;',
+                    ));
+                ?>
+
+
             </div>
-            <div class="customerdatabox">
-              <!--- INVOICE DETAILS START--->
-				<table style="width:50%">
+            <div class="costinvoicebox contentbox">
+                <!--- INVOICE DETAILS START--->
+                <table style="width:50%">
                     <td><span
-                                    class="datacontenttitle"><?php echo $model->getAttributeLabel('total_cost'); ?></span>
-                            </td>
-                            <td><?php echo $model->total_cost; ?></td>
-                    
+                            class="datacontenttitle"><?php echo $model->getAttributeLabel('total_cost'); ?></span>
+                    </td>
+                    <td><?php echo $model->total_cost; ?></td>
+
                     <tr>
-                         <td><span
+                        <td><span
                                 class="datacontenttitle"><?php echo $model->getAttributeLabel('invoice.shipping_handling_cost'); ?></span>
                         </td>
                         <td><?php echo $model->invoice->shipping_handling_cost; ?></td>
                     </tr>
-                    
+
                     <tr>
-                         <td><span
+                        <td><span
                                 class="datacontenttitle"><?php echo $model->getAttributeLabel('invoice.labour_cost'); ?></span>
                         </td>
                         <td><?php echo $model->invoice->labour_cost; ?></td>
                     </tr>
                     <tr>
-                         <td><span
+                        <td><span
                                 class="datacontenttitle"><?php echo $model->getAttributeLabel('vat_on_total'); ?></span>
                         </td>
                         <td><?php echo $model->vat_on_total; ?></td>
                     </tr>
 
                     <tr>
-                         <td><span
+                        <td><span
                                 class="datacontenttitle"><?php echo $model->getAttributeLabel('net_cost'); ?></span>
                         </td>
                         <td><?php echo $model->net_cost; ?></td>
                     </tr>
 
-				</table>
+                </table>
 
                 <!-- INVOICE DETAILS END --->
             </div>
         </td>
     </tr>
     <!-- Invoice End-->
-    
 
-    <!-- Go Mobile Start-->
+
+    <!-- GO mobible View-->
     <tr>
         <td colspan="2">
-            <div class="customerheadingbox">
-                <h4>Activity with Engineer </h4>
+            <div class="customerheadingbox" id="enggreporting">
+                <h4>Reported By Engineer </h4>
+            </div>
+
+            <?php
+            ///Loading view from Go Mobile
+            $gmserviceid = Gmservicecalls::model()->getgomobileidbyservicecallid($service_id);
+            if ($gmserviceid != null || $gmserviceid != "" || $gmserviceid != false)
+                $this->renderPartial('gomobile.views.gmservicecalls.view');
+            else
+                echo "<div class='alert'><h4>No Work has been reported by Engineer yet</h4></div>"
+            ?>
+        </td>
+    </tr>
+
+    <!-- GO mobible View-->
+
+
+    <!-- Activity Log Start-->
+    <tr>
+        <td colspan="2">
+            <div class="customerheadingbox contentbox">
+                <table style="width: 100%">
+                    <tr>
+                        <th style="width: 50%"></th>
+                        <th style="width: 50%"></th>
+                    </tr>
+                    <tr>
+                        <td><h4>Activity Log</h4></td>
+                        <td class="right">
+                            <?php
+
+                            Yii::app()->clientScript->registerScript('activitylog-div', "
+                                        $('#activitylog-button').click(function(){
+	                                    $('#activitylog-div').toggle();
+	                                    return false;
+                                        });
+                                ");
+                            ?>
+
+
+                            <?php $activitylogtext = "<h4 style='color: white;' id='activilitylogdivbutton'> <i class='fa fa-eye fa-1x'></i> <h4>"; ?>
+                            <?php echo CHtml::link($activitylogtext, '#', array('id' => 'activitylog-button')); ?>
+
+                        </td>
+                    </tr>
+                </table>
+
             </div>
             <div class="customerdatabox">
-                <div>
-                    <span class="datacontenttitle">Activity Log</span>
-                    <table>
-                        <tr>
-                            <th><span class="datacontenttitle">Activity Date</span></th>
-                            <th><span class="datacontenttitle">Status</span></th>
-                            <th><span class="datacontenttitle">Sent By</span></th>
-                        </tr>
+                <div id="activitylog-div" style="display:none">
+                    <?php $activity_array = json_decode($model->activity_log, true); ?>
+                    <?php if (count($activity_array) > 0): ?>
+                        <?php $activity_array = array_reverse($activity_array, true); ?>
 
-                        <?php
+                        <table>
+                            <tr>
+                                <th><span class="datacontenttitle">Activity Date</span></th>
+                                <th><span class="datacontenttitle">Status</span></th>
+                                <th><span class="datacontenttitle">User</span></th>
+                                <th><span class="datacontenttitle">Engineer</span></th>
+                            </tr>
+                            <?php foreach ($activity_array as $ac): ?>
+                                <tr>
+                                    <td><?php echo $ac['time']; ?></td>
+                                    <td><?php echo $ac['jobstatus']; ?></td>
+                                    <td><?php echo $ac['user']; ?></td>
+                                    <td><?php echo $ac['engineer']; ?></td>
 
-                        $gomobile_server_url = Gmservicecalls::model()->getserverurl();
-                        $gmservice = Gmservicecalls::model()->findByAttributes(array('servicecall_id' => $model->id), array('order' => 'created ASC'));
-						
-						if ($gmservice)
-						{
-							echo $gmservice->event_log; ////this contains data in <tr> format
-							echo CHtml::link(CHtml::image('images/icons/view.png', 'Edit Servicecall', array('width' => '20px')), array('/gomobile/gmservicecalls/view', 'id' => $gmservice->id, '#' => 'workcarriedout'));
-						
-                        //foreach ($gmservicecallslogs as $gmservice) {
-                            /*
-                            echo '<tr>';
-                            echo '<td>' . $gmservice->jobstatus->name . '</td>';
-                            echo '<td>' . Setup::model()->formatdatewithtime($gmservice->created) . '</td>';
-                            echo '</tr>';
-                            */
-							
-                            
-
-                            //echo $gmservice->comments;
-
-                            if ($gmservice->server_status_id == '5') { ///status 5 means data is recieved from the server
-                                $fulldataarray = json_decode($gmservice->comments, true);
-
-                                //$recieveddata=json_decode($fulldataarray['data'],true);
-                                $fullchatarray = json_decode($fulldataarray['communications'], true);
-
-                            }///end of if
-
-                        }//end if ($gmservice)
-
-                        ?>
-                    </table>
-
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    <?php endif; ?>
                 </div>
             </div>
         </td>
     </tr>
-    <!-- Go Mobile End-->
+    <!-- Activity Log  End-->
 
 
 </table>
-
 
 
 

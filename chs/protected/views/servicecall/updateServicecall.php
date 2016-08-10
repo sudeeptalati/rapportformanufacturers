@@ -110,9 +110,13 @@
 
 
 					<?php
+						/*
 				
 						$result=$model->updateStatus();
 						$list=CHtml::listData($result, 'id','name');
+						*/
+						$list=JobStatus::model()->getAllPublishedListdata();
+
 						echo $form->dropDownList($model, 'job_status_id', $list, array('onchange'=>'js:my_change(this.value)')
 //												array(
 //													'ajax' => array(
@@ -278,8 +282,8 @@
 							<th>Visit Date</th>
 							<th>Job Status</th>
 						</tr>
-						<?php $previousCall = $model->previousCall($model->customer_id);
-						foreach ($previousCall as $data)
+						<?php $previousCalls = $model->previousCalls($model->customer_id);
+						foreach ($previousCalls as $data)
 						{
 							if ($data->service_reference_number!=$model->service_reference_number)//////since we want to skip the current service call
 							{
@@ -996,6 +1000,7 @@
 
 
 
+					<!-- Job Payment date END  -->
 
 
 

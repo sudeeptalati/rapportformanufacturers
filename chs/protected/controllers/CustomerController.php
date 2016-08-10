@@ -422,13 +422,38 @@ class CustomerController extends RController
 	    	
 	    }
 	}//end of openDialog().
-	
-	public function actionTestSMS()
+
+
+
+
+	public function actionUpdatecustomerfromservicecall()
 	{
-		//echo "In sms action<hr>";
-		
-		//Yii::app()->sms->send(array('to'=>'447550508559', 'message'=>'Happy New Year 2013!!!'));
-		
-	}//end of testSMS
-    
+
+		if (isset($_POST['Customer'])) {
+
+			$servicecall_id=$_GET['servicecall_id'];
+			$service_model=Servicecall::model()->findByPk($servicecall_id);
+			$customer_model=Customer::model()->findByPk($service_model->customer_id);
+
+			$customer_model->attributes = $_POST['Customer'];
+
+			if ($customer_model->save()) {
+				$this->redirect(array('servicecall/view&id='.$servicecall_id."#customerbox"));
+
+			}else{
+				echo "getErrors";
+				$errors=$customer_model->getErrors();
+				$error_msg='<h5>Customer Not Updated</h5><h5><i class="fa fa-lightbulb-o fa-2x" aria-hidden="true"></i> Please update again</h5>';
+				foreach ($errors as $key=>$value)
+					$error_msg.="<br>".$value[0];
+
+
+				//$this->redirect(array('servicecall/view', 'id' => $servicecall_id, 'error_msg='=>$error_msg));
+				$this->redirect(array('servicecall/view&id='.$servicecall_id.'&error_msg='.$error_msg));
+			}
+
+
+		}
+	}
+
 }//end of class.
