@@ -8,15 +8,18 @@
 $this->layout='column1';
 
 	$selected_statuses=array(
-							'31'=>'Job Sent to Engineer', 
-							'35'=>'Engineer Claim Received & Waiting for Review', 
-							'37'=>'Message Recieved From Engineer', 
-							
-							'32'=>'Unable to Sent to Engineer', 
-							'34'=>'Engineer Claim Approved', 
-							'54'=>'Claim Rejected', 
-							'36'=>'Message Sent to Engineer', 
-							
+							//'31'=>'Job Sent to Engineer',
+							'35'=>'Engineer Claim Received & Waiting for Review',
+							'37'=>'New Msg',
+							'38'=>'Msg Read',
+
+		/*
+        '32'=>'Unable to Sent to Engineer',
+        '34'=>'Engineer Claim Approved',
+        '54'=>'Claim Rejected',
+        '36'=>'Message Sent to Engineer',
+        */
+
 							//'101'=>'Invoiced - Serviced'
 							);
 

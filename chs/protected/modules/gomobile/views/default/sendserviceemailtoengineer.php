@@ -1,3 +1,6 @@
+
+
+
 <h1>Send email</h1>
 
 <?php
@@ -20,6 +23,7 @@ if (isset($system_message))
     <?php $form = $this->beginWidget('CActiveForm', array(
         'id' => 'Emailform-form',
         'enableAjaxValidation' => true,
+        'htmlOptions' => array('enctype' => 'multipart/form-data'),
         'clientOptions' => array(
             'validateOnSubmit' => true,
         ),
@@ -74,6 +78,26 @@ if (isset($system_message))
                     echo CHtml::link($previewImg, array('/servicecall/preview', 'id' => $model->id), array('target' => '_blank'));
 
                     ?>
+
+                    <table>
+                        <tr>
+                            <td style="width:2%">
+                                <i class="fa fa-paperclip fa-2x" aria-hidden="true"></i>
+                            </td>
+                            <td style="width: 98%">
+                                <?php
+                                $this->widget('CMultiFileUpload', array(
+                                    'name' => 'uploaded_attachments',
+                                    'accept' => 'jpeg|jpg|gif|png|pdf|doc|docx|xls|xlsx', // useful for verifying files
+                                    'duplicate' => 'Duplicate file!', // useful, i think
+                                    'denied' => 'Invalid file type', // useful, i think
+                                ));
+                                ?>
+                            </td>
+                        </tr>
+                    </table>
+
+
                 </td>
             </tr>
             <tr>
@@ -91,6 +115,7 @@ if (isset($system_message))
 
             <tr>
                 <td>
+                    <?php //$emailmodel->email_body="THISI SI etst"; ?>
                     <?php echo $form->labelEx($emailmodel, 'email_body'); ?>
                 </td>
                 <td>

@@ -1,4 +1,5 @@
 <?php include('servicecall_sidemenu.php'); ?>
+<?php //$this->layout='column1'; ?>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <?php
@@ -45,7 +46,7 @@ if (!empty ($php_warranty_date)) {
 </script>
 
 <div class="customerheadingbox" id="draggable"
-     style="position: fixed;right: 14%; bottom: 55%;   width: 150px;height:160px;   padding-left: 35px; border-radius: 10px; cursor:move;">
+     style="position: fixed;right: 14%; top: 10%;   width: 150px;height:160px;   padding-left: 35px; border-radius: 10px; cursor:move;">
 
 
     <h4>
@@ -122,6 +123,9 @@ if (!empty ($php_warranty_date)) {
         </td>
     </tr>
     <tr>
+        <th style="text-align:left;"><h1 title="Job Reference No."
+                                          style="color:green"><?php echo $model->service_reference_number; ?></h1></th>
+
         <th style="width:50%;">
 
             <?php $editicon = '<h4><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;' . $model->jobStatus->name . '</h4>'; ?>
@@ -158,11 +162,14 @@ if (!empty ($php_warranty_date)) {
             </div>
 
         </th>
-        <th style="text-align:right;"><h1 title="Job Reference No."
-                                          style="color:green"><?php echo $model->service_reference_number; ?></h1></th>
     </tr>
 
-    <tr>
+    <tr><th style="text-align:left;">
+            <h3 title="Reported Date" style="color:green">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <?php echo Setup::model()->formatdate($model->fault_date); ?>
+
+            </h3>
         <th style="width:50%;">
             <div class="enginnerheadingbox contentbox">
                 <h4 style="color:white">
@@ -195,12 +202,7 @@ if (!empty ($php_warranty_date)) {
                 </h4>
             </div>
         </th>
-        <th style="text-align:right;">
-            <h3 title="Reported Date" style="color:green">
-                <i class="fa fa-calendar" aria-hidden="true"></i>
-                <?php echo Setup::model()->formatdate($model->fault_date); ?>
 
-            </h3>
         </th>
     </tr>
 
@@ -877,9 +879,8 @@ if (!empty ($php_warranty_date)) {
     <tr>
         <td colspan="2">
             <div class="sparesheadingbox contentbox" id="sparesbox">
-
-
                 <?php
+
                 $updateproducttext = "<h4 style='color: white;'><i class='fa fa-cogs'></i> Spares</h4>";
                 echo CHtml::link($updateproducttext,
                     '#', array(
@@ -903,7 +904,12 @@ if (!empty ($php_warranty_date)) {
                 $this->endWidget('zii.widgets.jui.CJuiDialog');
                 // the link that may open the dialog
                 ?>
+                <?php
 
+                $printspares='<i style="color: white" class="fa fa-print fa-2x" aria-hidden="true"></i>';
+
+                echo CHtml::link($printspares,array('sparesUsed/GenerateSparesOrderFormPdf', 'service_id'=>$model->id), array('target'=>'_blank'));
+                ?>
 
             </div>
             <div class="sparesrbox contentbox">

@@ -56,7 +56,7 @@ class GmservicecallsController extends RController
         $this->render('view', array(
             'model' => $this->loadModel($id), 'system_message' => $system_message
         ));*/
-       // $this->render('view');
+        // $this->render('view');
 
         $model=Gmservicecalls::model()->findByPk($id);
 
@@ -445,7 +445,9 @@ class GmservicecallsController extends RController
             // Status disabled as We don not want to change the status when message is sent to engineer
             //$claim_status = '36'; ///as 36 is the status for message sent to engineer.
 
+            $system_message .= Gmservicecalls::model()->sendmessagetoengineer($service_reference_number, $only_chat_message, $claim_status);
 
+            /*
             if ($model->updatestatusbygomobileid($id, $claim_status)) {
                 $system_message .= 'Job Status Changed - ';
                 $system_message .= Gmservicecalls::model()->sendmessagetoengineer($service_reference_number, $only_chat_message, $claim_status);
@@ -455,6 +457,7 @@ class GmservicecallsController extends RController
 
             }
 
+            */
         } else { ///end of if (isset($_POST['service_ref_no']))
 
             $system_message .= 'BAD Access';
@@ -463,6 +466,41 @@ class GmservicecallsController extends RController
 
         echo $system_message;
     }///end of     public function actionSendchatmessagetoengineer()
+
+
+    public function actionMarkservermessageasread()
+    {
+        $gm_service_id=$_GET['gmservicecall_id'];
+        $servicecall_id=$_GET['servicecall_id'];
+
+
+        echo '<br>marking as gm service'.$gm_service_id;
+
+        $msg_read_status_id='38';//////read msg jobstatus id
+        Gmservicecalls::model()->updategomobile_statusid($gm_service_id, $msg_read_status_id);
+
+
+        $this->redirect(array('/Servicecall/view&id='.$servicecall_id));
+
+    }///end of public function actionMarkservermessageasread($gm_service_id)
+
+    public function actionMarkservermessageasunread()
+    {
+        $gm_service_id=$_GET['gmservicecall_id'];
+        $servicecall_id=$_GET['servicecall_id'];
+
+
+        echo '<br>marking as gm service'.$gm_service_id;
+
+        $msg_read_status_id='37';//////unread msg jobstatus id
+        Gmservicecalls::model()->updategomobile_statusid($gm_service_id, $msg_read_status_id);
+
+
+        $this->redirect(array('/Servicecall/view&id='.$servicecall_id));
+
+        Setup::model()->formatdatewithtime()
+
+    }///end of public function actionMarkservermessageasread($gm_service_id)
 
 
 

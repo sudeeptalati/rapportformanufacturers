@@ -163,7 +163,7 @@ class JobStatus extends CActiveRecord
 	public static function published_item($type,$code)
 	{
 		if(!isset(self::$_published_items[$type]))
-			self::published_loadItemshtml($type);
+			self::published_loadItems($type);
 		return isset(self::$_published_items[$type][$code]) ? self::$_published_items[$type][$code] : false;
 	}
 

@@ -471,7 +471,16 @@ $mpdf->Output($filename,'I');
 			$service_model=Servicecall::model()->findByPk($servicecall_id);
 
 			$service_model->attributes = $_POST['Servicecall'];
-			if ($service_model->save()) {
+
+			$comments= Setup::model()->updatenotesorcomments($service_model->comments , $service_model, 'comments');
+
+			$servicecall_update = Servicecall::model()->updateByPk($servicecall_id,
+				array(
+					'comments' => $comments,
+
+				));
+
+			if ($servicecall_update) {
 				echo "Servicecall Comments Saved";
 				$this->redirect(array('servicecall/view', 'id' => $servicecall_id));
 			}
@@ -486,6 +495,7 @@ $mpdf->Output($filename,'I');
 				//$this->redirect(array('servicecall/view', 'id' => $servicecall_id, 'error_msg='=>$error_msg));
 				$this->redirect(array('servicecall/view&id='.$servicecall_id.'&error_msg='.$error_msg.'#productbox'));
 			}
+
 		}
 
 	}////end of public function addcommnetsinservicecall()

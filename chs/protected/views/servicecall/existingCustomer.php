@@ -196,7 +196,7 @@ include('servicecall_sidemenu.php');
 	
 	<!-- ******************* PREVIOUS SERVICECALLS RECORD *************** -->
 	<?php 
-		$previousCall = $model->previousCall($cust_id,$prod_id); 
+		$previousCall = $model->previousCalls($cust_id,$prod_id);
 		if(count($previousCall) != 0)
 		{
 	?>
@@ -214,7 +214,7 @@ include('servicecall_sidemenu.php');
     	<th>Visit Date</th>
     	<th>Job Status</th>
     	</tr>
-    	<?php $previousCall = $model->previousCall($cust_id);
+    	<?php $previousCall = $model->previousCalls($cust_id);
     	foreach ($previousCall as $data)
     	{
     		$enggdiaryModel=Enggdiary::model()->findByPk($data->engg_diary_id);

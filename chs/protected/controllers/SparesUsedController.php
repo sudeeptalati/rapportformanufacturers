@@ -155,7 +155,7 @@ class SparesUsedController extends RController
 		$service_id = $_GET['servicecall_id'];
 		
 		//$this->redirect(array('/servicecall/update/'.$service_id));
-		$this->redirect(array('servicecall/view&id='.$service_id.'#sparesbox'));
+		$this->redirect(array('servicecall/update&id='.$service_id.'#spares_details'));
 		
 		/*
 		if(Yii::app()->request->isPostRequest)
@@ -418,10 +418,9 @@ Phone Number(Direct Dial): 01563-557152|&nbsp;&nbsp;&nbsp;&nbsp;|FAX: 0845 250 8
 
 
 
-	public function actionAddspares()
+	public function actionAddSpares($service_id)
 	{
 		$model = new SparesUsed();
-		$service_id=$_GET['servicecall_id'];
 
 		$model->servicecall_id = $service_id;
 		$model->master_item_id = 0;
@@ -442,18 +441,18 @@ Phone Number(Direct Dial): 01563-557152|&nbsp;&nbsp;&nbsp;&nbsp;|FAX: 0845 250 8
 
 				$servicecallModel = Servicecall::model()->updateByPk($service_id, array('spares_used_status_id'=>1));
 
-				$this->redirect(array('servicecall/view&id='.$service_id.'#sparesbox'));
+				$this->redirect(array('servicecall/view&id='.$service_id.'#spares_details'));
 			}
 			else
 			{
 				echo "getErrors";
-				$errors=$model->getErrors();
+				$errors=$service_model->getErrors();
 				$error_msg='<h5>Spares not added</h5>';
 				foreach ($errors as $key=>$value)
 					$error_msg.="<br>".$value[0];
 
 				//$this->redirect(array('servicecall/view', 'id' => $servicecall_id, 'error_msg='=>$error_msg));
-				$this->redirect(array('servicecall/view&id='.$service_id.'&error_msg='.$error_msg.'#sparesbox'));
+				$this->redirect(array('servicecall/view&id='.$servicecall_id.'&error_msg='.$error_msg.'#productbox'));
 
 			}
 
@@ -491,7 +490,7 @@ Phone Number(Direct Dial): 01563-557152|&nbsp;&nbsp;&nbsp;&nbsp;|FAX: 0845 250 8
 			if($model->save())
 			{
 				//echo "<br>Spares saved";
-				$this->redirect(array('servicecall/view&id='.$service_id.'#sparesbox'));
+				$this->redirect(array('servicecall/update&id='.$service_id.'#spares_details'));
 			}
 			else
 			{

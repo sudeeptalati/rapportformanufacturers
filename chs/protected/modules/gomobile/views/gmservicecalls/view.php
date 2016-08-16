@@ -274,28 +274,9 @@ $system_message = '';
                                 <div class="datacontenttitle">
                                     <?php echo $model->servicecall->getAttributeLabel('job_payment_date'); ?>
                                 </div>
-                                <?php
-                                if (empty($model->servicecall->job_payment_date))
-                                    $model->servicecall->job_payment_date = time() + 2592000;///we just add 1 month as they are paid next month
-									 
+                                <?php $jobpaymentdate= date('d-M-Y',$model->servicecall->job_payment_date ); ?>
+                                <?php echo CHtml::textField('job_payment_date', $jobpaymentdate,array('id'=>'job_payment_date','readonly'=>'readonly')); ?>
 
-
-                                $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                    'name' => 'job_payment_date',
-                                    //'value' => date('d-M-Y', $model->servicecall->job_payment_date),
-                                    'value' => '',
-                                    // additional javascript options for the date picker plugin
-                                    'options' => array(
-                                        'showAnim' => 'fold',
-                                        'dateFormat' => 'dd-M-yy',
-                                    ),
-                                    'htmlOptions' => array(
-                                        'style' => 'height:20px;'
-                                    ),
-                                ));
-
-
-                                ?>
                             </td>
                             <td></td>
                             <td>
@@ -362,12 +343,42 @@ Yii::app()->clientScript->registerScript( 'chat_time', "
         <div class="chat-button">
             <table>
                 <tr>
-                    <td><h4>Communication for this Job</h4>
+                    <td>
+                        <h4>Communication for this Job</h4>
                     </td>
                     <td>X</td>
                 </tr>
             </table>
         </div>
+         <table>
+            <tr>
+                <td style="width: 80%">
+                    <?php $bgcolor=$model->jobstatus->backgroundcolor;?>
+                    <div style="border-radius: 10px;padding: 5px 5px 5px 30px;color:white; background-color:<?php echo $bgcolor;?> ">
+                        <?php echo $model->jobstatus->name;?>
+                    </div>
+                </td>
+                <td style="width: 20%">
+                    <?php if($model->server_status_id=='38'): //38 msg is unread ?>
+                        <div class="">
+                            <?php $msgread='<i style title="Mark message as Unread" class="fa fa-  fa-inbox fa-2x" aria-hidden="true"></i>';?>
+                            <?php echo CHtml::link($msgread,array('gomobile/gmservicecalls/markservermessageasunread', 'gmservicecall_id'=>$gomobile_id, 'servicecall_id'=>$servicecall_id)); ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="">
+                            <?php $msgread='<i title="Move to Archive" class="fa fa- fa-stack-overflow fa-2x" aria-hidden="true"></i>';?>
+                            <?php echo CHtml::link($msgread,array('gomobile/gmservicecalls/markservermessageasread', 'gmservicecall_id'=>$gomobile_id, 'servicecall_id'=>$servicecall_id)); ?>
+                        </div>
+                    <?php endif; ///end of if($model->server_status_id=='38'): ?>
+                </td>
+
+            </tr>
+        </table>
+
+
+
+
+
         <div id="chat_text">
             <table class="chat_table">
                 <tr>
@@ -419,10 +430,11 @@ Yii::app()->clientScript->registerScript( 'chat_time', "
             </table>
         </div><!-- <div class="chat_text">    -->
         <div style="text-align: right;">
-            <form name="only_chat_form" id="only_chat_form">
-                <?php echo CHtml::textArea('only_chat_message', '', array('style' => 'width:78%;height:50px;')); ?>
-                <?php echo CHtml::button("Reply to this Chat", array('title' => "Reply to this Chat", 'onclick' => 'js:replytothecchat();')); ?>
-            </form>
+
+                        <form name="only_chat_form" id="only_chat_form">
+                            <?php echo CHtml::textArea('only_chat_message', '', array('style' => 'width:78%;height:50px;')); ?>
+                            <?php echo CHtml::button("Reply to this Chat", array('title' => "Reply to this Chat", 'onclick' => 'js:replytothecchat();')); ?>
+                        </form>
         </div>
 
     </div> <!-- <div id="chat_window"> -->
@@ -552,7 +564,18 @@ Yii::app()->clientScript->registerScript( 'chat_time', "
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+
+
+    var job_payment_date = new Pikaday(
+        {
+            numberOfMonths: 3,
+            field: document.getElementById('job_payment_date'),
+
+        });
+
+
+
+
 </script>
-
-
 

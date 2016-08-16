@@ -346,7 +346,7 @@ class NotificationRules extends CActiveRecord
 	}//end of sendCustomerEmailAndSms().
 	
 	
-	public function sendEmail($reciever_email_address, $body, $subject, $pdfattachment=null)
+	public function sendEmail($reciever_email_address, $body, $subject, $callsheet_pdfattachment=null, $other_attachments=null )
 	{
 		$email_response = '';
 		$email_body =nl2br($body);
@@ -397,10 +397,25 @@ class NotificationRules extends CActiveRecord
 			$mail->AddBCC($sender_email);
 			$mail->AddReplyTo($sender_email);
 
-            if ($pdfattachment!=null)
+            if ($callsheet_pdfattachment!=null)
             {
-                $mail->AddStringAttachment($pdfattachment['pdf'], $pdfattachment['filename'], $encoding = 'base64', $type = 'application/pdf');
+                $mail->AddStringAttachment($callsheet_pdfattachment['pdf'], $callsheet_pdfattachment['filename'], $encoding = 'base64', $type = 'application/pdf');
             }
+
+
+			if ($other_attachments!=null)
+			{
+				foreach ($other_attachments as $oa)
+				{
+					$mail->addAttachment($oa['location'], $oa['filename']);
+				}
+
+			}
+
+
+			
+			
+			
 
 
             $mail->WordWrap = 50;                                 // Set word wrap to 50 characters

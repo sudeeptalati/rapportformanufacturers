@@ -17,7 +17,7 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'spares-used-addSpares-form',
-	'action' => Yii::app()->createUrl('sparesused/addspares&servicecall_id=' .$service_id),
+	'action' => Yii::app()->createUrl('sparesUsed/addspares&servicecall_id=' .$service_id),
 	'enableAjaxValidation'=>false,
 )); ?>
 

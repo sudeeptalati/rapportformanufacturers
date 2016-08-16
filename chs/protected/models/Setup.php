@@ -774,7 +774,7 @@ class Setup extends CActiveRecord
             if (count($allnotesarray) > 0) {
                 $returnhtml = '<table class="notes_comments_table" ><tr><th>Date/Time</th><th>User</th><th>Notes</th></tr>';
 
-                $allnotesarray = array_reverse($allnotesarray, true);
+                //$allnotesarray = array_reverse($allnotesarray, true);
 
                 foreach ($allnotesarray as $jn) {
                     $returnhtml .= '<tr>';

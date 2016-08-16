@@ -95,9 +95,28 @@ class DefaultController extends RController
             $pdfattachment['pdf'] = $mpdf->Output('', 'S');
 			$pdfattachment['filename'] = $filename;
 
-            var_dump($emailmodel->attributes);
 
-			$mailsent=NotificationRules::model()->sendEmail($emailmodel->email_to, $emailmodel->email_body, $emailmodel->email_subject, $pdfattachment);
+
+			$other_attachments=array();
+			$uploaded_attachments= CUploadedFile::getInstancesByName('uploaded_attachments');
+
+			if (isset($uploaded_attachments) && count($uploaded_attachments) > 0) {
+				// go through each uploaded image
+				foreach ($uploaded_attachments as $image => $pic) {
+					$attach_this=array();
+					$attach_this['location']=$pic->tempName;
+					$attach_this['filename']=$pic->name;
+					array_push($other_attachments, $attach_this);
+				}
+             }
+
+
+
+
+
+
+			$mailsent=NotificationRules::model()->sendEmail($emailmodel->email_to, $emailmodel->email_body, $emailmodel->email_subject, $pdfattachment, $other_attachments);
+
 
 			if (!$mailsent)
                 $this->render('sendserviceemailtoengineer', array('id'=>$id, 'model'=>$model, 'emailmodel'=>$emailmodel,'setupmodel'=>$setupmodel, 'attachfilename'=>$filename,'system_message'=>'Cannot send the Email. Please contact support'));

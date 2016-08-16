@@ -99,8 +99,14 @@ class Gmservicecalls extends CActiveRecord
 		$criteria->compare('id',$this->id);
         $criteria->compare('servicecall_id',$this->servicecall_id);
         $criteria->compare('service_reference_number',$this->service_reference_number,true);
-        $criteria->compare('server_status_id',$this->server_status_id);
-        $criteria->compare('created',$this->created);
+		//$criteria->compare('server_status_id',$this->server_status_id);
+
+		$criteria->addCondition("server_status_id =:t OR server_status_id =:d OR server_status_id =:e");
+        $criteria->params[':t'] = '35';
+		$criteria->params[':d'] = '37';
+		$criteria->params[':e'] = '38';
+
+		$criteria->compare('created',$this->created);
         $criteria->compare('modified',$this->modified);
         $criteria->compare('comments',$this->comments,true);
         $criteria->compare('data_sent',$this->data_sent,true);
@@ -558,5 +564,20 @@ class Gmservicecalls extends CActiveRecord
 		
 	}///end of public function moveengineerchathistorytocomments($service_id)
 
-	
+
+
+	public function updategomobile_statusid($gm_id, $status_id)
+	{
+
+		return Gmservicecalls::model()->updateByPk($gm_id,
+			array(
+				'server_status_id'=>$status_id
+			));
+
+	}///end of 	public function updategmstatusid()
+
+
+
+
+
 }
