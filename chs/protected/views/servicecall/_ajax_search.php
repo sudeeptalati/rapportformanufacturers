@@ -47,8 +47,8 @@ vertical-align:top;
 
 			?>
 		
-       <?php echo CHtml::link('New Customer Service', array('servicecall/create')); ?>
-       <?php echo CHtml::link($service_img_html, array('Servicecall/create'));?>	
+       <?php //echo CHtml::link('New Customer Service', array('servicecall/create')); ?>
+       <?php //echo CHtml::link($service_img_html, array('Servicecall/create'));?>	
        </p>
 
 

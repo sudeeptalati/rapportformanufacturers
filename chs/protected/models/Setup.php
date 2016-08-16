@@ -704,8 +704,8 @@ class Setup extends CActiveRecord
     public function updatenotesorcomments($text, $model, $attribute)
     {
 
-        echo '<br> Recieved Text- '.$text;
-        echo '<br> Recieved $attribute- '.$attribute;
+        //echo '<br> Recieved Text- '.$text;
+        //echo '<br> Recieved $attribute- '.$attribute;
 
         $return_values='';
 
@@ -713,15 +713,15 @@ class Setup extends CActiveRecord
         $existingvaluesinmodel = $model->findByPk($model->id);
 
         if (!empty($text)) {
-            echo '<hr> Not empty Text';
+            //echo '<hr> Not empty Text';
 
             $return_array = json_decode($existingvaluesinmodel->$attribute, true);
 
-            var_dump($return_array);
+            //var_dump($return_array);
 
             ////If old notes are not in JSON format, we will archive old notes
             if ($return_array == NULL) {
-                echo '<br> Null Array for existing ';
+                //echo '<br> Null Array for existing ';
                 $return_array = json_decode($this->initiatetimestampnotesorcomments(),true);
                 $notes = $this->preparethetextfortimestampnotes($existingvaluesinmodel->$attribute);
                 array_push($return_array['timestampednotes'], $notes);

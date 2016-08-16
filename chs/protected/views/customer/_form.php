@@ -105,7 +105,21 @@ function PostcodeAnywhere_Interactive_RetrieveByPostcodeAndBuilding_v1_10End(res
    
 </script> 
 
+<?php
 
+///Presets
+if(isset($_GET['postcode']))
+{
+	$customerModel->postcode=$_GET['postcode'];
+}
+
+if(empty($productModel->contract_id))
+ $productModel->contract_id= '1000001';
+if(empty($productModel->warranty_for_months))
+ $productModel->warranty_for_months= '24';
+
+
+?>
 
 <div class="form">
 
@@ -486,27 +500,8 @@ function PostcodeAnywhere_Interactive_RetrieveByPostcodeAndBuilding_v1_10End(res
                                 $warranty_date = '';
                             }
                             ?>
-                            <?php
-                            $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                'name' => CHtml::activeName($productModel, 'warranty_date'),
-                                'model' => $productModel,
-                                //'value' => $productModel->attributes['warranty_date'],
-                                'value' => $warranty_date,
-                                // additional javascript options for the date picker plugin
-                                'options' => array(
-                                    'showAnim' => 'fold',
-                                    'dateFormat' => 'd-M-y',
-                                    //'onSelect' => 'js:function(){ console.log("Hiiiii "  );document.getElementById("Product_purchase_date").value=""  ; }',
-                                    'onSelect' => 'js:function(selectedDate) {console.log("Hiiiii "+selectedDate);document.getElementById("Product_purchase_date").value=selectedDate}',
-
-                                ),
-                                'htmlOptions' => array(
-                                    'style' => 'height:20px;'
-                                ),
-                            ));
-                            ?>
-                            <?php //echo $form->textField($productModel,'warranty_date'); ?>
-                            <?php echo $form->error($productModel, 'warranty_date'); ?>
+                            <?php echo $form->textField($productModel,'warranty_date', array('readonly'=>'readonly')); ?>
+            				<?php echo $form->error($productModel, 'warranty_date'); ?>
                         </td>
                         <td>
                             <?php echo $form->labelEx($productModel, 'warranty_for_months'); ?>
@@ -562,24 +557,8 @@ function PostcodeAnywhere_Interactive_RetrieveByPostcodeAndBuilding_v1_10End(res
                                 $purchase_date = '';
                             }
                             ?>
-                            <?php
-                            $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                'name' => CHtml::activeName($productModel, 'purchase_date'),
-                                'model' => $productModel,
-                                //'value' => $productModel->attributes['purchase_date'],
-                                'value' => $purchase_date,
-                                // additional javascript options for the date picker plugin
-                                'options' => array(
-                                    'showAnim' => 'fold',
-                                    'dateFormat' => 'd-M-y',
-                                ),
-                                'htmlOptions' => array(
-                                    'style' => 'height:20px;'
-                                ),
-                            ));
-                            ?>
-                            <?php //echo $form->textField($productModel,'purchase_date'); ?>
-                            <?php echo $form->error($productModel, 'purchase_date'); ?>
+                            <?php echo $form->textField($productModel,'purchase_date', array('readonly'=>'readonly')); ?>
+            				<?php echo $form->error($productModel, 'purchase_date'); ?>
                         </td>
 
                         <td>
@@ -657,3 +636,32 @@ function PostcodeAnywhere_Interactive_RetrieveByPostcodeAndBuilding_v1_10End(res
 </div><!-- form -->
 
 
+
+<script>
+
+    var Product_purchase_date = new Pikaday(
+        {
+            numberOfMonths: 3,
+            field: document.getElementById('Product_purchase_date'),
+
+        });
+    
+     var Product_warranty_date = new Pikaday(
+        {
+            numberOfMonths: 3,
+            field: document.getElementById('Product_warranty_date'),
+             onSelect: function(date) {
+      			  copywarrantydatetopurchasedate();
+    		}
+
+        });
+    
+	    
+        
+    function copywarrantydatetopurchasedate()
+	{
+		document.getElementById('Product_purchase_date').value=document.getElementById('Product_warranty_date').value;
+	}////end of function copywarrantydatetopurchasedate()
+	
+        
+</script>

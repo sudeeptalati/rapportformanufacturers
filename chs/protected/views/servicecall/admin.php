@@ -2,7 +2,7 @@
 <?php $searchurl=Yii::app()->baseUrl.'/index.php?r=servicecall/searchengine';?>
 
 
-
+ 
 <?php $newdata=Gmservicecalls::model()->checkfornewdataonserver();?>
 <?php $msg_json=json_decode($newdata);?>
 
@@ -17,7 +17,7 @@
 	</a>
 
 <?php endif; ?>
-
+ 
 <!-- Search Form -->
 <script type="text/javascript">
  
@@ -35,9 +35,13 @@ $(document).ready(function() {
 	
 	$("#keyword").keyup(function()
 	{
-		var data_string = 'keyword='+ $(this).val();;
-		var current_url = '<?php echo $searchurl; ?>'; 
 	
+		appendurlnewcustomerurl($(this).val());
+		
+		var data_string = 'keyword='+ $(this).val();
+		var current_url = '<?php echo $searchurl; ?>'; 
+
+		
 		if($(this).val().length>3)
 		{
 			console.log('Key is up'+data_string+current_url);
@@ -58,6 +62,14 @@ $(document).ready(function() {
 	});//end of keyup function.
 	
 });//end of ready function.
+
+
+function appendurlnewcustomerurl(postcode)
+{
+	newurl='index.php?r=Servicecall/create&postcode='+postcode;
+	console.log(newurl);
+	document.getElementById("newcustomer").href=newurl; 
+}
 </script>
 <table>
 	<tr>
@@ -70,7 +82,7 @@ $(document).ready(function() {
 		<td>
 			<div style='float:right;'>
 				<?php $service_img_html = CHtml::image('images/service.gif','Raise Service Call',array('title'=>'Raise New Service Call')); ?>
-				<?php echo CHtml::link($service_img_html, array('Servicecall/create'));?>	
+				<?php echo CHtml::link($service_img_html, array('Servicecall/create'), array('id'=>'newcustomer'));?>	
 			</div>
 		</td>
 	</tr>
@@ -93,9 +105,7 @@ $(document).ready(function() {
 <?php $gridVar = $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'servicecall-grid',
 	'dataProvider'=>$model->search(),
-	'selectableRows'=>1,
-	'selectionChanged'=>'function(id){ location.href = "'.$this->createUrl('view').'/id/"+$.fn.yiiGridView.getSelection(id);}',
-
+ 
 	'filter'=>$model,
 	'columns'=>array(
 		//'id',
@@ -141,10 +151,13 @@ $(document).ready(function() {
 
 		array(
 			'name'=>'job_status_id',
-			'value'=>'$data->jobStatus->html_name',
+			'value' => 'CHtml::link($data->jobStatus->html_name, array("Servicecall/view&id=".$data->id))',
+		 		
 			'filter'=>JobStatus::model()->getAllPublishedListdata(),
 			'type'=>'raw',
 		),
+		
+        
 
 		//'fault_description',
 
@@ -154,6 +167,8 @@ $(document).ready(function() {
 		array('header' => 'ReportedDate','name'=>'fault_date', 'value'=>'date("d-M-Y",$data->fault_date)', 'filter'=>false),
 
 		//'fault_date',
+		//'created',
+		array('header' => 'Created','name'=>'created', 'value'=>'date("d-M-Y H:i:s",$data->created)', 'filter'=>false),
 
 
 

@@ -196,7 +196,7 @@ include('servicecall_sidemenu.php');
 	
 	<!-- ******************* PREVIOUS SERVICECALLS RECORD *************** -->
 	<?php 
-		$previousCall = $model->previousCalls($cust_id,$prod_id);
+		$previousCall = $model->previousCalls($cust_id,$prod_id); 
 		if(count($previousCall) != 0)
 		{
 	?>

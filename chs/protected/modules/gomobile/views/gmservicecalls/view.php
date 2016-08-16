@@ -63,9 +63,20 @@ $system_message = '';
                     </tr>
                     <tr>
                         <td>
+                        
+                       
                             <div>
                                 <span class="datacontenttitle">Serial Number:</span>
                                 <span  style="font-size:18px"> <?php echo '' . $model->servicecall->product->serial_number; ?> (In Records) </span>
+                                   	<?php
+									 $updateproducttext = "<span><i class='fa fa-pencil-square-o'></i></span>";
+									echo CHtml::link($updateproducttext,
+										'#', array(
+											'onclick' => '$("#update-product-dialog").dialog("open"); return false;',
+										));
+									?>
+ 
+ 
                             </div>
 
                             <div class="recieveddata">
@@ -274,32 +285,44 @@ $system_message = '';
                                 <div class="datacontenttitle">
                                     <?php echo $model->servicecall->getAttributeLabel('job_payment_date'); ?>
                                 </div>
-                                <?php $jobpaymentdate= date('d-M-Y',$model->servicecall->job_payment_date ); ?>
-                                <?php echo CHtml::textField('job_payment_date', $jobpaymentdate,array('id'=>'job_payment_date','readonly'=>'readonly')); ?>
-
+                                <?php  
+                                 
+                                if (empty($model->servicecall->job_payment_date))
+                                    //$payment_date = time() + 2592000;///we just add 1 month as they are paid next month
+									$payment_date = '';///we just add 1 month as they are paid next month
+								else
+									$payment_date=date('d-M-Y',$model->servicecall->job_payment_date);
+								 		
+										
+								?>
+                                
+                                <?php echo CHtml::textField('job_payment_date', $payment_date, array('id'=>'job_payment_date','readonly'=>'readonly')); ?>
                             </td>
-                            <td></td>
                             <td>
                                 <div class="datacontenttitle">Reason for Rejection</div>
                                 <?php echo CHtml::textArea('chat_message', '') ?>
                                 <div class="errorMessage" id="chat_message_error"></div>
+                            </td>
+                            <td>
+                        	    <?php $imghtml = CHtml::image($model->getportalurl() . '/images/chaticon.png', '', array("style" => "width:50px; height: 50px")); ?>
+								<?php echo CHtml::link($imghtml, '#', array('class' => 'chat-button')); ?>
+                            </td>
+                        </tr>
+                        <?php if ($model->servicecall->job_status_id<100): ?>
+							<tr>
+								<td>
+									<div class="row submit">
+										<?php echo CHtml::submitButton('Approve'); ?>
+									</div>
+								</td>
+								<td>
+									<?php echo CHtml::button("Reject", array('title' => "Reject", 'onclick' => 'js:rejectthisclaim();')); ?>
+								</td>
+								<td>
+								</td>
+							</tr>
+                        <?php endif; ///if ($model->servicecall->job_status_id<100): ?>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="row submit">
-                                    <?php echo CHtml::submitButton('Approve'); ?>
-                                </div>
-                            </td>
-                            <td>
-                                <?php echo CHtml::button("Reject", array('title' => "Reject", 'onclick' => 'js:rejectthisclaim();')); ?>
-                            </td>
-                            <td>
-                                <?php $imghtml = CHtml::image($model->getportalurl() . '/images/chaticon.png', '', array("style" => "width:50px; height: 50px")); ?>
-                                <?php echo CHtml::link($imghtml, '#', array('class' => 'chat-button')); ?>
-                            </td>
-                        </tr>
                     </table>
 
 
@@ -341,23 +364,26 @@ Yii::app()->clientScript->registerScript( 'chat_time', "
 <div class="chat-form" style="display:block">
     <div id="chat_window">
         <div class="chat-button">
-            <table>
+            <table  style="margin-bottom:0px;">
                 <tr>
-                    <td>
-                        <h4>Communication for this Job</h4>
+                    <td><h4>Communication for this Job</h4>
                     </td>
                     <td>X</td>
                 </tr>
             </table>
         </div>
-         <table>
+        
+        <table style="margin-bottom:0px;">
             <tr>
                 <td style="width: 80%">
                     <?php $bgcolor=$model->jobstatus->backgroundcolor;?>
                     <div style="border-radius: 10px;padding: 5px 5px 5px 30px;color:white; background-color:<?php echo $bgcolor;?> ">
                         <?php echo $model->jobstatus->name;?>
                     </div>
-                </td>
+                    <small title="Last Modified"  style="float: right;">
+                    	<b><i class="fa fa-clock-o" aria-hidden="true"></i></b>&nbsp;&nbsp;<?php echo Setup::model()->formatdatewithtime($model->modified); ?>
+                	</small>
+                    </td>
                 <td style="width: 20%">
                     <?php if($model->server_status_id=='38'): //38 msg is unread ?>
                         <div class="">
@@ -374,11 +400,7 @@ Yii::app()->clientScript->registerScript( 'chat_time', "
 
             </tr>
         </table>
-
-
-
-
-
+        
         <div id="chat_text">
             <table class="chat_table">
                 <tr>
@@ -430,11 +452,10 @@ Yii::app()->clientScript->registerScript( 'chat_time', "
             </table>
         </div><!-- <div class="chat_text">    -->
         <div style="text-align: right;">
-
-                        <form name="only_chat_form" id="only_chat_form">
-                            <?php echo CHtml::textArea('only_chat_message', '', array('style' => 'width:78%;height:50px;')); ?>
-                            <?php echo CHtml::button("Reply to this Chat", array('title' => "Reply to this Chat", 'onclick' => 'js:replytothecchat();')); ?>
-                        </form>
+            <form name="only_chat_form" id="only_chat_form">
+                <?php echo CHtml::textArea('only_chat_message', '', array('style' => 'width:78%;height:50px;')); ?>
+                <?php echo CHtml::button("Reply to this Chat", array('title' => "Reply to this Chat", 'onclick' => 'js:replytothecchat();')); ?>
+            </form>
         </div>
 
     </div> <!-- <div id="chat_window"> -->
@@ -564,18 +585,17 @@ Yii::app()->clientScript->registerScript( 'chat_time', "
             reader.readAsDataURL(input.files[0]);
         }
     }
-
-
-
+    
+    
+    
     var job_payment_date = new Pikaday(
         {
             numberOfMonths: 3,
             field: document.getElementById('job_payment_date'),
 
         });
-
-
-
-
+    
 </script>
+
+
 

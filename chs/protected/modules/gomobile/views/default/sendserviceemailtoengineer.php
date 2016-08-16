@@ -1,6 +1,3 @@
-
-
-
 <h1>Send email</h1>
 
 <?php
@@ -23,7 +20,6 @@ if (isset($system_message))
     <?php $form = $this->beginWidget('CActiveForm', array(
         'id' => 'Emailform-form',
         'enableAjaxValidation' => true,
-        'htmlOptions' => array('enctype' => 'multipart/form-data'),
         'clientOptions' => array(
             'validateOnSubmit' => true,
         ),
@@ -115,7 +111,6 @@ if (isset($system_message))
 
             <tr>
                 <td>
-                    <?php //$emailmodel->email_body="THISI SI etst"; ?>
                     <?php echo $form->labelEx($emailmodel, 'email_body'); ?>
                 </td>
                 <td>

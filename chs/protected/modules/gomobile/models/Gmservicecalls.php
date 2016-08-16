@@ -99,14 +99,14 @@ class Gmservicecalls extends CActiveRecord
 		$criteria->compare('id',$this->id);
         $criteria->compare('servicecall_id',$this->servicecall_id);
         $criteria->compare('service_reference_number',$this->service_reference_number,true);
-		//$criteria->compare('server_status_id',$this->server_status_id);
-
-		$criteria->addCondition("server_status_id =:t OR server_status_id =:d OR server_status_id =:e");
-        $criteria->params[':t'] = '35';
+        
+        $criteria->compare('server_status_id',$this->server_status_id);
+        
+        /*$criteria->addCondition("server_status_id =:t OR server_status_id =:d");
+		$criteria->params[':t'] = '35';
 		$criteria->params[':d'] = '37';
-		$criteria->params[':e'] = '38';
-
-		$criteria->compare('created',$this->created);
+        */
+        $criteria->compare('created',$this->created);
         $criteria->compare('modified',$this->modified);
         $criteria->compare('comments',$this->comments,true);
         $criteria->compare('data_sent',$this->data_sent,true);
@@ -120,6 +120,12 @@ class Gmservicecalls extends CActiveRecord
             'sort'=>array('defaultOrder'=>'modified DESC'),
         ));
 	}///end of search
+	
+	
+	
+	
+	
+	
 	
 	public function getdatabyserverstatusid($server_status_id)
 	{
@@ -409,7 +415,7 @@ class Gmservicecalls extends CActiveRecord
             $full_chat_array = json_decode( $fullchat, true );
             array_push( $full_chat_array['chats'], $chat_array );
             $model->communications = json_encode( $full_chat_array );
-            $model->server_status_id =$claim_status;
+            //$model->server_status_id =$claim_status;
 
             if ($model->save())
                 $system_message.='and Saved';
@@ -431,7 +437,7 @@ class Gmservicecalls extends CActiveRecord
     {
 
         $model=$this->loadModel($id);
-        $model->server_status_id=$status_id;
+        //$model->server_status_id=$status_id;
 
 		$log='<tr>';
 		$log.='<td>'.date('d-M-Y h:i A').'</td>';
@@ -564,8 +570,6 @@ class Gmservicecalls extends CActiveRecord
 		
 	}///end of public function moveengineerchathistorytocomments($service_id)
 
-
-
 	public function updategomobile_statusid($gm_id, $status_id)
 	{
 
@@ -575,9 +579,5 @@ class Gmservicecalls extends CActiveRecord
 			));
 
 	}///end of 	public function updategmstatusid()
-
-
-
-
 
 }

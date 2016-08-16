@@ -1,5 +1,4 @@
 <?php include('servicecall_sidemenu.php'); ?>
-<?php //$this->layout='column1'; ?>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <?php
@@ -46,9 +45,13 @@ if (!empty ($php_warranty_date)) {
 </script>
 
 <div class="customerheadingbox" id="draggable"
-     style="position: fixed;right: 14%; top: 10%;   width: 150px;height:160px;   padding-left: 35px; border-radius: 10px; cursor:move;">
+     style="position: fixed;right: 14%; top: 4%;   width: 150px; height:auto;   padding-left: 35px; border-radius: 10px; cursor:move;">
 
 
+    <h4>
+     	<i class="fa fa-arrow-up" aria-hidden="true"></i>
+        <a style="color:white;" href="#page">Top</a>
+    </h4>  
     <h4>
         <i class="fa fa-users" aria-hidden="true"></i>
         <a style="color:white;" href="#customerbox">Customer</a>
@@ -68,13 +71,47 @@ if (!empty ($php_warranty_date)) {
         <i class="fa fa-gears" aria-hidden="true"></i>
         <a style="color:white;" href="#sparesbox">Spares</a>
     </h4>
+    
+    <h4>
+        <i class="fa fa-money" aria-hidden="true"></i>
+        <a style="color:white;" href="#costs">Costs</a>
+    </h4>    
+     
 
 
     <h4>
         <i class="fa fa-briefcase" aria-hidden="true"></i>
         <a style="color:white;" href="#enggreporting">Work Done</a>
     </h4>
+    <h4>
+        <i class="fa fa-code-fork" aria-hidden="true"></i>
 
+        <a style="color:white;"  onclick="showhideactivitylog()" href="#activitylog">Activity Log</a>
+        <script>
+			function showhideactivitylog()
+			{	
+				$('#activitylog-div').toggle();	
+			}		
+        </script>
+        
+    </h4>
+    <h4>
+		<i class="fa fa-comments" aria-hidden="true"></i>
+        <span id='sidechatbtn' onclick="showhidechatbox()" style="color:white;cursor:pointer;" >Chats</<span>
+        <script>
+			function showhidechatbox()
+			{	
+				$('.chat-form').toggle();	
+			}		
+        </script>
+    </h4>
+    
+
+    
+    <h4>
+     	<i class="fa fa-arrow-down" aria-hidden="true"></i>
+        <a style="color:white;" href="#footer">Bottom</a>
+    </h4>  
 
 </div>
 
@@ -87,7 +124,7 @@ if (!empty ($php_warranty_date)) {
                 <tr>
                     <td>
                         <b>
-                            <?php echo CHtml::link('Edit', array('/servicecall/update', 'id' => $model->id)); ?>
+                            <?php //echo CHtml::link('Edit', array('/servicecall/update', 'id' => $model->id)); ?>
                         </b>
                     </td>
                     <td>
@@ -106,10 +143,16 @@ if (!empty ($php_warranty_date)) {
                     </td>
                     <td>
                         <?php
-                        //$mobileImgUrl = Yii::app()->request->baseUrl . '/images/mobile.png';
-                        $mobileImgUrl = Yii::app()->request->baseUrl . '/images/icons/paper_plane.png';
-                        $mobileImg = CHtml::image($mobileImgUrl, 'sendToMobile', array('width' => 35, 'height' => 35, 'title' => 'Send to Mobile'));
-                        echo CHtml::link($mobileImg, array('/gomobile/default/sendsingleservicecalltoserver', 'id' => $model->id), array('target' => '_blank'));
+                        
+                        
+                        if ($model->job_status_id<100)
+                        {
+                        	//$mobileImgUrl = Yii::app()->request->baseUrl . '/images/mobile.png';
+                        	$mobileImgUrl = Yii::app()->request->baseUrl . '/images/icons/paper_plane.png';
+                        	$mobileImg = CHtml::image($mobileImgUrl, 'sendToMobile', array('width' => 35, 'height' => 35, 'title' => 'Send to Mobile'));
+                        	echo CHtml::link($mobileImg, array('/gomobile/default/sendsingleservicecalltoserver', 'id' => $model->id), array('target' => '_blank'));
+                        }
+                        
                         ?>
                     </td>
                 </tr>
@@ -249,11 +292,9 @@ if (!empty ($php_warranty_date)) {
                                 ");
                 ?>
 
-                <table>
-                    <tr>
-                        <td>
-                            <div class="left">
-                                <?php $updatecomments = "<h4 style='color: white;' ><i class='fa fa-plus-square-o' ></i> Comments</h4>"; ?>
+                 
+                            <h4>
+                                <?php $updatecomments = "<span style='color: white;' ><i class='fa fa-plus-square-o' ></i> Comments</span>"; ?>
 
                                 <?php
                                 echo CHtml::link($updatecomments,
@@ -261,17 +302,12 @@ if (!empty ($php_warranty_date)) {
                                         'onclick' => '$("#update-comments-dialog").dialog("open"); return false;',
                                     ));
                                 ?>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="right">
-                                <?php $commentstext = "<h4 style='color: white;' id='activilitylogdivbutton'> <i class='fa fa-eye fa-1x'></i></h4>"; ?>
-                                <?php echo CHtml::link($commentstext, '#', array('id' => 'comments-button')); ?>
-
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                                <div class="right">
+									<?php $commentstext = "<span style='color: white;' id='activilitylogdivbutton'> <i class='fa fa-toggle-on'></i></span>"; ?>
+									<?php echo CHtml::link($commentstext, '#', array('id' => 'comments-button')); ?>
+                            	</div>
+                            </h4>
+                         
             </div>
 
             <div class="customerdatabox">
@@ -313,8 +349,9 @@ if (!empty ($php_warranty_date)) {
     <tr>
         <td colspan="2">
             <div class="customerheadingbox contentbox" id="customerbox">
-                <?php
-                $updatecustomertext = "<h4 style='color: white;'><i class='fa fa-pencil-square-o'></i> Customer</h4>";
+                <?php 
+				$updatecustomertext = "<h4 style='color: white;'><i class='fa fa-users'></i>&nbsp;&nbsp;Customer <div style='float:right'><i class='fa fa-pencil-square-o'></i></div></h4>";
+
                 echo CHtml::link($updatecustomertext,
                     '#', array(
                         'onclick' => '$("#update-customer-dialog").dialog("open"); return false;',
@@ -346,14 +383,14 @@ if (!empty ($php_warranty_date)) {
                     </tr>
                     <tr>
                         <td>
-                            <?php echo $model->customer->title . ' ' . $model->customer->fullname; ?>
-                            <br>
-                            <div class="address_contact">
+                            <h4><?php echo $model->customer->title . ' ' . $model->customer->fullname; ?></h4>
+                             
+                            <div>
                                 <?php
                                 echo Setup::model()->formataddressinhtml($model->customer->address_line_1, $model->customer->address_line_2, $model->customer->address_line_3, $model->customer->town, $model->customer->postcode);
                                 ?>
                             </div>
-                            <br>
+                             <br>
                             <table>
                                 <tr>
                                     <td><span
@@ -397,18 +434,13 @@ if (!empty ($php_warranty_date)) {
 
 
                             <?php
-
-                            Yii::app()->clientScript->registerScript('search', "
-                                        $('#customer-comments-button').click(function(){
-	                                    $('#customer-comments-div').toggle();
-	                                    return false;
-                                        });
-                                ");
-                            ?>
-                            <?php echo CHtml::link(' Notes ', '#', array('id' => 'customer-comments-button', 'class' => 'fa fa-eye fa-1x')); ?>
-                            <div id="customer-comments-div" style="display:block">
+    							echo CHtml::link('<h4><i class="fa fa-sticky-note-o" title="Product Notes" aria-hidden="true"></i></h4>',
+										'#', array(
+											'onclick' => '$("#update-customer-dialog").dialog("open"); return false;',
+										));
+    							?>
                                 <?php echo Setup::model()->printjsonnotesorcommentsinhtml($model->customer->notes); ?>
-                            </div><!-- Customer comments-div -->
+                          
 
 
                         </td>
@@ -429,7 +461,8 @@ if (!empty ($php_warranty_date)) {
             <div class="productheadingbox contentbox" id="productbox">
 
                 <?php
-                $updateproducttext = "<h4 style='color: white;'><i class='fa fa-pencil-square-o'></i> Product</h4>";
+                $updateproducttext = "<h4 style='color: white;'><i class='fa fa-archive'></i>&nbsp;&nbsp;Product <div style='float:right'><i class='fa fa-pencil-square-o'></i></div></h4>";
+
                 echo CHtml::link($updateproducttext,
                     '#', array(
                         'onclick' => '$("#update-product-dialog").dialog("open"); return false;',
@@ -547,18 +580,17 @@ if (!empty ($php_warranty_date)) {
                     <tr>
                         <td colspan='2'>
                             <div>
-                                <?php
-                                Yii::app()->clientScript->registerScript('product-notes-div-script', "
-													$('#product-notes-button').click(function(){
-													$('#product-notes-div').toggle();
-													return false;
-													});
-											");
-                                ?>
-                                <?php echo CHtml::link('Notes', '#', array('id' => 'product-notes-button', 'class' => 'fa fa-eye fa-1x')); ?>
-                                <div id="product-notes-div" style="display:block">
-                                    <?php echo Setup::model()->printjsonnotesorcommentsinhtml($productModel->notes); ?>
-                                </div><!-- comments-form -->
+    							<?php
+    							echo CHtml::link('<h4><i class="fa fa-sticky-note-o" title="Product Notes" aria-hidden="true"></i></h4>',
+										'#', array(
+											'onclick' => '$("#update-product-dialog").dialog("open"); return false;',
+										));
+    							?>
+    
+                                
+	
+                                <?php echo Setup::model()->printjsonnotesorcommentsinhtml($productModel->notes); ?>
+                                
                             </div>
                         </td>
                     </tr>
@@ -570,15 +602,9 @@ if (!empty ($php_warranty_date)) {
     <!-- Previous Servicecalls Start-->
     <tr>
         <td colspan="2">
-            <div class="customerheadingbox contentbox">
-                <table style="width: 100%">
-                    <tr>
-                        <th style="width: 50%"></th>
-                        <th style="width: 50%"></th>
-                    </tr>
-                    <tr>
-                        <td><h4><i class="fa fa-history"></i> Previous Services</h4></td>
-                        <td class="right">
+            <div class="customerheadingbox contentbox" id='previousservicecalls'>
+                	
+                         
                             <?php
 
                             Yii::app()->clientScript->registerScript('prevserivicecalls', "
@@ -589,11 +615,11 @@ if (!empty ($php_warranty_date)) {
                                 ");
 
                             ?>
-                            <?php $prevserviceallastitle = "<h4 style='color: white;'> <i class='fa fa-eye fa-1x'></i> <h4>"; ?>
-                            <?php echo CHtml::link($prevserviceallastitle, '#', array('id' => 'previous-servicecalls-button')); ?>
-                        </td>
-                    </tr>
-                </table>
+                            <?php $prevserviceallastitle = "<h4 style='color: white;'><i class='fa fa-history'></i>&nbsp;&nbsp; Previous Services <div style='color: white; float:right;'><i class='fa fa-toggle-on'></i> </div></h4>"; ?>
+                            <?php echo CHtml::link($prevserviceallastitle, '#', array('id' => 'previous-servicecalls-button', 'style'=>'color:white;')); ?>
+                        
+                        
+                        
             </div>
             <div class="customerdatabox">
                 <div id="previous-servicecalls-div" style="display:block">
@@ -684,25 +710,30 @@ if (!empty ($php_warranty_date)) {
         <td colspan="2">
             <div class="serviceheadingbox contentbox" id="service-details">
 
-                <table>
-                    <tr>
-                        <td>
-
+               
 
                             <?php
-                            $updateproducttext = "<h4 style='color: white;'><i class='fa fa-pencil-square-o'></i> Service Details</h4>";
+                            $updateproducttext = "<h4 style='color: white;'><i class='fa fa-wrench'></i>&nbsp;&nbsp;Service Details<div style='float:right'><i class='fa fa-pencil-square-o'></i></div></h4>";
                             echo CHtml::link($updateproducttext,
                                 '#', array(
                                     'onclick' => '$("#update-servicelcall-dialog").dialog("open"); return false;',
                                 ));
                             ?>
                             <?php
+                            
+                            if (isset($_GET['openservicedialog']))
+                            	$autoopenservice=true; 
+                            else
+                            	$autoopenservice=false;
+                            
+                            
+                            
                             $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
                                 'id' => 'update-servicelcall-dialog',
                                 // additional javascript options for the dialog plugin
                                 'options' => array(
                                     'title' => 'Update Servicecall',
-                                    'autoOpen' => false,
+                                    'autoOpen' => $autoopenservice,
                                     'resizable' => false,
                                     'modal' => 'true',
                                     'width' => '60%',
@@ -713,14 +744,7 @@ if (!empty ($php_warranty_date)) {
                             // the link that may open the dialog
                             ?>
 
-                        </td>
-                        <td><h4 style='color: white;'>
-                                <?php echo $model->getAttributeLabel('fault_date'); ?>
-                                : <?php echo Setup::model()->formatdate($model->fault_date); ?>
-                            </h4>
-                        </td>
-                    </tr>
-                </table>
+                         
             </div>
 
 
@@ -879,39 +903,49 @@ if (!empty ($php_warranty_date)) {
     <tr>
         <td colspan="2">
             <div class="sparesheadingbox contentbox" id="sparesbox">
-                <?php
+		 	<h4 style='color: white;'>
+					  <?php
+						$updateproducttext = "<span style='color: white;'><i class='fa fa-cogs'></i>&nbsp;&nbsp;Spares</span>";
+						echo CHtml::link($updateproducttext,
+							'#', array(
+								'onclick' => '$("#add-spares-dialog").dialog("open"); return false;',
+							));
+						?>
+						<?php
+						$this->beginWidget('zii.widgets.jui.CJuiDialog', array(
+							'id' => 'add-spares-dialog',
+							// additional javascript options for the dialog plugin
+							'options' => array(
+								'title' => 'Add Spares',
+								'autoOpen' => false,
+								'resizable' => false,
+								'modal' => 'true',
+								'width' => '30%',
+							),
+						));
 
-                $updateproducttext = "<h4 style='color: white;'><i class='fa fa-cogs'></i> Spares</h4>";
-                echo CHtml::link($updateproducttext,
-                    '#', array(
-                        'onclick' => '$("#add-spares-dialog").dialog("open"); return false;',
-                    ));
-                ?>
-                <?php
-                $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
-                    'id' => 'add-spares-dialog',
-                    // additional javascript options for the dialog plugin
-                    'options' => array(
-                        'title' => 'Add Spares',
-                        'autoOpen' => false,
-                        'resizable' => false,
-                        'modal' => 'true',
-                        'width' => '30%',
-                    ),
-                ));
-
-                $this->renderPartial('/sparesUsed/addSpares', array('service_id' => $model->id));
-                $this->endWidget('zii.widgets.jui.CJuiDialog');
-                // the link that may open the dialog
-                ?>
-                <?php
-
-                $printspares='<i style="color: white" class="fa fa-print fa-2x" aria-hidden="true"></i>';
-
-                echo CHtml::link($printspares,array('sparesUsed/GenerateSparesOrderFormPdf', 'service_id'=>$model->id), array('target'=>'_blank'));
-                ?>
-
+						$this->renderPartial('/sparesUsed/addSpares', array('service_id' => $model->id));
+						$this->endWidget('zii.widgets.jui.CJuiDialog');
+						// the link that may open the dialog
+						?>
+					<div class="right">
+                	<?php
+					    $printspares='<i title="Print Spares Order" style="color: white" class="fa fa-print" aria-hidden="true"></i>';
+		                echo CHtml::link($printspares,array('sparesUsed/GenerateSparesOrderFormPdf', 'service_id'=>$model->id), array('target'=>'_blank'));
+                	?>
+                	&nbsp;&nbsp;&nbsp;
+			        <?php
+					    $addsparestext = "<span style='color: white;'><i class='fa fa-plus-square-o'></i></span>";
+						echo CHtml::link($addsparestext,
+							'#', array(
+								'onclick' => '$("#add-spares-dialog").dialog("open"); return false;',
+							));
+                	?>
+                	
+                	</div>
+  				</h4>
             </div>
+            
             <div class="sparesrbox contentbox">
 
 
@@ -983,8 +1017,17 @@ if (!empty ($php_warranty_date)) {
                                     <?php echo CHtml::link('<i title="Edit" class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('sparesUsed/updateSpares', 'spares_id' => $data->id, 'servicecall_id' => $model->id)); ?>
 
                                 </td>
-
                             </tr>
+                            <tr>
+                            	<td colspan='10'>
+                            	<small>
+		                           	<i title="Parts specific Notes" class="fa fa-sticky-note-o" aria-hidden="true"></i>
+                            		<?php echo $data->notes; ?>
+                            	</small>
+                            	<br>
+                            	</td>
+                            </tr>
+
                         <?php }//end of foreach of spares()?>
 
 
@@ -1002,9 +1045,17 @@ if (!empty ($php_warranty_date)) {
 
 
                 <div>
-                    <span class="datacontenttitle"><?php echo $model->getAttributeLabel('spares_notes'); ?></span>
                     <br>
-                    <?php echo $model->spares_notes; ?>
+                  	 	
+                  	 	<?php
+                  	 	echo CHtml::link('<i class="fa fa-sticky-note-o" aria-hidden="true"></i>',
+							'#', array(
+								'onclick' => '$("#update-servicelcall-dialog").dialog("open"); return false;',
+							));
+                  	 	?>
+                     	<?php echo $model->spares_notes; ?>
+                   
+
                 </div>
             </div><!-- end of customerdatabox-->
         </td>
@@ -1020,8 +1071,9 @@ if (!empty ($php_warranty_date)) {
 
                 <?php
 
+ 
+                $coststext = "<h4 style='color: white;'><i class='fa fa-money'></i>&nbsp;&nbsp;Costs <div style='float:right'><i class='fa fa-pencil-square-o'></i></div></h4>";
 
-                $coststext = "<h4 style='color: white;'><i class='fa fa-money'></i> Costs</h4>";
                 echo CHtml::link($coststext,
                     '#', array(
                         'onclick' => '$("#update-servicelcall-dialog").dialog("open"); return false;',
@@ -1077,10 +1129,22 @@ if (!empty ($php_warranty_date)) {
     <!-- GO mobible View-->
     <tr>
         <td colspan="2">
-            <div class="customerheadingbox" id="enggreporting">
-                <h4>Reported By Engineer </h4>
+            <div class="customerheadingbox contentbox" id="enggreporting">
+				<?php
+					Yii::app()->clientScript->registerScript('workdoneboxgtext-div', "
+							$('#workdonebox-button').click(function(){
+							$('#workdonebox-div').toggle();
+							return false;
+							});
+							");
+				?>
+
+				<?php $workdoneboxgtext = "<h4 style='color: white;' id='workdonebox'> <i class='fa fa-briefcase'></i>&nbsp;&nbsp;Reported By Engineer <div style='float:right'> <i class='fa fa-toggle-on'></i></div><h4>"; ?>
+				<?php echo CHtml::link($workdoneboxgtext, '#', array('id' => 'workdonebox-button')); ?>
+			 
             </div>
 
+			<div id="workdonebox-div">
             <?php
             ///Loading view from Go Mobile
             $gmserviceid = Gmservicecalls::model()->getgomobileidbyservicecallid($service_id);
@@ -1089,6 +1153,8 @@ if (!empty ($php_warranty_date)) {
             else
                 echo "<div class='alert'><h4>No Work has been reported by Engineer yet</h4></div>"
             ?>
+            </div>
+            
         </td>
     </tr>
 
@@ -1099,14 +1165,7 @@ if (!empty ($php_warranty_date)) {
     <tr>
         <td colspan="2">
             <div class="customerheadingbox contentbox">
-                <table style="width: 100%">
-                    <tr>
-                        <th style="width: 50%"></th>
-                        <th style="width: 50%"></th>
-                    </tr>
-                    <tr>
-                        <td><h4>Activity Log</h4></td>
-                        <td class="right">
+           
                             <?php
 
                             Yii::app()->clientScript->registerScript('activitylog-div', "
@@ -1118,20 +1177,16 @@ if (!empty ($php_warranty_date)) {
                             ?>
 
 
-                            <?php $activitylogtext = "<h4 style='color: white;' id='activilitylogdivbutton'> <i class='fa fa-eye fa-1x'></i> <h4>"; ?>
+                            <?php $activitylogtext = "<h4 style='color: white;' id='activilitylogdivbutton'><i class='fa fa-code-fork'></i>&nbsp;&nbsp;Activity Log <div style='float:right;'><i class='fa fa-toggle-on'></i></div> <h4>"; ?>
                             <?php echo CHtml::link($activitylogtext, '#', array('id' => 'activitylog-button')); ?>
 
-                        </td>
-                    </tr>
-                </table>
-
+                 
             </div>
-            <div class="customerdatabox">
+            <div class="customerdatabox" id="activitylog">
                 <div id="activitylog-div" style="display:none">
                     <?php $activity_array = json_decode($model->activity_log, true); ?>
                     <?php if (count($activity_array) > 0): ?>
-                        <?php $activity_array = array_reverse($activity_array, true); ?>
-
+                         
                         <table>
                             <tr>
                                 <th><span class="datacontenttitle">Activity Date</span></th>

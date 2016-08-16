@@ -1031,14 +1031,16 @@ hr.space {
     height: 300px;
     overflow-x: hidden;
     margin: 10px;
+    background: white;
+    border-radius: 10px;
 
 }
 #chat_window
 {
     width: 325px;
-    height: 530px;
+    height: 500px;
     background: whitesmoke;
-    bottom: 0em;
+    bottom: 1px;
     right: 2em;
     position: fixed;
     padding: 25px;

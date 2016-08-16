@@ -158,7 +158,7 @@ class Servicecall extends CActiveRecord
             'work_summary' => 'Work Summary',
             'engg_first_visit_date' => 'Engineer First Visit Date',
             'engg_claim_returned_date' => 'Engineer Claim Submitted Date',
-            'spares_notes' => 'Notes :)',
+            'spares_notes' => 'Spares Notes',
 
         );
     }

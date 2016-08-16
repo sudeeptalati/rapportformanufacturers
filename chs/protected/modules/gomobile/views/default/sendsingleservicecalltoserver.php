@@ -272,6 +272,7 @@ Please wait for <span id="countdown" class="timer"></span> seconds. If window is
                     alert("Successfully sent");
                     console.log(data);
                     window.close();
+                    refreshParent();
                 },
                 error: function (xhr, desc, err) {
                     console.log(xhr);
@@ -280,5 +281,10 @@ Please wait for <span id="countdown" class="timer"></span> seconds. If window is
             }); // end ajax call
         }///end of setServicecallsStatus(servicecalls)
     }//end of if (servicecalls_json.unsent_servicecalls.length > 0)
+
+
+    function refreshParent() {
+        window.opener.location.reload();
+    }
 
 </script>

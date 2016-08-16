@@ -495,7 +495,7 @@ $mpdf->Output($filename,'I');
 				//$this->redirect(array('servicecall/view', 'id' => $servicecall_id, 'error_msg='=>$error_msg));
 				$this->redirect(array('servicecall/view&id='.$servicecall_id.'&error_msg='.$error_msg.'#productbox'));
 			}
-
+			
 		}
 
 	}////end of public function addcommnetsinservicecall()
@@ -858,18 +858,23 @@ WHERE     customer.postcode LIKE 'gl50 4bd'
 
 			$updated_engineer_id=$_POST['Servicecall']['engineer_id'];
 			$id=$_POST['Servicecall']['id'];
+
+			$servicecallmodel=$this->loadModel($id);
+			$oldengineercompanyname=$servicecallmodel->engineer->company;
+			
+			
 			$redirect_url=$_POST['Servicecall']['successfulredirectto'];
 			$r=Servicecall::model()->updateengineerbyservicecallid($id,$updated_engineer_id);
 			////Update engineer by PK
 			if ($r==2){
 				//Whenever the engg is changed, the remote chat is transferred to comments and cleared
-				$clearchat=$this->clearchathistory($id);
+				$clearchat=$this->clearchathistory($id, $oldengineercompanyname);
 				//redirect
 
 				//$this->redirect(array($redirect_url));
 				if ($clearchat==true)
 				{
-					$this->redirect(array('servicecall/view&id='.$id));
+					$this->redirect(array('servicecall/view','id'=>$id));
 
 				}else
 				{
@@ -1174,7 +1179,7 @@ WHERE     customer.postcode LIKE 'gl50 4bd'
 	}//end of ChangeEngineerOnly.
 
 
-	public function clearchathistory($servicecall_id)
+	public function clearchathistory($servicecall_id, $oldenggname)
 	{
 		$systemmsg= "Clear Chat history is called servicecall_id".$servicecall_id;
 		$error_msg='';
@@ -1193,7 +1198,7 @@ WHERE     customer.postcode LIKE 'gl50 4bd'
 			$servicecallmodel=Servicecall::model()->findByPk($servicecall_id);
 
 			$systemmsg.="<br>fault_date ".$servicecallmodel->fault_date;
-			$chats="<h5>Engineer Changed from ".$servicecallmodel->engineer->company."</h5><b>Previous Chats:</b><br>".$chats;
+			$chats="<h5>Engineer Changed from ".$oldenggname."</h5><b>Previous Chats:</b><br>".$chats;
 			$comments= $setupmodel->updatenotesorcomments($chats, $servicecallmodel, 'comments');
 
 

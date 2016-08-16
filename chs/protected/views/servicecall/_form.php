@@ -1,3 +1,5 @@
+
+
  
 <!-- ********  CODE FOR POSTCODE SET-UP ***************** -->
 
@@ -111,6 +113,7 @@ function PostcodeAnywhere_Interactive_RetrieveByPostcodeAndBuilding_v1_10End(res
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'servicecall-form',
+ 
 		'enableAjaxValidation'=>true,
 		'clientOptions'=>array(
 				'validateOnSubmit'=>true,
@@ -149,6 +152,22 @@ function PostcodeAnywhere_Interactive_RetrieveByPostcodeAndBuilding_v1_10End(res
 ?>
 
 <?php
+
+///Presets
+if(isset($_GET['postcode']))
+{
+	$customerModel->postcode=$_GET['postcode'];
+}
+
+if(empty($productModel->contract_id))
+ $productModel->contract_id= '1000001';
+ if(empty($productModel->warranty_for_months))
+ $productModel->warranty_for_months= '24';
+
+
+?>
+
+<?php
 	//echo "<hr>In servicecall form";
 	
 	$calling_code = '';
@@ -159,6 +178,8 @@ function PostcodeAnywhere_Interactive_RetrieveByPostcodeAndBuilding_v1_10End(res
 	$calling_code = $setupModel->countryCodes->calling_code;
 	$country_id = $setupModel->country_id;
 	//echo "<hr>";
+	
+	
 
 
 ?>
@@ -299,12 +320,15 @@ function PostcodeAnywhere_Interactive_RetrieveByPostcodeAndBuilding_v1_10End(res
 				<?php echo $form->textField($customerModel,'postcode'); ?>
 				<?php echo $form->error($customerModel,'postcode'); ?>
 				
-								 <span  class="fa fa-search fa-2x" type=button value="Find" 
+					<button  class="info" type=button value="Find" 
   						 onclick="Javascript: PostcodeAnywhere_Interactive_RetrieveByPostcodeAndBuilding_v1_10Begin
     					  ('<?php echo $postcodeanwhere_license_key; ?>',
       							 (document.getElementById('Customer_postcode').value),
       								 ''
-      						)"> </span>
+      						)">
+      						<i class="fa fa-globe fa-2x" aria-hidden="true"></i>
+      						<i class="fa fa-search fa-2x" aria-hidden="true"></i>
+ 					</button>
       						 
 			</td>
 	</tr>
@@ -436,7 +460,7 @@ function PostcodeAnywhere_Interactive_RetrieveByPostcodeAndBuilding_v1_10End(res
 	
 	<tr>
 		<td>
-			<?php echo $form->labelEx($productModel,'brand_id'); ?><small><b><a href="index.php?r=brand/admin"  target="_blank">Click here to acivate More Brands</a> </b></small>
+			<?php echo $form->labelEx($productModel,'brand_id'); ?>
 			<?php echo CHtml::activeDropDownList($productModel, 'brand_id', $productModel->getAllBrands());?>
 			<?php echo $form->error($productModel,'brand_id'); ?>
 		</td>
@@ -504,24 +528,8 @@ function PostcodeAnywhere_Interactive_RetrieveByPostcodeAndBuilding_v1_10End(res
 		</td>
 		<td>			
 			<?php echo $form->labelEx($productModel,'warranty_date'); ?>
-			<?php 
-				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-				    'name'=>CHtml::activeName($productModel, 'warranty_date'),
-					'model'=>$productModel,
-	        		'value' => $productModel->attributes['warranty_date'],
-				    // additional javascript options for the date picker plugin
-				    'options'=>array(
-				        'showAnim'=>'fold',
-						'dateFormat' => 'dd-mm-yy',
-						'onSelect'=> 'js:function(selectedDate) {console.log("Hiiiii "+selectedDate);document.getElementById("Product_purchase_date").value=selectedDate}',
-
-				    ),
-				    'htmlOptions'=>array(
-				        'style'=>'height:20px;'
-				    ),
-				));	
-			?>
-			<?php //echo $form->textField($productModel,'warranty_date'); ?>
+			<?php echo $form->textField($productModel,'warranty_date', array('readonly'=>'readonly')); ?>
+            				
 			<?php echo $form->error($productModel,'warranty_date'); ?>
 		</td>
 		<td>
@@ -571,22 +579,8 @@ function PostcodeAnywhere_Interactive_RetrieveByPostcodeAndBuilding_v1_10End(res
 		</td>
 		<td>
 				<?php echo $form->labelEx($productModel,'purchase_date'); ?>
-				<?php 
-					$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-					    'name'=>CHtml::activeName($productModel, 'purchase_date'),
-						'model'=>$productModel,
-		        		'value' => $productModel->attributes['purchase_date'],
-					    // additional javascript options for the date picker plugin
-					    'options'=>array(
-					        'showAnim'=>'fold',
-							'dateFormat' => 'dd-mm-yy',
-					    ),
-					    'htmlOptions'=>array(
-					        'style'=>'height:20px;'
-					    ),
-					));
-				?>
-				<?php //echo $form->textField($productModel,'purchase_date'); ?>
+				<?php echo $form->textField($productModel,'purchase_date', array('readonly'=>'readonly')); ?>
+            				
 				<?php echo $form->error($productModel,'purchase_date'); ?>
 		</td>
 		
@@ -658,4 +652,29 @@ function PostcodeAnywhere_Interactive_RetrieveByPostcodeAndBuilding_v1_10End(res
 </div><!-- form -->
 
  
+<script>
 
+    var Product_purchase_date = new Pikaday(
+        {
+            numberOfMonths: 3,
+            field: document.getElementById('Product_purchase_date'),
+
+        });
+    
+    var Product_warranty_date = new Pikaday(
+        {
+            numberOfMonths: 3,
+            field: document.getElementById('Product_warranty_date'),
+             onSelect: function(date) {
+      			  copywarrantydatetopurchasedate();
+    		}
+
+        });
+    
+	function copywarrantydatetopurchasedate()
+	{
+		document.getElementById('Product_purchase_date').value=document.getElementById('Product_warranty_date').value;
+	}////end of function copywarrantydatetopurchasedate()
+	
+        
+</script>

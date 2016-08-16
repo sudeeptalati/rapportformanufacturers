@@ -25,66 +25,30 @@
 <?php $serviecallmodel=Servicecall::model()->findByPk($servicecall_id); ?>
 
 
-<?php echo $form->labelEx($serviecallmodel, 'fault_description'); ?>
-<?php echo $form->textArea($serviecallmodel, 'fault_description', array('style' => 'width:600px;height:100px;')); ?>
-<?php echo $form->error($serviecallmodel, 'fault_description'); ?>
-
-
 <table>
     <tr>
         <td>
-            <!--
-            <?php echo $form->labelEx($serviecallmodel, 'contract_id'); ?>
-            <?php echo CHtml::activeDropDownList($serviecallmodel, 'contract_id', $serviecallmodel->getAllContract()); ?>
-            <?php echo $form->error($serviecallmodel, 'contract_id'); ?>
-            -->
+			<?php echo $form->labelEx($serviecallmodel, 'fault_description'); ?>
+			<?php echo $form->textArea($serviecallmodel, 'fault_description', array('style' => 'width:600px;height:100px;')); ?>
+			<?php echo $form->error($serviecallmodel, 'fault_description'); ?>
 
+			<?php echo $form->labelEx($serviecallmodel, 'work_carried_out'); ?>
+			<?php echo $form->textArea($serviecallmodel, 'work_carried_out', array('style' => 'width:600px;height:100px;')); ?>
+			<?php echo $form->error($serviecallmodel, 'work_carried_out'); ?>
+			
+			
 
-            <?php echo $form->labelEx($serviecallmodel, 'fault_code'); ?>
-            <?php echo $form->textField($serviecallmodel, 'fault_code'); ?>
-            <?php echo $form->error($serviecallmodel, 'fault_code'); ?>
+			
 
-            <?php echo $form->labelEx($serviecallmodel, 'work_carried_out'); ?>
-            <?php echo $form->textArea($serviecallmodel, 'work_carried_out', array('rows' => 4, 'cols' => '30')); ?>
-            <?php echo $form->error($serviecallmodel, 'work_carried_out'); ?>
-
-
-            <?php echo $form->labelEx($serviecallmodel, 'work_summary'); ?>
-            <?php //echo $form->textField($serviecallmodel,'work_summary',array('rows'=>6, 'cols'=>50)); ?>
-
-            <?php
-            $works_array = array();
-            array_push($works_array, '');
-            array_push($works_array, 'RETURNED WITH ENGINEER VISIT');
-            array_push($works_array, 'RETURNED WITHOUT ENGINEER VISIT');
-            array_push($works_array, 'REPAIRED');
-            array_push($works_array, 'CALL AVOIDANCE ENGINEER');
-            array_push($works_array, 'CANCELLED');
-            array_push($works_array, 'SPARES ONLY');
-            array_push($works_array, 'CALL AVOIDANCE CC');
-            array_push($works_array, 'CUSTOMER CHARGED');
-            array_push($works_array, 'NOT KNOWN');
-            ?>
-            <?php echo $form->dropDownList($serviecallmodel, 'work_summary', array_combine($works_array, $works_array)); ?>
-
-            <hr>
-            <?php $serviecallmodel->comments = '';///so that commenst are not messed up as they are managed sperately?>
-            <?php echo $form->labelEx($serviecallmodel, 'comments'); ?>
-            <?php echo $form->textArea($serviecallmodel, 'comments', array('rows' => 4, 'cols' => '30')); ?>
-            <?php echo $form->error($serviecallmodel, 'comments'); ?>
-
-            <?php echo $form->labelEx($serviecallmodel, 'notes'); ?>
-            <?php echo $form->textArea($serviecallmodel, 'notes', array('rows' => 8, 'cols' => 120)); ?>
-            <?php echo $form->error($serviecallmodel, 'notes'); ?>
-        </td>
-        <td>
+		</td>
+	<td>
 
             <!-- ***** Fault  Date**** -->
             <?php if (!empty($serviecallmodel->fault_date)) {
                     $serviecallmodel->fault_date = date('j-M-Y', $serviecallmodel->fault_date);
             }?>
             <?php echo $form->labelEx($serviecallmodel, 'fault_date'); ?>
-            <?php echo $form->textField($serviecallmodel,'fault_date', array('readonly'=>'readonly')); ?>
+            <?php echo $form->textField($serviecallmodel,'fault_date', array('readonly'=>'readonly', 'style'=>'cursor: pointer;background-color: #ffffff;')); ?>
             <?php echo $form->error($serviecallmodel, 'fault_date'); ?>
 
 
@@ -93,7 +57,7 @@
                 $serviecallmodel->engg_first_visit_date = date('j-M-Y', $serviecallmodel->engg_first_visit_date);
             }?>
             <?php echo $form->labelEx($serviecallmodel, 'engg_first_visit_date'); ?>
-            <?php echo $form->textField($serviecallmodel,'engg_first_visit_date', array('readonly'=>'readonly')); ?>
+            <?php echo $form->textField($serviecallmodel,'engg_first_visit_date', array('readonly'=>'readonly', 'style'=>'cursor: pointer;background-color: #ffffff;')); ?>
             <?php echo $form->error($serviecallmodel, 'engg_first_visit_date'); ?>
 
 
@@ -102,7 +66,7 @@
                 $serviecallmodel->job_finished_date = date('j-M-Y', $serviecallmodel->job_finished_date);
             }?>
             <?php echo $form->labelEx($serviecallmodel, 'job_finished_date'); ?>
-            <?php echo $form->textField($serviecallmodel,'job_finished_date', array('readonly'=>'readonly')); ?>
+            <?php echo $form->textField($serviecallmodel,'job_finished_date', array('readonly'=>'readonly', 'style'=>'cursor: pointer;background-color: #ffffff;')); ?>
             <?php echo $form->error($serviecallmodel, 'job_finished_date'); ?>
 
             <!-- DATE of Paperwork returned - claim sheet return date -->
@@ -110,7 +74,7 @@
                 $serviecallmodel->engg_claim_returned_date = date('j-M-Y', $serviecallmodel->engg_claim_returned_date);
             }?>
             <?php echo $form->labelEx($serviecallmodel, 'engg_claim_returned_date'); ?>
-            <?php echo $form->textField($serviecallmodel,'engg_claim_returned_date', array('readonly'=>'readonly')); ?>
+            <?php echo $form->textField($serviecallmodel,'engg_claim_returned_date', array('readonly'=>'readonly', 'style'=>'cursor: pointer;background-color: #ffffff;')); ?>
             <?php echo $form->error($serviecallmodel, 'engg_claim_returned_date'); ?>
 
             <!-- Job Payment date  -->
@@ -118,23 +82,45 @@
                 $serviecallmodel->job_payment_date = date('j-M-Y', $serviecallmodel->job_payment_date);
             }?>
             <?php echo $form->labelEx($serviecallmodel, 'job_payment_date'); ?>
-            <?php echo $form->textField($serviecallmodel,'job_payment_date', array('readonly'=>'readonly')); ?>
+            <?php echo $form->textField($serviecallmodel,'job_payment_date', array('readonly'=>'readonly', 'style'=>'cursor: pointer;background-color: #ffffff;')); ?>
             <?php echo $form->error($serviecallmodel, 'job_payment_date'); ?>
 
             <!-- Job Payment date END  -->
 
-            <hr>
+			
+             
+
+
+
+        </td>
+	</tr>
+ </table>
+ <table>
+    <tr>
+        <td>
+            <!--
+            <?php echo $form->labelEx($serviecallmodel, 'contract_id'); ?>
+            <?php echo CHtml::activeDropDownList($serviecallmodel, 'contract_id', $serviecallmodel->getAllContract()); ?>
+            <?php echo $form->error($serviecallmodel, 'contract_id'); ?>
+           
+
+
+            <?php echo $form->labelEx($serviecallmodel, 'fault_code'); ?>
+            <?php echo $form->textField($serviecallmodel, 'fault_code'); ?>
+            <?php echo $form->error($serviecallmodel, 'fault_code'); ?>
+ 			-->
+ 			<hr>
 
             <i class="fa fa-money fa-2x"></i>
 
             <?php echo $form->labelEx($serviecallmodel, 'total_cost'); ?>
-            <?php echo $form->textField($serviecallmodel, 'total_cost', array('readonly'=>'readonly')); ?>
+            <?php echo $form->textField($serviecallmodel, 'total_cost', array('readonly'=>'readonly' , 'size' => '10', 'style' => 'text-align:right')); ?>
             <?php echo $form->error($serviecallmodel, 'total_cost'); ?>
 
 
 
             <?php echo $form->labelEx($serviecallmodel, 'vat_on_total'); ?>
-            <?php echo $form->textField($serviecallmodel, 'vat_on_total'); ?>
+            <?php echo $form->textField($serviecallmodel, 'vat_on_total', array('size' => '10', 'style' => 'text-align:right')); ?>
             <?php echo $form->error($serviecallmodel, 'vat_on_total'); ?>
 
 
@@ -162,17 +148,61 @@
             <?php echo $form->error($invoiceModel, 'labour_cost'); ?>
 
 
+            <?php echo $form->labelEx($serviecallmodel, 'work_summary'); ?>
+            <?php //echo $form->textField($serviecallmodel,'work_summary',array('rows'=>6, 'cols'=>50)); ?>
 
-
+            <?php
+            $works_array = array();
+            array_push($works_array, '');
+            array_push($works_array, 'RETURNED WITH ENGINEER VISIT');
+            array_push($works_array, 'RETURNED WITHOUT ENGINEER VISIT');
+            array_push($works_array, 'REPAIRED');
+            array_push($works_array, 'CALL AVOIDANCE ENGINEER');
+            array_push($works_array, 'CANCELLED');
+            array_push($works_array, 'SPARES ONLY');
+            array_push($works_array, 'CALL AVOIDANCE CC');
+            array_push($works_array, 'CUSTOMER CHARGED');
+            array_push($works_array, 'NOT KNOWN');
+            ?>
+            <?php echo $form->dropDownList($serviecallmodel, 'work_summary', array_combine($works_array, $works_array)); ?>
 
         </td>
+        <td>
+        	<hr>
+           	<?php //echo $form->labelEx($serviecallmodel, 'spares_notes'); ?> 
+			<h5><i class="fa fa-sticky-note-o" aria-hidden="true"></i>&nbsp;&nbsp;Spares Notes&nbsp;&nbsp;<i class="fa fa-cogs" aria-hidden="true"></i></h5>
+
+			<?php echo $form->textArea($serviecallmodel, 'spares_notes', array('style' => 'width:600px;height:100px;')); ?>
+			<?php echo $form->error($serviecallmodel, 'spares_notes'); ?>
+
+            <?php echo $form->labelEx($serviecallmodel, 'notes'); ?>
+            <?php echo $form->textArea($serviecallmodel, 'notes', array('style' => 'width:600px;height:100px;')); ?>
+            <?php echo $form->error($serviecallmodel, 'notes'); ?>
+            
+            
+            
+	        <?php echo $form->label($serviecallmodel,'job_status_id'); ?>
+    	    <?php echo $form->dropDownList($serviecallmodel, 'job_status_id', Jobstatus::model()->getAllPublishedListdata(), array('style' => 'width:600px;')); ?>
+    		<?php echo $form->error($serviecallmodel, 'job_status_id'); ?>
+        
+        </td>
+        
 
     </tr>
 </table>
 
-<div class="success">
 
-    <?php echo CHtml::submitButton('Save'); ?>
+
+
+
+<div class="success">
+  	<?php $serviecallmodel->comments = '';///so that commenst are not messed up as they are managed sperately?>
+
+  	<?php echo CHtml::submitButton('Save'); ?>
+
+    <?php echo $form->labelEx($serviecallmodel, 'comments'); ?>
+    <?php echo $form->textArea($serviecallmodel, 'comments', array('rows' => 4, 'cols' => '30')); ?>
+    <?php echo $form->error($serviecallmodel, 'comments'); ?>
 </div>
 <?php $this->endWidget(); ?>
 

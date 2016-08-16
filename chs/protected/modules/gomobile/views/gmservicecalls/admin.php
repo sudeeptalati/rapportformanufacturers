@@ -8,18 +8,14 @@
 $this->layout='column1';
 
 	$selected_statuses=array(
-							//'31'=>'Job Sent to Engineer',
-							'35'=>'Engineer Claim Received & Waiting for Review',
-							'37'=>'New Msg',
-							'38'=>'Msg Read',
-
-		/*
-        '32'=>'Unable to Sent to Engineer',
-        '34'=>'Engineer Claim Approved',
-        '54'=>'Claim Rejected',
-        '36'=>'Message Sent to Engineer',
-        */
-
+							'31'=>'Job Sent to Engineer', 
+							'35'=>'Engineer Claim Received & Waiting for Review', 
+							'32'=>'Unable to Sent to Engineer', 
+							'34'=>'Engineer Claim Approved', 
+							'54'=>'Claim Rejected', 
+							'36'=>'Message Sent to Engineer', 
+							'37'=>'New Message', 
+							'38'=>'Archive', 
 							//'101'=>'Invoiced - Serviced'
 							);
 
@@ -73,13 +69,18 @@ ul#menu li {
 				//'filter'=>true,
 				'header' => 'Service Ref No#'
 		),
-
-		array(	'name'=>'server_status_id',
-				'value'=>'$data->servicecall->jobStatus->name',
+		
+		 
+		array(	
+				'header' => 'Servicecall Status',
+				//'name'=>'servicecall.job_status_id',
+				'value'=>'$data->servicecall->jobStatus->html_name',
 				'type'=>'raw',
-				'filter'=>false,
+				//'filter'=>false,
 				//'filter'=>JobStatus::model()->getAllPublishedListdata(),
 		),
+		
+		 
 
 		/*
 		array('name'=>'server_status_id',
@@ -111,7 +112,12 @@ ul#menu li {
 				'value'=>'$data->servicecall->engineer->company',		 
 			),
 			
-		
+		array(	'header' => 'ReportedDate',
+            	//'name'=>'fault_reported_date',
+				 'value'=>'$data->servicecall->fault_date==null ? "":date("d-M-Y",$data->servicecall->fault_date)', 
+			),
+			
+			
 		array(	'header' => 'JobPaymentDate',
             	//'name'=>'customer_address',
 				 'value'=>'$data->servicecall->job_payment_date==null ? "":date("d-M-Y",$data->servicecall->job_payment_date)', 
@@ -119,10 +125,7 @@ ul#menu li {
 		//array('name'=>'created', 'value'=>'$data->created==null ? "":date("d-M-Y",$data->created)', 'filter'=>false),
 
 		 
-		array(	'header' => 'ReportedDate',
-            	//'name'=>'fault_reported_date',
-				 'value'=>'$data->servicecall->fault_date==null ? "":date("d-M-Y",$data->servicecall->fault_date)', 
-			),
+
 		array('header' => 'LastChanged', 'name'=>'modified', 'value'=>'$data->modified==null ? "":date("d-M-Y H:i:s l",$data->modified)', 'filter'=>false),
 
 		array('name'=>'server_status_id',

@@ -413,11 +413,6 @@ class NotificationRules extends CActiveRecord
 			}
 
 
-			
-			
-			
-
-
             $mail->WordWrap = 50;                                 // Set word wrap to 50 characters
 			//$mail->AddAttachment('/var/tmp/file.tar.gz');         // Add attachments
 			//$mail->AddAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name

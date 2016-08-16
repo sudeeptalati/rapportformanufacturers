@@ -84,7 +84,7 @@ $csvdata='';
 //get lavbel
 $servicecall_label=Servicecall::model()->attributeLabels();
 $job_status_data = JobStatus::model()->getAllPublishedListdata();
-$engg_data = Engineer::model()->getAllCompanyNames();	
+$engg_data = Engineer::model()->getactiveengineerslist();	
 $today = date('d-M-y', time()); 
 
 

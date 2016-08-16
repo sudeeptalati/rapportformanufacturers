@@ -56,11 +56,11 @@ class GmservicecallsController extends RController
         $this->render('view', array(
             'model' => $this->loadModel($id), 'system_message' => $system_message
         ));*/
-        // $this->render('view');
+       // $this->render('view');
 
         $model=Gmservicecalls::model()->findByPk($id);
 
-        $this->redirect(array('/servicecall/view', 'id' => $model->servicecall_id));
+        $this->redirect(array('/servicecall/view&id='.$model->servicecall_id.'#enggreporting'));
 
     }
 
@@ -369,8 +369,8 @@ class GmservicecallsController extends RController
                 $msg = 'Your claim has been approved and you will be paid in month of ' . $payment_month;
 
                 $system_message .= Gmservicecalls::model()->sendmessagetoengineer($service_reference_number, $msg, $claim_status);
-
-                $this->redirect(array('/Servicecall/view', 'id' => $model->servicecall_id));
+				
+				$this->redirect(array('/servicecall/view&id='.$model->servicecall_id.'&openservicedialog=true'));
             } else
                 $system_message .= '<br>There was some problem in changing the status of recieved data' . var_dump($model->getErrors());
 
@@ -445,7 +445,8 @@ class GmservicecallsController extends RController
             // Status disabled as We don not want to change the status when message is sent to engineer
             //$claim_status = '36'; ///as 36 is the status for message sent to engineer.
 
-            $system_message .= Gmservicecalls::model()->sendmessagetoengineer($service_reference_number, $only_chat_message, $claim_status);
+
+           $system_message .= Gmservicecalls::model()->sendmessagetoengineer($service_reference_number, $only_chat_message, $claim_status);
 
             /*
             if ($model->updatestatusbygomobileid($id, $claim_status)) {
@@ -458,6 +459,7 @@ class GmservicecallsController extends RController
             }
 
             */
+
         } else { ///end of if (isset($_POST['service_ref_no']))
 
             $system_message .= 'BAD Access';
@@ -466,7 +468,6 @@ class GmservicecallsController extends RController
 
         echo $system_message;
     }///end of     public function actionSendchatmessagetoengineer()
-
 
     public function actionMarkservermessageasread()
     {
@@ -498,10 +499,7 @@ class GmservicecallsController extends RController
 
         $this->redirect(array('/Servicecall/view&id='.$servicecall_id));
 
-        Setup::model()->formatdatewithtime()
-
     }///end of public function actionMarkservermessageasread($gm_service_id)
-
 
 
     /**
