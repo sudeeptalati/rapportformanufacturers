@@ -299,8 +299,8 @@ $system_message = '';
                                 <?php echo CHtml::textField('job_payment_date', $payment_date, array('id'=>'job_payment_date','readonly'=>'readonly')); ?>
                             </td>
                             <td>
-                                <div class="datacontenttitle">Reason for Rejection</div>
-                                <?php echo CHtml::textArea('chat_message', '') ?>
+                                <div class="datacontenttitle">Reason</div>
+                                <?php echo CHtml::textArea('chat_message', '', array("style" => "width:300px; height: 100px")) ?>
                                 <div class="errorMessage" id="chat_message_error"></div>
                             </td>
                             <td>
@@ -312,11 +312,16 @@ $system_message = '';
 							<tr>
 								<td>
 									<div class="row submit">
-										<?php echo CHtml::submitButton('Approve'); ?>
+										<?php echo CHtml::submitButton('Approve',array('class'=>'btn btn-success')); ?>
 									</div>
 								</td>
 								<td>
-									<?php echo CHtml::button("Reject", array('title' => "Reject", 'onclick' => 'js:rejectthisclaim();')); ?>
+									<?php echo CHtml::button("Reject", array('title' => "Reject", 'onclick' => 'js:rejectthisclaim();', 'class'=>'btn btn-danger' )); ?>
+									&nbsp;&nbsp;&nbsp;
+									<?php echo CHtml::button("Need More Info", array('title' => "Need More Info", 'onclick' => 'js:needmoreinfothisclaim();', 'class'=>'btn btn-warning' )); ?>
+									&nbsp;&nbsp;&nbsp;
+									<?php echo CHtml::button("Cancel", array('title' => "Cancel", 'onclick' => 'js:cancelthisclaim();', 'class'=>'btn btn-info' )); ?>
+									
 								</td>
 								<td>
 								</td>
@@ -466,48 +471,89 @@ Yii::app()->clientScript->registerScript( 'chat_time', "
 
 
     function rejectthisclaim() {
-        console.log('Open Chat Window To display reason for rejection');
-
-        var chat_msg = document.getElementById("chat_message").value;
-
-        //chat_msg = chat_msg.replace(/\s+/, "")
-       	//chat_msg= chat_msg.trim();
-
-        if (chat_msg == '' || chat_msg == null) {
-            document.getElementById("chat_message").style.backgroundColor = "#FEEEEE";
-            document.getElementById("chat_message_error").innerHTML = 'Please input some reason for Rejection';
-            document.getElementById("chat_message_error").style.color = "#C00000";
-            //alert('Please specify the reason');
+		if (validatereasonbox()) {
+           	rejecturl= 'index.php?r=gomobile/gmservicecalls/rejectthisclaim';	
+            performajaxaction(rejecturl);
         }
-        else {
+    }//end of function rejectthisclaim
+    
+    
+    function needmoreinfothisclaim()
+    {
+    	if (validatereasonbox()) {
+           	moreinfo_url= 'index.php?r=gomobile/gmservicecalls/needmoreinfoonthisclaim';
+            performajaxaction(moreinfo_url);
+        }
+    }///end of function needmoreinfothisclaim
+    
+    function cancelthisclaim()
+    {
+    	if (validatereasonbox()) {
+    	
+	    	if (confirm("Are you sure you want to cancel this job and close it?") == true) {
+  
+        	   cancelthisclaim_url= 'index.php?r=gomobile/gmservicecalls/cancelthisclaim';
+    	       performajaxaction(cancelthisclaim_url);
+			  return true;
+  
+  			} else {
+			  return false;
+  			}///end of if else     	if (confirm("Are you sure you want to cancel this job. This action will close the job.") == true) {
+  
+  
+    	}//end of 	if (validatereasonbox()) {
+    
+    }///end of function needmoreinfothisclaim
+    
 
-            chat_msg;
-
-            gomobile_id = '<?php echo $model->id; ?>';
-
-
+	function performajaxaction(action_url)
+	{
+			console.log('performajaxaction '+action_url);
+			
+			gomobile_id = '<?php echo $model->id; ?>';
+			reason= document.getElementById("chat_message").value;
+            
             $.ajax({
-                url: 'index.php?r=gomobile/gmservicecalls/rejecttheclaim',
+                url: action_url,
                 type: 'post',
-                data: {'chat_msg': chat_msg, 'gomobile_id': gomobile_id},
+                data: {'chat_msg': reason, 'gomobile_id': gomobile_id},
                 success: function (data, status) {
-
                     console.log(data);
                     alert(data);
                     location.reload();
-
-
                 },
                 error: function (xhr, desc, err) {
                     console.log(xhr);
                     alert("Details: " + desc + "\nError:" + err);
                 }
             }); // end ajax call
+            
+	}
 
 
+    
+    
+    function validatereasonbox()
+    {
+        var chat_msg = document.getElementById("chat_message").value; //the reason box id is chat_message
+
+        if (chat_msg == '' || chat_msg == null) {
+            document.getElementById("chat_message").style.backgroundColor = "#FEEEEE";
+            document.getElementById("chat_message_error").innerHTML = 'Please input some reason';
+            document.getElementById("chat_message_error").style.color = "#C00000";
+            //alert('Please specify the reason');
+           return false
         }
+        else {
+        	return true;
+        }
+        
+    }//end of    function validatereasonbox()
+    
+    
 
-    }//end of function rejectthisclaim
+
+
 
     function replytothecchat() {
         console.log('Reply to this chat called');
@@ -546,6 +592,8 @@ Yii::app()->clientScript->registerScript( 'chat_time', "
         }
 
     }///end of function replytothecchat
+    
+
 
 
 </script>
@@ -594,6 +642,12 @@ Yii::app()->clientScript->registerScript( 'chat_time', "
             field: document.getElementById('job_payment_date'),
 
         });
+    
+    
+   
+var objDiv = document.getElementById("chat_text");
+objDiv.scrollTop = objDiv.scrollHeight;
+    
     
 </script>
 

@@ -20,6 +20,7 @@ if (isset($system_message))
     <?php $form = $this->beginWidget('CActiveForm', array(
         'id' => 'Emailform-form',
         'enableAjaxValidation' => true,
+        'htmlOptions' => array('enctype' => 'multipart/form-data'), // ADD THIS
         'clientOptions' => array(
             'validateOnSubmit' => true,
         ),
@@ -87,9 +88,16 @@ if (isset($system_message))
                                     'accept' => 'jpeg|jpg|gif|png|pdf|doc|docx|xls|xlsx', // useful for verifying files
                                     'duplicate' => 'Duplicate file!', // useful, i think
                                     'denied' => 'Invalid file type', // useful, i think
+                                    
                                 ));
                                 ?>
+	                        	<small>Maximum upload size</small>   		
+	                        	<?php echo ini_get('upload_max_filesize'); ?> MB
                             </td>
+                 
+ 
+
+                        	 
                         </tr>
                     </table>
 

@@ -97,6 +97,10 @@ class DefaultController extends RController
 
 			$other_attachments=array();
 			$uploaded_attachments= CUploadedFile::getInstancesByName('uploaded_attachments');
+ 
+			
+			///var_dump($uploaded_attachments);
+			 //var_dump($_FILES);
 
 			if (isset($uploaded_attachments) && count($uploaded_attachments) > 0) {
 				// go through each uploaded image
@@ -107,8 +111,8 @@ class DefaultController extends RController
 					array_push($other_attachments, $attach_this);
 				}
              }
-
-
+             
+				
 	 
 
 

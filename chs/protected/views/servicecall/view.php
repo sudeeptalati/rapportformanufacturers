@@ -254,6 +254,12 @@ if (!empty ($php_warranty_date)) {
 
             <?php if (isset($_GET['error_msg'])): ?>
                     <?php
+                    
+                    $error_msg=$_GET['error_msg'];
+					$error_msg=trim($error_msg);
+					
+					if (!empty($error_msg))
+					{
                     $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
                         'id' => 'error-dialog',
                         // additional javascript options for the dialog plugin
@@ -272,6 +278,8 @@ if (!empty ($php_warranty_date)) {
 
                     $this->endWidget('zii.widgets.jui.CJuiDialog');
                     // the link that may open the dialog
+					}///end of if (!empty($error_msg))
+
                     ?>
 
                     </div>

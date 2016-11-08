@@ -390,11 +390,9 @@ class GmservicecallsController extends RController
     }
 
 
-    public function actionRejecttheclaim()
+    public function actionRejectthisclaim()
     {
-
         $system_message = '';
-
         if (isset($_POST['gomobile_id'])) {
 
             $msg = $_POST['chat_msg'];
@@ -424,6 +422,73 @@ class GmservicecallsController extends RController
     }///end of public function actionRejecttheclaim()
 
 
+	public function actionNeedmoreinfoonthisclaim()
+	{
+		$system_message = '';
+		
+		if (isset($_POST['gomobile_id'])) {
+
+            $msg = $_POST['chat_msg'];
+            $id = $_POST['gomobile_id'];
+
+            $model = $this->loadModel($id);
+            $service_reference_number = $model->service_reference_number;
+            $claim_status = '56'; ///as 56 is the status for Pending More Info
+
+            $servicecall_id = $model->servicecall_id;
+
+            if ($model->updatestatusbygomobileid($id, $claim_status)) {
+                $system_message .= 'Job Status Changed - ';
+                $system_message .= Gmservicecalls::model()->sendmessagetoengineer($service_reference_number, $msg, $claim_status);
+
+            } else {
+                $system_message .= 'There has been some problem in this transaction. Please contact support';
+
+            }
+
+        } else { ///end of if (isset($_POST['service_ref_no']))
+
+            $system_message .= 'BAD Access';
+        }///else fo if (isset($_POST['service_ref_no']))
+        
+         echo $system_message;
+		
+	}///end of public function actionNeedmoreinfoonthisclaim()
+
+
+
+	public function actionCancelthisclaim()
+	{
+		$system_message = '';
+		
+		if (isset($_POST['gomobile_id'])) {
+
+            $msg = $_POST['chat_msg'];
+            $id = $_POST['gomobile_id'];
+
+            $model = $this->loadModel($id);
+            $service_reference_number = $model->service_reference_number;
+            $claim_status = '102'; ///as 56 is the status for Cancelling a job
+
+            $servicecall_id = $model->servicecall_id;
+
+            if ($model->updatestatusbygomobileid($id, $claim_status)) {
+                $system_message .= 'Job Status Changed - ';
+                $system_message .= Gmservicecalls::model()->sendmessagetoengineer($service_reference_number, $msg, $claim_status);
+
+            } else {
+                $system_message .= 'There has been some problem in this transaction. Please contact support';
+
+            }
+
+        } else { ///end of if (isset($_POST['service_ref_no']))
+
+            $system_message .= 'BAD Access';
+        }///else fo if (isset($_POST['service_ref_no']))
+        
+         echo $system_message;
+		
+	}///end of public function actionCancelthisclaim()
 
 
 

@@ -2,25 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="368d8bc6-fe25-4e64-947e-b56a02b356df" name="Default" comment="rapport for manufacturers">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/controllers/SparesUsedController.php" afterPath="$PROJECT_DIR$/chs/protected/controllers/SparesUsedController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/modules/gomobile/controllers/DefaultController.php" afterPath="$PROJECT_DIR$/chs/protected/modules/gomobile/controllers/DefaultController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/views/servicecall/view.php" afterPath="$PROJECT_DIR$/chs/protected/views/servicecall/view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/models/NotificationRules.php" afterPath="$PROJECT_DIR$/chs/protected/models/NotificationRules.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/modules/gomobile/views/gmservicecalls/admin.php" afterPath="$PROJECT_DIR$/chs/protected/modules/gomobile/views/gmservicecalls/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/views/sparesUsed/addSpares.php" afterPath="$PROJECT_DIR$/chs/protected/views/sparesUsed/addSpares.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/views/servicecall/existingCustomer.php" afterPath="$PROJECT_DIR$/chs/protected/views/servicecall/existingCustomer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/modules/gomobile/controllers/GmservicecallsController.php" afterPath="$PROJECT_DIR$/chs/protected/modules/gomobile/controllers/GmservicecallsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/runtime/application.log" afterPath="$PROJECT_DIR$/chs/protected/runtime/application.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/modules/gomobile/models/Gmservicecalls.php" afterPath="$PROJECT_DIR$/chs/protected/modules/gomobile/models/Gmservicecalls.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/modules/gomobile/views/gmservicecalls/view.php" afterPath="$PROJECT_DIR$/chs/protected/modules/gomobile/views/gmservicecalls/view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/controllers/ServicecallController.php" afterPath="$PROJECT_DIR$/chs/protected/controllers/ServicecallController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/data/00chs.db" afterPath="$PROJECT_DIR$/chs/protected/data/00chs.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/css/screen.css" afterPath="$PROJECT_DIR$/chs/css/screen.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/modules/gomobile/views/default/sendserviceemailtoengineer.php" afterPath="$PROJECT_DIR$/chs/protected/modules/gomobile/views/default/sendserviceemailtoengineer.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/chs/protected/views/servicecall/uploadattachments.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/data/chs.db" afterPath="$PROJECT_DIR$/chs/protected/data/chs.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/models/Setup.php" afterPath="$PROJECT_DIR$/chs/protected/models/Setup.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/models/JobStatus.php" afterPath="$PROJECT_DIR$/chs/protected/models/JobStatus.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/runtime/application.log" afterPath="$PROJECT_DIR$/chs/protected/runtime/application.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/views/servicecall/admin.php" afterPath="$PROJECT_DIR$/chs/protected/views/servicecall/admin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/views/servicecall/view.php" afterPath="$PROJECT_DIR$/chs/protected/views/servicecall/view.php" />
     </list>
     <ignored path="rapportformanufacturers.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,53 +29,67 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GmservicecallsController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/controllers/GmservicecallsController.php">
+      <file leaf-file-name="uploadattachments.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/chs/protected/views/servicecall/uploadattachments.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="501" column="0" selection-start-line="500" selection-start-column="8" selection-end-line="501" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="view.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/views/gmservicecalls/view.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="375" column="16" selection-start-line="352" selection-start-column="9" selection-end-line="375" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.35094962">
+              <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
               <folding>
-                <marker date="1471002220000" expanded="true" signature="12059:12208" placeholder="..." />
+                <element signature="e#6#94#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="screen.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/chs/css/screen.css">
+      <file leaf-file-name="view.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/chs/protected/views/servicecall/view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="1038" column="14" selection-start-line="1038" selection-start-column="14" selection-end-line="1038" selection-end-column="14" />
+            <state vertical-scroll-proportion="-42.653847">
+              <caret line="1237" column="0" selection-start-line="1237" selection-start-column="0" selection-end-line="1237" selection-end-column="0" />
+              <folding>
+                <marker date="1473174099000" expanded="true" signature="8187:8200" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="10800:10813" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="11314:11327" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="12983:12996" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="13058:13069" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="18094:18107" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="18170:18181" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="25715:25728" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="25802:25828" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="29851:29866" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="30504:30517" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="30586:30597" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="39205:39218" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="40101:40113" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="40424:40437" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="46212:46225" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="46284:46295" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="48779:48792" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="48888:48899" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="49827:49840" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="49932:49943" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="50900:50913" placeholder="..." />
+                <marker date="1473174099000" expanded="true" signature="51011:51023" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sendserviceemailtoengineer.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/views/default/sendserviceemailtoengineer.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-27.461538">
+              <caret line="90" column="34" selection-start-line="83" selection-start-column="31" selection-end-line="90" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/views/gmservicecalls/admin.php">
+      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/controllers/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Gmservicecalls.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/models/Gmservicecalls.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0137429265">
-              <caret line="11" column="30" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="30" />
+            <state vertical-scroll-proportion="-27.23077">
+              <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -137,18 +138,19 @@
         <option value="$PROJECT_DIR$/chs/protected/views/sparesUsed/addSpares.php" />
         <option value="$PROJECT_DIR$/chs/protected/controllers/ServicecallController.php" />
         <option value="$PROJECT_DIR$/chs/protected/models/Setup.php" />
-        <option value="$PROJECT_DIR$/chs/protected/views/servicecall/view.php" />
         <option value="$PROJECT_DIR$/chs/protected/models/NotificationRules.php" />
         <option value="$PROJECT_DIR$/chs/protected/modules/gomobile/views/default/sendserviceemailtoengineer.php" />
         <option value="$PROJECT_DIR$/chs/protected/modules/gomobile/models/Emailform.php" />
         <option value="$PROJECT_DIR$/chs/protected/modules/gomobile/controllers/DefaultController.php" />
         <option value="$PROJECT_DIR$/chs/protected/modules/graph/views/reports/form.php" />
         <option value="$PROJECT_DIR$/chs/protected/models/JobStatus.php" />
-        <option value="$PROJECT_DIR$/chs/protected/modules/gomobile/models/Gmservicecalls.php" />
         <option value="$PROJECT_DIR$/chs/protected/modules/gomobile/views/gmservicecalls/admin.php" />
         <option value="$PROJECT_DIR$/chs/protected/modules/gomobile/views/gmservicecalls/view.php" />
         <option value="$PROJECT_DIR$/chs/css/screen.css" />
         <option value="$PROJECT_DIR$/chs/protected/modules/gomobile/controllers/GmservicecallsController.php" />
+        <option value="$PROJECT_DIR$/chs/protected/modules/gomobile/models/Gmservicecalls.php" />
+        <option value="$PROJECT_DIR$/chs/protected/views/servicecall/view.php" />
+        <option value="$PROJECT_DIR$/chs/protected/views/servicecall/uploadattachments.php" />
       </list>
     </option>
   </component>
@@ -162,8 +164,9 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="2560" />
+    <option name="x" value="647" />
+    <option name="y" value="24" />
+    <option name="width" value="1846" />
     <option name="height" value="1381" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -191,6 +194,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -260,58 +264,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rapportformanufacturers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rapportformanufacturers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sparesUsedStatus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rapportformanufacturers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rapportformanufacturers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sparesUsed" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -449,7 +401,37 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="gmservicecalls" />
+              <option name="myItemId" value="default" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rapportformanufacturers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rapportformanufacturers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gomobile" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -483,27 +465,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rapportformanufacturers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rapportformanufacturers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -590,16 +553,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="2560" height="1381" extended-state="6" />
+    <frame x="647" y="24" width="1846" height="1381" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11595092" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23237495" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22339246" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295053" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951945" sideWeight="0.50203663" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951945" sideWeight="0.49796334" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15593705" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13359202" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951945" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -649,13 +612,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tasks.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="66" column="1" selection-start-line="66" selection-start-column="1" selection-end-line="66" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chs/protected/views/customer/_form.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -667,13 +623,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chs/protected/views/servicecall/_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.5339404">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -845,13 +794,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/views/default/sendsingleservicecalltoserver.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chs/protected/controllers/SparesUsedController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.19701986">
@@ -916,38 +858,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chs/protected/views/servicecall/view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31733334">
-          <caret line="73" column="15" selection-start-line="73" selection-start-column="15" selection-end-line="73" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/models/Emailform.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6781076">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chs/protected/models/NotificationRules.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.07079646">
           <caret line="378" column="12" selection-start-line="378" selection-start-column="12" selection-end-line="378" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/views/default/sendserviceemailtoengineer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.082269505">
-          <caret line="62" column="21" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/controllers/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5722714">
-          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -975,7 +889,7 @@
     <entry file="file://$PROJECT_DIR$/chs/css/screen.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="1038" column="14" selection-start-line="1038" selection-start-column="14" selection-end-line="1038" selection-end-column="14" />
+          <caret line="1040" column="14" selection-start-line="1040" selection-start-column="14" selection-end-line="1040" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -983,34 +897,117 @@
     <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/views/gmservicecalls/admin.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
-          <folding />
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <marker date="1471348323000" expanded="true" signature="170:178" placeholder="..." />
+            <marker date="1471348323000" expanded="true" signature="2972:3649" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/views/gmservicecalls/view.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="375" column="16" selection-start-line="352" selection-start-column="9" selection-end-line="375" selection-end-column="16" />
-          <folding>
-            <marker date="1471002220000" expanded="true" signature="12059:12208" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/controllers/GmservicecallsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="501" column="0" selection-start-line="500" selection-start-column="8" selection-end-line="501" selection-end-column="0" />
+          <caret line="396" column="16" selection-start-line="396" selection-start-column="16" selection-end-line="396" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/models/Gmservicecalls.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0137429265">
-          <caret line="11" column="30" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="30" />
+        <state vertical-scroll-proportion="-40.73077">
+          <caret line="72" column="39" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="39" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/views/default/sendsingleservicecalltoserver.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/controllers/GmservicecallsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.67712635">
+          <caret line="500" column="0" selection-start-line="500" selection-start-column="0" selection-end-line="500" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chs/protected/views/servicecall/_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46655658">
+          <caret line="648" column="0" selection-start-line="648" selection-start-column="0" selection-end-line="649" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/models/Emailform.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.60363334">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chs/protected/views/servicecall/view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-42.653847">
+          <caret line="1237" column="0" selection-start-line="1237" selection-start-column="0" selection-end-line="1237" selection-end-column="0" />
+          <folding>
+            <marker date="1473174099000" expanded="true" signature="8187:8200" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="10800:10813" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="11314:11327" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="12983:12996" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="13058:13069" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="18094:18107" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="18170:18181" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="25715:25728" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="25802:25828" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="29851:29866" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="30504:30517" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="30586:30597" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="39205:39218" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="40101:40113" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="40424:40437" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="46212:46225" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="46284:46295" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="48779:48792" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="48888:48899" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="49827:49840" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="49932:49943" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="50900:50913" placeholder="..." />
+            <marker date="1473174099000" expanded="true" signature="51011:51023" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/controllers/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-27.23077">
+          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/views/default/sendserviceemailtoengineer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-27.461538">
+          <caret line="90" column="34" selection-start-line="83" selection-start-column="31" selection-end-line="90" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chs/protected/views/servicecall/uploadattachments.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35094962">
+          <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
+          <folding>
+            <element signature="e#6#94#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

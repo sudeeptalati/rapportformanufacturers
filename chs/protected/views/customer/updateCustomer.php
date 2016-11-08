@@ -189,7 +189,14 @@ background-color: #FFFF9D;
 			
 	</tr>
 	<tr>
+			
 			<td>
+			
+				<?php echo $form->labelEx($model,'postcode'); ?>
+				<?php echo $form->textField($model,'postcode'); ?>
+				<?php echo $form->error($model,'postcode'); ?>
+				
+				
 				<?php echo $form->labelEx($model,'postcode'); ?> <small>First Part &nbsp; Second Part</small><br>
 				<?php echo $form->textField($model,'postcode_s',array('size'=>3,'maxlength'=>4)); ?>
 				<?php echo $form->error($model,'postcode_s'); ?>
@@ -212,7 +219,7 @@ background-color: #FFFF9D;
 					 <input type=button value="Find" 
 		   onclick="Javascript: PostcodeAnywhere_Interactive_RetrieveByPostcodeAndBuilding_v1_10Begin
 		      ('<?php echo $postcodeanwhere_license_key; ?>',
-		       (document.getElementById('Customer_postcode_s').value + document.getElementById('Customer_postcode_e').value),
+		       (document.getElementById('Customer_postcode').value),
 		       ''
 		      )"> 
 		</td>
