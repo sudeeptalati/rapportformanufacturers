@@ -48,6 +48,63 @@ $system_message = '';
     -->
     <!-- Work Carried Out Start -->
 
+
+    <tr>
+        <td>
+            <div class="contentbox media">
+                <h3>Engineer Status Updates Log</h3>
+                <?php //echo $model->event_log; ?>
+
+                <div id="Engineer-activitylog-div">
+                    <?php $engg_activity_array = json_decode($model->event_log, true); ?>
+                    <?php if (count($engg_activity_array) > 0): ?>
+
+                        <table>
+                            <tr>
+                                <th><span class="datacontenttitle">Activity Date</span></th>
+                                <th><span class="datacontenttitle">Status</span></th>
+                                <th><span class="datacontenttitle">User</span></th>
+                                <th><span class="datacontenttitle">Engineer</span></th>
+                            </tr>
+
+                            <?php $engg_activity_array = array_reverse($engg_activity_array); ?>
+                            <?php foreach ($engg_activity_array as $ac): ?>
+                                <tr>
+                                    <td><?php echo $ac['time']; ?></td>
+                                    <td>
+                                        <?php echo $ac['jobstatus']; ?></td>
+                                    <td><?php echo $ac['user']; ?></td>
+                                    <td><?php echo $ac['engineer']; ?></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <?php if(isset($ac['comments']) && (!empty($ac['comments']) ) ): /////This is because comments tag is added later in the system ?>
+
+                                            <div style="background: #fdf3bc;    padding: 5px 25px;    border-radius: 10px;">
+                                                <?php echo $ac['comments'];?>
+
+                                            </div>
+                                        <?php endif; ?>
+                                        <hr>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    <?php endif; ?>
+                </div>
+
+
+
+
+            </div>
+        </td>
+    </tr>
+
+
+
+
+
+
     <tr>
         <td>
 

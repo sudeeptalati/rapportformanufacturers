@@ -222,34 +222,38 @@ class Gmservicecalls extends CActiveRecord
 		$system_message="";
 		$url=Gmservicecalls::model()->getserverurl();
 		$final_url=$url.'index.php?r=server/getdatafordesktop';
-
-
+		
+		//$system_message.=$final_url ;
+	
 		$engg_emails=Engineer::model()->getAllEngineersemailsincsv();
 
-		$data='gomobile_account_id=AMICA&engineer_emails='.$engg_emails;
+		$data='gomobile_account_id='.$this->getaccountid().'&engineer_emails='.$engg_emails;
 		$method='POST';
+
+
 
 		$url = $final_url;
 		$fields_string='';
 		$fields = array(
 			'engg_emails'=>$engg_emails,
-			'engg_emails'=>'AMICA'
+			'gomobile_account_id'=> $this->getaccountid(),
 		);
 
 //url-ify the data for the POST
 		foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
 		rtrim($fields_string,'&');
 
-		$results= Setup::model()->callurl($url,$data,$method,count($fields) );
+        //$system_message.=$data ;
+        $results= Setup::model()->callurl($url,$data,$method,count($fields) );
 
-
+        //$system_message.=$results;
 		$results_json=json_decode($results);
 
 		if ($results_json->status=='OK')
 		{
 			$system_message.= 'Saving Servicecalls.';
 			$data=json_decode($results_json->data);
-
+			//$system_message.=$results_json->data;
 			foreach ($data  as $recieved_sc_data )
 			{
                 if ($recieved_sc_data->type=='servicecall_data')
@@ -260,8 +264,10 @@ class Gmservicecalls extends CActiveRecord
                 {
 					$servicecall_status=0;
                 }
+                $system_message.="<br> SERV REf No#".$recieved_sc_data->service_reference_number;
+                $system_message.="<br> Recievd Data#".json_encode($recieved_sc_data);
 
-				$this->saverecieveddatatoservicecalls($servicecall_status,$recieved_sc_data->service_reference_number, $recieved_sc_data->sent_data->data_sent, $recieved_sc_data->sent_data->communications);
+                $this->saverecieveddatatoservicecalls($servicecall_status,$recieved_sc_data->service_reference_number, $recieved_sc_data->sent_data->data_sent, $recieved_sc_data->sent_data->communications, $recieved_sc_data->sent_data->status_log );
 
 			}
 		}
@@ -270,25 +276,28 @@ class Gmservicecalls extends CActiveRecord
 			$system_message.="There are no servicecalls";
 		}
 
-		echo $system_message;
+		//echo $system_message;
 
 
 	}///end of 	public function recieveservicecallfromserver()
 
 
-	public function saverecieveddatatoservicecalls($service_status,$ser_ref_no, $data, $communications )
+	public function saverecieveddatatoservicecalls($service_status,$ser_ref_no, $data, $communications, $status_log )
 	{
 //		echo $ser_ref_no.$data.$communications;
 		/*
 		$model=new Gmservicecalls;
 
 		*/
+
+		echo "<hr>".$data;
+
 		$id=$this->getgomobileidbyservicereferenceno($ser_ref_no);
         $model=Gmservicecalls::model()->findByPk($id);
         $model->server_status_id=37;///as msg unread
         $model->data_recieved=$data;
         $model->communications=$communications;
-        //$model->event_log=$model->event_log.'DATA Recieved';
+        $model->event_log=$status_log;
         $model->save();
 
 		////Only update servicecall status if it is service data
@@ -344,7 +353,7 @@ class Gmservicecalls extends CActiveRecord
 
     public function getgomobileid()
     {
-        return 'AMICA';
+        return $this->getaccountid();
     }
 
 
@@ -372,10 +381,12 @@ class Gmservicecalls extends CActiveRecord
 
 
         $data_array=array();
+        $data_array['gomobile_account_id']=$model->getgomobileid();
         $data_array['service_reference_number']=$service_reference_number;
         $data_array['communications']=$chat_array;
         $data_array['claim_status']=$claim_status;
         $data_array['type']= 'chat_message';
+
 
 
         $data = array("data" => json_encode($data_array), "engineer_email"=>$engineer_email,"gomobile_account_id"=>$gomobile_account_id, "service_reference_number"=>$service_reference_number);
@@ -475,6 +486,8 @@ class Gmservicecalls extends CActiveRecord
 	public function checkfornewdataonserver()
 	{
 		$url=Gmservicecalls::model()->getserverurl()."index.php?r=server/checkfornewdata";
+
+
         $method='POST';
         $data=array();
         $fieldscount=count($data);

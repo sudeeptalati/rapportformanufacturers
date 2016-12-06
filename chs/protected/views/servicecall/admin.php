@@ -2,22 +2,28 @@
 <?php $searchurl=Yii::app()->baseUrl.'/index.php?r=servicecall/searchengine';?>
 
 
- 
+
 <?php $newdata=Gmservicecalls::model()->checkfornewdataonserver();?>
 <?php $msg_json=json_decode($newdata);?>
 
-<?php if ($msg_json->status=='MESSAGES') : ?>
-<?php //if (0==1) : ?>
- 
+<?php if (isset($msg_json->status)) : ?>
 
-	<a href="index.php?r=gomobile/gmservicecalls/receiveservicecallfrommobile">
-		<div style="padding: 5px 5px 5px 30px; border-radius: 10px;background:#91FF95" >
-			<?php echo $msg_json->status_message; ?>
-		</div>
-	</a>
+	<?php if ($msg_json->status=='MESSAGES') : ?>
+		<?php //if (0==1) : ?>
 
+
+		<a href="index.php?r=gomobile/gmservicecalls/receiveservicecallfrommobile">
+			<div style="padding: 5px 5px 5px 30px; border-radius: 10px;background:#91FF95" >
+				<?php echo $msg_json->status_message; ?>
+			</div>
+		</a>
+
+
+	<?php endif; ?>
 <?php endif; ?>
- 
+
+
+
 <!-- Search Form -->
 <script type="text/javascript">
  

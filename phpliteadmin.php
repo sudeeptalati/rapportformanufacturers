@@ -1969,6 +1969,7 @@ if(isset($_GET['help']))
 </head>
 
 <body style="direction:<?php echo $lang['direction']; ?>;">
+<h1 style="text-align:left;">MANUFACTURER - MANUFACTURER - MANUFACTURER- MANUFACTURER- MANUFACTURER- MANUFACTURER- MANUFACTURER- MANUFACTURER</h1>
 
 <?php
 
