@@ -267,6 +267,8 @@ class Gmservicecalls extends CActiveRecord
                 $system_message.="<br> SERV REf No#".$recieved_sc_data->service_reference_number;
                 $system_message.="<br> Recievd Data#".json_encode($recieved_sc_data);
 
+                echo  $recieved_sc_data->sent_data->status_log;
+
                 $this->saverecieveddatatoservicecalls($servicecall_status,$recieved_sc_data->service_reference_number, $recieved_sc_data->sent_data->data_sent, $recieved_sc_data->sent_data->communications, $recieved_sc_data->sent_data->status_log );
 
 			}
@@ -358,7 +360,7 @@ class Gmservicecalls extends CActiveRecord
 
 
 
-    public function sendmessagetoengineer($service_reference_number, $msg, $claim_status)
+    public function sendmessagetoengineer($service_reference_number, $msg, $claim_status_keyword)
     {
         $system_message='';
         $gm_id= Gmservicecalls::model()->getgomobileidbyservicereferenceno($service_reference_number);
@@ -384,8 +386,23 @@ class Gmservicecalls extends CActiveRecord
         $data_array['gomobile_account_id']=$model->getgomobileid();
         $data_array['service_reference_number']=$service_reference_number;
         $data_array['communications']=$chat_array;
-        $data_array['claim_status']=$claim_status;
-        $data_array['type']= 'chat_message';
+
+        $data_array['claim_status']=$claim_status_keyword;
+
+        switch($claim_status_keyword)
+        {
+            case 'APPROVED':
+                $data_array['type']= 'claim_approved_in_chat_message';
+                $data_array['payment_date']= date('d-M-Y', $servicecall_model->job_payment_date);
+                $data_array['payment_date_text']= date('F-Y', $servicecall_model->job_payment_date);
+                break;
+
+            case 'MESSAGE_SENT':
+                $data_array['type']= 'chat_message';
+                break;
+
+        }
+
 
 
 
@@ -450,13 +467,15 @@ class Gmservicecalls extends CActiveRecord
         $model=$this->loadModel($id);
         //$model->server_status_id=$status_id;
 
+        /*
 		$log='<tr>';
 		$log.='<td>'.date('d-M-Y h:i A').'</td>';
 		$log.='<td>'.$model->jobstatus->html_name.'</td>';
 		$log.='<td>'.Yii::app()->user->name.'</td>';
 		$log.='</tr>';
 		$model->event_log.=$log;
-			
+		*/
+
         if ($model->save())
         {
             Servicecall::model()->updateByPk($model->servicecall_id,
@@ -465,7 +484,7 @@ class Gmservicecalls extends CActiveRecord
                 )
             );
 
-			Servicecall::model()->updateactivitylog($model->servicecall_id);
+			//Servicecall::model()->updateactivitylog($model->servicecall_id);
 
             return true;
         }

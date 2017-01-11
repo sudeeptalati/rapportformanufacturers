@@ -94,7 +94,8 @@ class JobStatusController extends RController
 		{
 			$model->attributes=$_POST['JobStatus'];
 			if($model->save())
-				$this->redirect(array('update','id'=>$model->id));
+                // $this->redirect(array('update','id'=>$model->id));
+                $this->redirect ( array('admin'));
 
 		}
 

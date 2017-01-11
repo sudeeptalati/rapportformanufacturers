@@ -323,6 +323,7 @@ class GmservicecallsController extends RController
 
 
         $this->redirect(array('/gomobile/gmservicecalls/admin'));
+
         //$this->render('receiveservicecallfrommobile');
 
     }////end of public function actionAcceptengineerdata()
@@ -335,7 +336,7 @@ class GmservicecallsController extends RController
             $id = $_POST['enggdata_gm_id'];
             $job_payment_date = strtotime($_POST['job_payment_date']);
 
-            $claim_status = '34'; ///for all When claim is approved statuses
+            $approved_claim_status_keyword = 'APPROVED';
 
             $model = $this->loadModel($id);
 
@@ -361,15 +362,17 @@ class GmservicecallsController extends RController
             );
 
 
-            if ($model->updatestatusbygomobileid($id, $claim_status)) {
+            $approved_claim_status_id=JobStatus::model()->get_status_id_by_keyword($approved_claim_status_keyword);
+
+            if ($model->updatestatusbygomobileid($id, $approved_claim_status_id)) {
                 $system_message .= 'Saved <br>';
 
                 /////Now Send a notification to Engineer
                 $payment_month = date('F, Y', $job_payment_date);
                 $msg = 'Your claim has been approved and you will be paid in month of ' . $payment_month;
 
-                $system_message .= Gmservicecalls::model()->sendmessagetoengineer($service_reference_number, $msg, $claim_status);
-				
+                $system_message .= Gmservicecalls::model()->sendmessagetoengineer($service_reference_number, $msg, $approved_claim_status_keyword );
+
 				$this->redirect(array('/servicecall/view&id='.$model->servicecall_id.'&openservicedialog=true'));
             } else
                 $system_message .= '<br>There was some problem in changing the status of recieved data' . var_dump($model->getErrors());
@@ -400,7 +403,7 @@ class GmservicecallsController extends RController
 
             $model = $this->loadModel($id);
             $service_reference_number = $model->service_reference_number;
-            $claim_status = '54'; ///as 54 is the status for Rejected.
+            $claim_status = 'CLAIM_REJECTED'; ///as 54 is the status for Rejected.
 
             $servicecall_id = $model->servicecall_id;
 
@@ -506,12 +509,14 @@ class GmservicecallsController extends RController
             $model = $this->loadModel($id);
             $service_reference_number = $model->service_reference_number;
             
-            $claim_status=$model->server_status_id;
+            //$claim_status=$model->server_status_id;
             // Status disabled as We don not want to change the status when message is sent to engineer
             //$claim_status = '36'; ///as 36 is the status for message sent to engineer.
 
+            $claim_status='MESSAGE_SENT';
 
-           $system_message .= Gmservicecalls::model()->sendmessagetoengineer($service_reference_number, $only_chat_message, $claim_status);
+
+            $system_message .= Gmservicecalls::model()->sendmessagetoengineer($service_reference_number, $only_chat_message, $claim_status);
 
             /*
             if ($model->updatestatusbygomobileid($id, $claim_status)) {

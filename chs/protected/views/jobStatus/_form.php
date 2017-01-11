@@ -17,7 +17,9 @@
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 	
 	<?php echo $form->errorSummary($model); ?>
-
+    <div class="row buttons">
+        <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+    </div>
 	<div class="row">
 		<?php echo $form->labelEx($model,'name'); ?>
 		<?php
@@ -37,10 +39,18 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'information'); ?>
-		<?php echo $form->textArea($model,'information',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'information'); ?>
+		<?php echo $form->labelEx($model,'keyword'); ?>
+		<?php echo $form->textField($model,'keyword',array('size'=>50, 'readonly'=>'readonly')); ?>
+		<?php echo $form->error($model,'keyword'); ?>
 	</div>
+
+
+    <div class="row">
+        <?php echo $form->labelEx($model,'information'); ?>
+        <?php echo $form->textArea($model,'information',array('rows'=>6, 'cols'=>50)); ?>
+        <?php echo $form->error($model,'information'); ?>
+    </div>
+
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'published'); ?>
@@ -106,5 +116,33 @@
 	
 </div><!-- form -->
 
+
+<script>
+
+    $( document ).ready(function() {
+        jobstatus_name=$( "#JobStatus_name" ).val();
+        jobstatus_keyword=change_to_upper_case_and_replace_space_with_underscore(jobstatus_name);
+        $( "#JobStatus_keyword" ).val(jobstatus_keyword)
+    });
+
+
+
+
+
+    $( "#JobStatus_keyword" ).keyup(function() {
+        jobstatus_keyword=$( "#JobStatus_keyword" ).val();
+        jobstatus_keyword=change_to_upper_case_and_replace_space_with_underscore(jobstatus_keyword);
+        $( "#JobStatus_keyword" ).val(jobstatus_keyword)
+    });
+
+    function change_to_upper_case_and_replace_space_with_underscore(str) {
+
+        str=str.replace(/ /g,"_");
+        str=str.toUpperCase();
+
+        return str;
+
+    }
+</script>
 
   

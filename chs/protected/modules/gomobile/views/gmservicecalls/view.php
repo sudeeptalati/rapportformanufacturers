@@ -53,11 +53,18 @@ $system_message = '';
         <td>
             <div class="contentbox media">
                 <h3>Engineer Status Updates Log</h3>
-                <?php //echo $model->event_log; ?>
+                <?php
+                    // echo $model->event_log;
+                ?>
+
 
                 <div id="Engineer-activitylog-div">
                     <?php $engg_activity_array = json_decode($model->event_log, true); ?>
+
+
+
                     <?php if (count($engg_activity_array) > 0): ?>
+
 
                         <table>
                             <tr>
@@ -67,8 +74,9 @@ $system_message = '';
                                 <th><span class="datacontenttitle">Engineer</span></th>
                             </tr>
 
-                            <?php $engg_activity_array = array_reverse($engg_activity_array); ?>
                             <?php foreach ($engg_activity_array as $ac): ?>
+
+
                                 <tr>
                                     <td><?php echo $ac['time']; ?></td>
                                     <td>
@@ -229,7 +237,8 @@ $system_message = '';
 
                 <div class="recieveddata">
                     <span class="datacontenttitle">Spares Used:</span>
-                    <?php if ($recieveddata['spares_used'] == '1'): ?>
+
+                   <?php if ($recieveddata['spares_used'] == '1'): ?>
                         <?php echo 'Yes' ?>
                     <?php else: ?>
                         <?php echo 'No'; ?>
@@ -245,7 +254,9 @@ $system_message = '';
 
 
                     ?>
-                    <?php $sparesusedarray = json_decode($recieveddata['spares_array'], true); ?>
+
+
+                    <?php $sparesusedarray = $recieveddata['spares_array']; ?>
                     <?php echo CHtml::hiddenField('total_spares_entries', count($sparesusedarray["spares"])); ?>
                     <?php echo CHtml::hiddenField('enggdata_gm_id', $model->id); ?>
 

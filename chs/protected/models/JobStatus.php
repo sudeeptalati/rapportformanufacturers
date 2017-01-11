@@ -15,7 +15,7 @@
  * @property integer $dropdown_display
  * @property string $html_name
  * @property string $backgroundcolor
- *
+ * @property string $keyword
  * The followings are the available model relations:
  * @property User $updatedByUser
  * @property Servicecall[] $servicecalls
@@ -47,9 +47,12 @@ class JobStatus extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, published, view_order', 'required'),
+
+            array('name, published, view_order', 'required'),
+
+            array('keyword', 'unique'),
 			array('published, view_order, updated_by_user_id', 'numerical', 'integerOnly'=>true),
-			array('dashboard_display,information, updated, html_name, backgroundcolor', 'safe'),
+			array('keyword, dashboard_display,information, updated, html_name, backgroundcolor', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name, information, published, view_order, updated_by_user_id, updated, dashboard_display', 'safe', 'on'=>'search'),
@@ -86,7 +89,9 @@ class JobStatus extends CActiveRecord
 			'dashboard_display' => 'Display on Dashboard',
 			'dropdown_display' => 'Display in Dropdown',
 			'html_name' => 'Color on Dashboard',
-			'backgroundcolor' => 'Background Color Dashboard',
+            'backgroundcolor' => 'Background Color Dashboard',
+            'keyword' => 'Keyword',
+
 
 
 		);
@@ -279,6 +284,23 @@ class JobStatus extends CActiveRecord
     	//$publishedStatus = JobStatus::model()->findAllByAttributes(array('published'=>1 ));
     	return CHtml::listData($publishedStatus, 'id', $type);
 
-    }//end of getAllPublishedListdata. 
-	
+    }//end of getAllPublishedListdata.
+
+
+
+    public function get_status_id_by_keyword($keyword)
+    {
+
+        $model = $this->findByAttributes(array('keyword' => $keyword));
+        if ($model)
+            return $model->id;
+        else
+            return null;
+
+    }////end of public function getstatusidbyname($keyword)
+
+
+
+
+
 }//end of class.

@@ -2,7 +2,7 @@
 /* @var $this GmServicecallsController */
 /* @var $model GmServicecalls */
 
- //include('gomobile_menu.php'); 
+include('gomobile_menu.php');
 
 
 $this->layout='column1';
