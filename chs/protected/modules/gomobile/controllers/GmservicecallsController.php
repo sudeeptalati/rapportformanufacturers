@@ -386,6 +386,8 @@ class GmservicecallsController extends RController
 
         //echo  $system_message;
 
+        
+
         $this->render('view', array(
             'model' => $model, 'system_message' => $system_message
         ));

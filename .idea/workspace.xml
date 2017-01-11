@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="368d8bc6-fe25-4e64-947e-b56a02b356df" name="Default" comment="rapport for manufacturers">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/chs/protected/data/dbchanges.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/data/chs.db" afterPath="$PROJECT_DIR$/chs/protected/data/chs.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/controllers/JobStatusController.php" afterPath="$PROJECT_DIR$/chs/protected/controllers/JobStatusController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/models/JobStatus.php" afterPath="$PROJECT_DIR$/chs/protected/models/JobStatus.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/modules/gomobile/controllers/GmservicecallsController.php" afterPath="$PROJECT_DIR$/chs/protected/modules/gomobile/controllers/GmservicecallsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/modules/gomobile/models/Gmservicecalls.php" afterPath="$PROJECT_DIR$/chs/protected/modules/gomobile/models/Gmservicecalls.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/modules/gomobile/views/gmservicecalls/admin.php" afterPath="$PROJECT_DIR$/chs/protected/modules/gomobile/views/gmservicecalls/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/modules/gomobile/views/gmservicecalls/view.php" afterPath="$PROJECT_DIR$/chs/protected/modules/gomobile/views/gmservicecalls/view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/runtime/application.log" afterPath="$PROJECT_DIR$/chs/protected/runtime/application.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/runtime/application.log.1" afterPath="$PROJECT_DIR$/chs/protected/runtime/application.log.1" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/runtime/application.log.2" afterPath="$PROJECT_DIR$/chs/protected/runtime/application.log.2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/runtime/application.log.3" afterPath="$PROJECT_DIR$/chs/protected/runtime/application.log.3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/runtime/application.log.4" afterPath="$PROJECT_DIR$/chs/protected/runtime/application.log.4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/runtime/application.log.5" afterPath="$PROJECT_DIR$/chs/protected/runtime/application.log.5" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/views/jobStatus/_form.php" afterPath="$PROJECT_DIR$/chs/protected/views/jobStatus/_form.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chs/protected/views/jobStatus/admin.php" afterPath="$PROJECT_DIR$/chs/protected/views/jobStatus/admin.php" />
     </list>
     <ignored path="rapportformanufacturers.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,8 +26,8 @@
       <file leaf-file-name="GmservicecallsController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/controllers/GmservicecallsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="386" column="32" lean-forward="false" selection-start-line="386" selection-start-column="32" selection-end-line="386" selection-end-column="32" />
+            <state relative-caret-position="282">
+              <caret line="388" column="8" lean-forward="false" selection-start-line="388" selection-start-column="8" selection-end-line="388" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -127,7 +111,7 @@
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="2560" />
-    <option name="height" value="850" />
+    <option name="height" value="1390" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -475,7 +459,7 @@
       <workItem from="1482504139711" duration="2418000" />
       <workItem from="1483028878022" duration="415000" />
       <workItem from="1483102848935" duration="6875000" />
-      <workItem from="1483703162038" duration="763000" />
+      <workItem from="1483703162038" duration="928000" />
     </task>
     <task id="LOCAL-00001" summary="rapport for manufacturers">
       <created>1469025672509</created>
@@ -488,7 +472,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37121000" />
+    <option name="totallyTimeSpent" value="37286000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -500,7 +484,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="2560" height="850" extended-state="0" />
+    <frame x="0" y="23" width="2560" height="1390" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11595092" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -913,8 +897,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/chs/protected/modules/gomobile/controllers/GmservicecallsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="386" column="32" lean-forward="false" selection-start-line="386" selection-start-column="32" selection-end-line="386" selection-end-column="32" />
+        <state relative-caret-position="282">
+          <caret line="388" column="8" lean-forward="false" selection-start-line="388" selection-start-column="8" selection-end-line="388" selection-end-column="8" />
           <folding />
         </state>
       </provider>
